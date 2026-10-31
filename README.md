@@ -27,10 +27,6 @@ very same bytes, which this project does not attempt. Our verified functions sho
 as *Nonmatching C* (same behavior, proven by the oracle). See
 [PROGRESS-TREEMAP.md](docs/PROGRESS-TREEMAP.md).
 
-![Decompilation progress map](docs/img/progress.svg)
-
-*The same data in address order, one cell per 256 bytes.*
-
 <!-- progress:start -->
 | Metric (measured by `tools/tracking.py`) | Progress | % | Count |
 |---|---|---|---|

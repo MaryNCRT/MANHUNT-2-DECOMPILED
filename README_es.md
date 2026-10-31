@@ -27,10 +27,6 @@ exactamente los mismos bytes, y este proyecto no persigue eso. Nuestras funcione
 verificadas salen como *Nonmatching C* (mismo comportamiento, demostrado por el
 oráculo). Ver [PROGRESS-TREEMAP.md](docs/PROGRESS-TREEMAP.md) (en inglés).
 
-![Mapa de progreso de la decompilación](docs/img/progress.svg)
-
-*Los mismos datos por orden de dirección, una celda cada 256 bytes.*
-
 <!-- progress:start -->
 | Metric (measured by `tools/tracking.py`) | Progress | % | Count |
 |---|---|---|---|
