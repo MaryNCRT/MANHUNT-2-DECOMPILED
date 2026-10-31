@@ -1,12 +1,12 @@
-// Script headless de Ghidra: decompila una lista de funciones a un archivo .c.
+// Ghidra headless script: decompiles a list of functions into a .c file.
 //
-// Lee un archivo de texto con una funcion por linea (formato: "0xADDR nombre"
-// o solo el nombre) y escribe el C decompilado en el orden dado, que es el
-// orden de dificultad que calcula rank.py.
+// Reads a text file with one function per line (format: "0xADDR name" or just
+// the name) and writes the decompiled C in the given order, which is the
+// difficulty order produced by the ranking script.
 //
 //   analyzeHeadless <proyecto> MH2 -process Manhunt2_nosecu.exe -noanalysis \
 //       -scriptPath "E:\MK3 PROJECT\OUTPUT\tools" \
-//       -postScript DecompileList.java <lista.txt> <salida.c>
+//       -postScript DecompileList.java <list.txt> <out.c>
 //
 //@category MH2
 
@@ -48,10 +48,10 @@ import ghidra.program.model.symbol.SourceType;
 
 public class DecompileList extends GhidraScript {
 
-    /** Structs declarados en structs.txt, por nombre. */
+    /** Structs declared in structs.txt, by name. */
     private final Map<String, DataType> customTypes = new LinkedHashMap<>();
 
-    /** Convierte un nombre de tipo del archivo de firmas en un DataType. */
+    /** Converts a type name from the signatures file into a DataType. */
     private DataType parseType(String t) {
         t = t.trim();
         // arrays: "char[64]"
@@ -94,12 +94,12 @@ public class DecompileList extends GhidraScript {
     }
 
     /**
-     * Crea los structs declarados en structs.txt y los registra en el programa.
-     * Se hace en dos pasadas: primero se crean vacios (para que un struct pueda
-     * referenciar a otro declarado despues), luego se rellenan los campos.
+     * Creates the structs declared in structs.txt and registers them in the program.
+     * Done in two passes: first they are created empty (so a struct can refer to
+     * one declared later), then the fields are filled in.
      */
     private int applyStructs(String path) throws Exception {
-        List<String[]> pending = new ArrayList<>();   // {nombre, offset, tipo, campo}
+        List<String[]> pending = new ArrayList<>();   // {name, offset, type, field}
         StructureDataType cur = null;
 
         try (BufferedReader br = new BufferedReader(new FileReader(new File(path)))) {
@@ -124,7 +124,7 @@ public class DecompileList extends GhidraScript {
             }
         }
 
-        // segunda pasada: ahora todos los nombres de struct son resolubles
+        // second pass: every struct name is now resolvable
         for (String[] f : pending) {
             StructureDataType s = (StructureDataType) customTypes.get(f[0]);
             int off = Integer.decode(f[1]);
@@ -147,9 +147,9 @@ public class DecompileList extends GhidraScript {
     }
 
     /**
-     * Aplica las firmas del archivo dado. Es el paso que convierte
-     * `undefined4 *param_1` en `float *m`: sin el, el decompilador no sabe que
-     * los datos son coma flotante y emite manipulacion de bits ilegible.
+     * Applies the signatures from the given file. This is the step that turns
+     * `undefined4 *param_1` into `float *m`: without it the decompiler does not know
+     * the data is floating point and emits unreadable bit manipulation.
      */
     private int applySignatures(String path, Map<String, Function> byName) throws Exception {
         int applied = 0;
@@ -167,7 +167,7 @@ public class DecompileList extends GhidraScript {
                 String fname = parts[0].trim();
                 Function f = byName.get(fname);
                 if (f == null) {
-                    println("  firma sin funcion: " + fname);
+                    println("  signature without function: " + fname);
                     continue;
                 }
                 DataType ret = parseType(parts[1]);
@@ -202,11 +202,11 @@ public class DecompileList extends GhidraScript {
     public void run() throws Exception {
         String[] args = getScriptArgs();
         if (args.length < 2) {
-            println("uso: DecompileList <lista.txt> <salida.c>");
+            println("usage: DecompileList <list.txt> <out.c>");
             return;
         }
 
-        // indice de funciones por nombre y por direccion
+        // index of functions by name and by address
         Map<String, Function> byName = new LinkedHashMap<>();
         Map<Long, Function> byAddr = new LinkedHashMap<>();
         FunctionIterator it = currentProgram.getFunctionManager().getFunctions(true);
@@ -231,7 +231,7 @@ public class DecompileList extends GhidraScript {
                     long a = Long.parseLong(parts[0].substring(2), 16);
                     f = byAddr.get(a);
                     if (f == null) {
-                        // la funcion puede no estar definida todavia: crearla
+                        // the function may not be defined yet: create it
                         Address addr = currentProgram.getAddressFactory()
                                 .getDefaultAddressSpace().getAddress(a);
                         f = createFunction(addr, parts.length > 1 ? parts[1] : null);
@@ -251,22 +251,22 @@ public class DecompileList extends GhidraScript {
             }
         }
 
-        println("solicitadas: " + targets.size() + "  no encontradas: " + missing.size());
+        println("requested: " + targets.size() + "  not found: " + missing.size());
         for (String s : missing) {
-            println("  NO ENCONTRADA: " + s);
+            println("  NOT FOUND: " + s);
         }
 
-        // Los structs van primero: las firmas pueden referenciarlos.
+        // Structs go first: signatures may refer to them.
         if (args.length >= 4 && !args[3].isEmpty() && new File(args[3]).exists()) {
-            println("structs creados: " + applyStructs(args[3]));
+            println("structs created: " + applyStructs(args[3]));
         }
         if (args.length >= 3 && !args[2].isEmpty() && new File(args[2]).exists()) {
-            println("firmas aplicadas: " + applySignatures(args[2], byName));
+            println("signatures applied: " + applySignatures(args[2], byName));
         }
 
         DecompInterface decomp = new DecompInterface();
-        // Opciones por defecto: grabFromToolAndProgram() necesita un Tool, que
-        // en modo headless no existe.
+        // Default options: grabFromToolAndProgram() needs a Tool, which does not
+        // exist in headless mode.
         DecompileOptions opts = new DecompileOptions();
         opts.setMaxWidth(100);
         decomp.setOptions(opts);
@@ -278,9 +278,9 @@ public class DecompileList extends GhidraScript {
         int ok = 0, fail = 0;
         try (PrintWriter out = new PrintWriter(args[1], "UTF-8")) {
             out.println("/*");
-            out.println(" * Decompilado de Manhunt 2 PC (x86, build 2009-02-11) con Ghidra.");
-            out.println(" * Generado por OUTPUT/tools/DecompileList.java.");
-            out.println(" * Punto de partida: hay que tipar y renombrar a mano.");
+            out.println(" * Decompiled from Manhunt 2 PC (x86, build 2009-02-11) with Ghidra.");
+            out.println(" * Generated by OUTPUT/tools/DecompileList.java.");
+            out.println(" * Starting point: types and names must be fixed by hand.");
             out.println(" */");
             out.println();
             for (Function f : targets) {
@@ -297,16 +297,16 @@ public class DecompileList extends GhidraScript {
                     ok++;
                     println("  ok   " + f.getName());
                 } else {
-                    out.println("/* FALLO: " + res.getErrorMessage() + " */");
+                    out.println("/* FAILED: " + res.getErrorMessage() + " */");
                     fail++;
-                    println("  FALLO " + f.getName() + ": " + res.getErrorMessage());
+                    println("  FAILED " + f.getName() + ": " + res.getErrorMessage());
                 }
                 out.println();
             }
         } finally {
             decomp.dispose();
         }
-        println("decompiladas: " + ok + "   fallidas: " + fail);
-        println("escrito " + args[1]);
+        println("decompiled: " + ok + "   failed: " + fail);
+        println("wrote " + args[1]);
     }
 }

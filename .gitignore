@@ -1,15 +1,15 @@
 # =====================================================================
-# MODELO LEGAL DEL PROYECTO: CERO ASSETS EN EL REPOSITORIO
+# PROJECT LEGAL MODEL: ZERO ASSETS IN THE REPOSITORY
 #
-# Este port distribuye SOLO CODIGO. Nada que sea propiedad de Rockstar /
-# Take-Two entra aqui: ni el ejecutable, ni las DLL del juego, ni los
-# assets, ni los volcados derivados de ellos. Cada usuario aporta su propia
-# copia del juego y las herramientas del repo extraen lo que haga falta.
+# This port ships CODE ONLY. Nothing owned by Rockstar / Take-Two goes in
+# here: not the executable, not the game DLLs, not the assets, not dumps
+# derived from them. Every user supplies their own copy of the game (installed
+# folder or disc ISO) and the repo tools extract what they need.
 #
-# Si anades algo al repo, comprueba antes que no venga del juego.
+# Before adding anything, check that it does not come from the game.
 # =====================================================================
 
-# ---- Instalacion del juego y binarios de referencia: NUNCA subir ----
+# ---- Game install and reference binaries: NEVER commit ----
 MH2GAME/
 ORIGINAL/
 *.exe
@@ -17,7 +17,12 @@ ORIGINAL/
 *.asi
 *.pdb
 
-# ---- Assets del juego ----
+# ---- Game assets ----
+*.iso
+*.mdf
+*.mds
+*.bin
+*.cue
 *.mls
 *.gxt
 *.txd
@@ -33,8 +38,8 @@ ORIGINAL/
 *.glg
 *.fxo
 
-# ---- Analisis derivado del binario: se regenera, no se versiona ----
-# Reproducir con OUTPUT/tools (ver PROGRESS.md, seccion "Reproducir").
+# ---- Analysis derived from the binary: regenerated, never versioned ----
+# Reproduce with OUTPUT/tools (see PROGRESS.md, "Reproducing the analysis").
 OUTPUT/ghidra/
 OUTPUT/inventory/
 OUTPUT/decompiled/
@@ -45,16 +50,16 @@ build/
 build32/
 build64/
 
-# ---- Herramientas de terceros que cada uno descarga ----
+# ---- Third-party tools each user downloads ----
 TOOLS/ghidra_*/
 TOOLS/GhidraMCP/
 TOOLS/rea/
 
-# ---- Especifico de la maquina ----
+# ---- Machine-specific ----
 .claude/settings.local.json
 .mcp.json
 
-# ---- Basura habitual ----
+# ---- Usual junk ----
 __pycache__/
 *.pyc
 *.obj
@@ -65,3 +70,6 @@ __pycache__/
 Thumbs.db
 .DS_Store
 .vs/
+
+# ---- Community repos, read-only reference ----
+REFERENCE/

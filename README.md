@@ -1,20 +1,32 @@
 # Manhunt 2 — PC Decompilation
 
-Decompilación del ejecutable de PC de **Manhunt 2** (2009) a código fuente legible,
-para construir un port nativo de **32 y 64 bits** para Windows 10/11:
+**English** · [Español](README_es.md)
 
-- sin el límite de 2 GB de memoria
-- sin límites de texturas, modelos, pools ni buffers
-- con soporte de modelos y texturas HD y mods cargados desde carpetas
-- sin necesidad de parches de terceros para arrancar en sistemas modernos
+A decompilation of the PC executable of **Manhunt 2** (2009) into readable source
+code, to build a native **32-bit and 64-bit** port for Windows 10/11:
 
-**Estado:** fase de análisis. Nada compilable todavía. Ver [PROGRESS.md](PROGRESS.md).
+- no 2 GB memory limit
+- no texture, model, pool or buffer limits
+- HD model and texture support, mods loaded from folders
+- no third-party patches needed to run on modern systems
+
+**Status:** analysis phase. Nothing compiles yet. See [PROGRESS.md](PROGRESS.md).
+
+## How the port will be set up
+
+You will need your own copy of Manhunt 2 for PC, either:
+
+- an **installed game folder**, or
+- the **game disc ISO**.
+
+The port reads the game data from either one. It never uses the original
+executable.
 
 ## Legal
 
-Este repositorio contiene **solo código y documentación propios**. No incluye el
-ejecutable, las DLL ni ningún asset del juego. Necesitas tu propia copia de
-Manhunt 2 para PC. El proyecto no incluye ni documenta la eliminación de DRM.
+This repository contains **only original code and documentation**. It does not
+include the executable, DLLs or any game asset. The project does not include or
+document DRM removal.
 
-Manhunt 2 es propiedad de Rockstar Games / Take-Two Interactive. Este proyecto
-no está afiliado a ellas.
+Manhunt 2 is the property of Rockstar Games / Take-Two Interactive. This project is
+not affiliated with them.

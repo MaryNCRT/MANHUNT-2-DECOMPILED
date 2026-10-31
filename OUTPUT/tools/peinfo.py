@@ -1,4 +1,4 @@
-"""Resumen de un PE: cabeceras, secciones, imports, flags y pistas de DRM/empaquetado."""
+"""PE summary: headers, sections, imports, flags and DRM/packer hints."""
 import sys, math, collections, pefile
 
 def entropy(b):

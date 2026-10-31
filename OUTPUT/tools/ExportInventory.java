@@ -1,10 +1,10 @@
-// Script headless de Ghidra: vuelca el inventario del programa analizado.
+// Ghidra headless script: dumps the inventory of the analyzed program.
 //
-//   functions.tsv : addr, nombre, bytes, n_callers, n_callees, firma
-//   strings.tsv   : addr, n_xrefs, funciones que lo referencian, texto
+//   functions.tsv : addr, name, bytes, n_callers, n_callees, signature
+//   strings.tsv   : addr, n_xrefs, functions referencing it, text
 //
 //   analyzeHeadless OUTPUT\ghidra MH2 -process Manhunt2_nosecu.exe -noanalysis \
-//       -scriptPath OUTPUT\tools -postScript ExportInventory.java <dir_salida>
+//       -scriptPath OUTPUT\tools -postScript ExportInventory.java <out_dir>
 //
 //@category MH2
 
@@ -69,6 +69,6 @@ public class ExportInventory extends GhidraScript {
                 ns++;
             }
         }
-        println("funciones: " + nf + "   cadenas: " + ns);
+        println("functions: " + nf + "   strings: " + ns);
     }
 }
