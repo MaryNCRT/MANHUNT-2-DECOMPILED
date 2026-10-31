@@ -1,0 +1,67 @@
+# =====================================================================
+# MODELO LEGAL DEL PROYECTO: CERO ASSETS EN EL REPOSITORIO
+#
+# Este port distribuye SOLO CODIGO. Nada que sea propiedad de Rockstar /
+# Take-Two entra aqui: ni el ejecutable, ni las DLL del juego, ni los
+# assets, ni los volcados derivados de ellos. Cada usuario aporta su propia
+# copia del juego y las herramientas del repo extraen lo que haga falta.
+#
+# Si anades algo al repo, comprueba antes que no venga del juego.
+# =====================================================================
+
+# ---- Instalacion del juego y binarios de referencia: NUNCA subir ----
+MH2GAME/
+ORIGINAL/
+*.exe
+*.dll
+*.asi
+*.pdb
+
+# ---- Assets del juego ----
+*.mls
+*.gxt
+*.txd
+*.dff
+*.pak
+*.bik
+*.fsb
+*.fev
+*.ifp
+*.bsp
+*.col
+*.inst
+*.glg
+*.fxo
+
+# ---- Analisis derivado del binario: se regenera, no se versiona ----
+# Reproducir con OUTPUT/tools (ver PROGRESS.md, seccion "Reproducir").
+OUTPUT/ghidra/
+OUTPUT/inventory/
+OUTPUT/decompiled/
+OUTPUT/*.log
+recompiled/
+decomp/**/_raw/
+build/
+build32/
+build64/
+
+# ---- Herramientas de terceros que cada uno descarga ----
+TOOLS/ghidra_*/
+TOOLS/GhidraMCP/
+TOOLS/rea/
+
+# ---- Especifico de la maquina ----
+.claude/settings.local.json
+.mcp.json
+
+# ---- Basura habitual ----
+__pycache__/
+*.pyc
+*.obj
+*.o
+*.ilk
+*.zip
+*.rar
+Thumbs.db
+.DS_Store
+.vs/
