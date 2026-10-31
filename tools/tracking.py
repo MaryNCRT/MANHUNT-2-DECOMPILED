@@ -193,6 +193,12 @@ def report():
     for doc in ("README.md", "README_es.md", "PROGRESS.md"):
         splice(os.path.join(ROOT, doc), "progress", t)
         splice(os.path.join(ROOT, doc), "phases", ph)
+    # Keep the progress map in sync with the tables.
+    from progress_svg import render
+    svg = os.path.join(ROOT, "docs", "img", "progress.svg")
+    os.makedirs(os.path.dirname(svg), exist_ok=True)
+    with open(svg, "w", encoding="utf-8", newline="\n") as f:
+        f.write(render(load(TRACK)))
 
 
 if __name__ == "__main__":

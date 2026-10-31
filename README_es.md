@@ -15,6 +15,10 @@ para construir un port nativo de **32 y 64 bits** para Windows 10/11:
 
 **Estado:** la decompilación ha empezado. Nada compila todavía. Nada es jugable.
 
+![Mapa de progreso de la decompilación](docs/img/progress.svg)
+
+*Todas las funciones del ejecutable por orden de dirección, una celda cada 256 bytes, coloreadas según su estado.*
+
 <!-- progress:start -->
 | Metric (measured by `tools/tracking.py`) | Progress | % | Count |
 |---|---|---|---|

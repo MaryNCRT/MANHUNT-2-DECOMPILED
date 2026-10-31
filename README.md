@@ -15,6 +15,10 @@ code, to build a native **32-bit and 64-bit** port for Windows 10/11:
 
 **Status:** decompilation has started. Nothing compiles yet. Nothing is playable.
 
+![Decompilation progress map](docs/img/progress.svg)
+
+*Every function of the executable in address order, one cell per 256 bytes, colored by status.*
+
 <!-- progress:start -->
 | Metric (measured by `tools/tracking.py`) | Progress | % | Count |
 |---|---|---|---|
