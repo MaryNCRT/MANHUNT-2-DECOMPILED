@@ -16,12 +16,40 @@ code, to build a native **32-bit and 64-bit** port for Windows 10/11:
 **Status:** decompilation has started. Nothing compiles yet. Nothing is playable.
 
 <!-- progress:start -->
+| Metric (measured by `tools/tracking.py`) | Progress | % | Count |
+|---|---|---|---|
+| Game code decompiled to readable C/C++ (by bytes) | `░░░░░░░░░░░░░░░░░░░░` | **0.08 %** | 8 of 14,929 functions |
+| Game code verified against the original (by bytes) | `░░░░░░░░░░░░░░░░░░░░` | **0.00 %** | 0 functions |
+| Game functions with a confirmed name | `░░░░░░░░░░░░░░░░░░░░` | 0.06 % | 9 of 14,929 |
+| DXUT functions replaced by the port | `░░░░░░░░░░░░░░░░░░░░` | 0.00 % | 0 of 20 identified |
+
+Functions in the executable: 15,407. CRT, DXUT, import thunks and exception funclets are not part of the game-code total.
 <!-- progress:end -->
 
 These numbers are computed from [`decomp/functions.tsv`](decomp/functions.tsv) by
 [`tools/tracking.py`](tools/tracking.py); nobody types them by hand. "Decompiled"
 and "verified" are different things: see [METHODOLOGY.md](docs/METHODOLOGY.md).
 Per-phase status, including the estimates we cannot measure, is in [PROGRESS.md](PROGRESS.md).
+
+### Phases
+
+<!-- phases:start -->
+| # | Phase | Progress | % | M/E | Basis |
+|---|---|---|---|---|---|
+| 0 | Binary analysis and mapping | `█████░░░░░░░░░░░░░░░` | 25.0 % | E | headers, imports, DRM layout, entry, WinMain, DXUT and game init found; subsystems not mapped |
+| 1 | Function inventory and library identification | `██████░░░░░░░░░░░░░░` | 30.0 % | E | inventory complete; 296 CRT (FID) and 20 DXUT functions identified; other static libraries not separated |
+| 2 | Subsystem map (strings, vtables, RTTI) | `▌░░░░░░░░░░░░░░░░░░░` | 3.00 % | E | boot, audio, settings and clock entry points located |
+| 3 | Catalog of original limits (docs/LIMITS.md) | `▌░░░░░░░░░░░░░░░░░░░` | 3.00 % | E | 2 limits found so far |
+| 4 | Build skeleton x86 + x64 (CMake), boot with stubs | `░░░░░░░░░░░░░░░░░░░░` | 0.00 % | E | not started |
+| 5 | Game data setup from installed folder or ISO | `░░░░░░░░░░░░░░░░░░░░` | 0.00 % | E | not started |
+| 6 | Differential test harness (the oracle) | `░░░░░░░░░░░░░░░░░░░░` | 0.00 % | E | designed in METHODOLOGY.md, not built |
+| 7 | Decompilation: game code readable | `░░░░░░░░░░░░░░░░░░░░` | 0.08 % | M | measured by bytes of game code |
+| 8 | Decompilation: game code verified | `░░░░░░░░░░░░░░░░░░░░` | 0.00 % | M | measured by bytes of game code |
+| 9 | Original mod support (docs/MODS.md) | `▍░░░░░░░░░░░░░░░░░░░` | 2.00 % | E | plan written; 1 of 18 plugin features located; nothing implemented |
+| 10 | Improvements: widescreen, FPS, XInput, modern renderer | `░░░░░░░░░░░░░░░░░░░░` | 0.00 % | E | not started |
+
+**M** = measured from `decomp/functions.tsv`. **E** = estimate, kept deliberately conservative, for phases with no countable unit yet (edit `docs/phases.tsv`).
+<!-- phases:end -->
 
 ## Documentation
 

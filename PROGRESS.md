@@ -24,28 +24,35 @@ Project state. Written so anyone can pick this up with no prior context.
 ### Measured (by `tools/tracking.py`, never edited by hand)
 
 <!-- progress:start -->
+| Metric (measured by `tools/tracking.py`) | Progress | % | Count |
+|---|---|---|---|
+| Game code decompiled to readable C/C++ (by bytes) | `░░░░░░░░░░░░░░░░░░░░` | **0.08 %** | 8 of 14,929 functions |
+| Game code verified against the original (by bytes) | `░░░░░░░░░░░░░░░░░░░░` | **0.00 %** | 0 functions |
+| Game functions with a confirmed name | `░░░░░░░░░░░░░░░░░░░░` | 0.06 % | 9 of 14,929 |
+| DXUT functions replaced by the port | `░░░░░░░░░░░░░░░░░░░░` | 0.00 % | 0 of 20 identified |
+
+Functions in the executable: 15,407. CRT, DXUT, import thunks and exception funclets are not part of the game-code total.
 <!-- progress:end -->
 
 ### Per phase
 
-**M** = measured from the tracking file. **E** = estimate, because the phase has no
-countable unit yet; estimates are deliberately conservative.
+<!-- phases:start -->
+| # | Phase | Progress | % | M/E | Basis |
+|---|---|---|---|---|---|
+| 0 | Binary analysis and mapping | `█████░░░░░░░░░░░░░░░` | 25.0 % | E | headers, imports, DRM layout, entry, WinMain, DXUT and game init found; subsystems not mapped |
+| 1 | Function inventory and library identification | `██████░░░░░░░░░░░░░░` | 30.0 % | E | inventory complete; 296 CRT (FID) and 20 DXUT functions identified; other static libraries not separated |
+| 2 | Subsystem map (strings, vtables, RTTI) | `▌░░░░░░░░░░░░░░░░░░░` | 3.00 % | E | boot, audio, settings and clock entry points located |
+| 3 | Catalog of original limits (docs/LIMITS.md) | `▌░░░░░░░░░░░░░░░░░░░` | 3.00 % | E | 2 limits found so far |
+| 4 | Build skeleton x86 + x64 (CMake), boot with stubs | `░░░░░░░░░░░░░░░░░░░░` | 0.00 % | E | not started |
+| 5 | Game data setup from installed folder or ISO | `░░░░░░░░░░░░░░░░░░░░` | 0.00 % | E | not started |
+| 6 | Differential test harness (the oracle) | `░░░░░░░░░░░░░░░░░░░░` | 0.00 % | E | designed in METHODOLOGY.md, not built |
+| 7 | Decompilation: game code readable | `░░░░░░░░░░░░░░░░░░░░` | 0.08 % | M | measured by bytes of game code |
+| 8 | Decompilation: game code verified | `░░░░░░░░░░░░░░░░░░░░` | 0.00 % | M | measured by bytes of game code |
+| 9 | Original mod support (docs/MODS.md) | `▍░░░░░░░░░░░░░░░░░░░` | 2.00 % | E | plan written; 1 of 18 plugin features located; nothing implemented |
+| 10 | Improvements: widescreen, FPS, XInput, modern renderer | `░░░░░░░░░░░░░░░░░░░░` | 0.00 % | E | not started |
 
-| Phase | Status | % | How |
-|---|---|---|---|
-| 0 — Binary analysis and mapping | 🔄 | 25 % | E — headers, imports, DRM layout, entry/WinMain/DXUT found; subsystems not mapped |
-| 1 — Function inventory + library identification | 🔄 | 30 % | E — inventory 100 %; 296 CRT (FID) + 19 DXUT identified, rest of libraries not separated |
-| 2 — Subsystem map (strings, vtables, RTTI) | ⬜ | 0 % | — |
-| 3 — Catalog of original limits → `docs/LIMITS.md` | ⬜ | 0 % | — |
-| 4 — Build skeleton x86 + x64 (CMake), boot with stubs | ⬜ | 0 % | — |
-| 5 — Game data setup from installed folder or ISO | ⬜ | 0 % | — |
-| 6 — Differential test harness (the oracle) | ⬜ | 0 % | — |
-| 7 — Decompile core: memory, files, level loading | ⬜ | see M | M |
-| 8 — D3D9 renderer (unlimited textures/models, HD) | ⬜ | 0 % | M |
-| 9 — FMOD audio, Bink video, input | ⬜ | 0 % | M |
-| 10 — Gameplay, AI, level scripts | ⬜ | 0 % | M |
-| 11 — Original mod support ([MODS.md](docs/MODS.md)) | 🔄 | 2 % | E — plan written, 1 of 18 plugin features located, nothing implemented |
-| 12 — Improvements: widescreen, FPS, XInput, modern renderer | ⬜ | 0 % | — |
+**M** = measured from `decomp/functions.tsv`. **E** = estimate, kept deliberately conservative, for phases with no countable unit yet (edit `docs/phases.tsv`).
+<!-- phases:end -->
 
 **Overall: the decompilation itself is at the measured percentage above (well under
 1 %). Nothing compiles. Nothing is playable.**
@@ -104,6 +111,9 @@ the 64-bit build.
 |---|---|---|
 | Forced to a single CPU core | `0x6154F0`: `SetProcessAffinityMask(GetCurrentProcess(), 1)` | Call removed (`runtime/stubs`) |
 | 2 GB address space | PE header, LAA off | x64 build; LAA on the x86 build |
+| Any FMOD start-up failure closes the game ("Sound Error"): no audio device, headset unplugged at boot, odd driver | `Audio_Init` 0x4CE4E0 → `FatalError` 0x4CE4B0 | Fall back to no-sound output and keep running |
+
+Limits are catalogued in [docs/LIMITS.md](docs/LIMITS.md).
 
 ---
 
@@ -150,6 +160,14 @@ Documentation links (to read when each subsystem comes up):
 | Date | Functions | Status | Notes |
 |---|---|---|---|
 | 2026-10-31 | `WinMain` 0x6155C0, `CountProcessesNamed` 0x615420 → `decomp/core/WinMain.cpp` | readable | Return value of 0x615420 confirmed in the disassembly (Ghidra lost it). Arity of 0x618EB0 unresolved. |
+| 2026-10-31 | `MH2_InitGame` 0x6154F0 → `decomp/core/GameInit.cpp` | readable | Call order and `ECX` of every call read from the disassembly. Most callees unnamed. |
+| 2026-10-31 | `Audio_Init` 0x4CE4E0, `Audio_TrackPeakMemory` 0x4CDEB0, `FatalError` 0x4CE4B0, sound error text/caption 0x40DC68 / 0x4CE4A0 → `decomp/audio/AudioInit.cpp` | readable | Mirrors FMOD Ex sample start-up; FMOD arguments from the disassembly (Ghidra's were wrong). Found limit L2 (15 MB FMOD pool). 0x4CDEB0 was assumed to be an error handler; it only tracks peak memory. |
+
+### Game init sequence (`MH2_InitGame`)
+Affinity lock → 0x53ABD0 → block layout 0x60DA80 → multisample probe (2/4/8/16) →
+PSP-sized surface setup 0x60D420 (480x272 / 512x320) → main game object at 0x79E728 →
+clock start → `Settings_ClampDetailLevel` → `Game_Init_004DF610` → **audio (FMOD)** →
+`Game_Init_004DF450` (loads 4 things) → 0x4F8C40 → 0x4C5390 → sub-object vcall.
 
 ### Boot sequence (from WinMain)
 1. Single-instance check: counts processes named `Manhunt2`, shows a localized
@@ -164,8 +182,8 @@ Documentation links (to read when each subsystem comes up):
 
 ## 6. Next work
 
-1. Decompile `MH2_InitGame` (0x6154F0) and name the subsystems it starts
-2. Identify the rest of DXUT and the 11 game callbacks
+1. Decompile `Game_Init_004DF450` and `Game_Init_004DF610` (what the game loads at boot)
+2. Identify the rest of DXUT and the 11 game callbacks (render/update entry points)
 3. Separate remaining static libraries (STL, zlib?, others)
 4. Design and build the differential test harness (`docs/METHODOLOGY.md`)
 5. Cross-check PCGamingWiki issues against the binary → table in §2

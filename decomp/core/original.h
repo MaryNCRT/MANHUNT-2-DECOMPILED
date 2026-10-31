@@ -39,6 +39,8 @@ HRESULT MH2_CreateDevice(bool windowed, int width, int height, int refreshRate, 
 HRESULT DXUTMainLoop(HACCEL accel);
 // 0x0044C1A0 (via thunk 0x004043F0)
 int DXUTGetExitCode();
+// 0x00408620 — returns the window handle; used before ShowWindow(SW_HIDE) (?)
+HWND DXUTGetHWND_Maybe();
 
 // Callback registration (one setter per DXUT state slot). The slot each one
 // fills is known from the state offset it writes; the DXUT name is (?).
@@ -72,8 +74,29 @@ void MH2_Callback_00615410();
 // Game
 // ---------------------------------------------------------------------------
 
-// 0x006154F0 — game initialization (subsystems, see PROGRESS.md)
+// 0x006154F0 — game initialization, decompiled in GameInit.cpp
 bool MH2_InitGame();
+
+// Callees of MH2_InitGame, in call order.
+void Unknown_0053ABD0();
+void Unknown_0060DA80(bool layout);
+void Video_ProbeMultisampleModes();       // 0x00606E40: keeps which of 2/4/8/16 pass 0x0040A510 (?)
+int  Unknown_004202E6(int);               // returns 1
+int  Unknown_0060D420(bool larger, int);  // 480x272 or 512x320 surface setup
+void Clock_Start();                       // 0x004B1820 (?)
+void Clock_ResetFrameCounters();          // 0x007D2A70 (?)
+void GameSubObject_VCall(int vtableOffset);  // stands for g_Game->sub->vtable[offset/4]()
+void Unknown_0056F990();
+struct Settings;
+extern Settings* g_Settings;              // 0x007604C8, static settings object
+void Settings_ClampDetailLevel(Settings* self);  // 0x0056C070 (?)
+bool Game_Init_004DF610(uint8_t* game, int);
+bool Game_Init_004DF450(uint8_t* game, int);
+bool Game_Init_004F8C40(uint8_t* game, int);
+extern uint8_t* g_Object_00696ED8;
+void Unknown_004C5390(uint8_t* self);
+extern uint8_t g_GameObject[];            // 0x0079E728
+extern uint8_t g_GameSubObject[];         // 0x0079E70C
 // 0x0053CC10
 bool FileExists(const char* path);
 // 0x0056C2D0 — load saved settings; false if missing or invalid (?)
@@ -95,7 +118,21 @@ void MH2_Shutdown_005943D0();
 void MH2_Shutdown_004DF4A0();
 void MH2_Shutdown_004CE710();
 
-// 0x0079E700 — main game object; its vtable is called during init/shutdown
+// 0x00580E30 / 0x00580C30 — together they hand out the FMOD memory block.
+// 0x00580E30 takes a size and returns an object; 0x00580C30 is __thiscall on
+// that object and returns the pointer. Memory manager, not decompiled yet.
+void* Unknown_00580E30(unsigned size);
+void* Unknown_00580C30(void* self);
+
+// 0x007605DC — UI language index: 0 EN, 1 DE, 2 FR, 3 IT, 4 ES
+extern int g_Language;
+// 0x00704808 (?) — ten 0x38-byte audio records reset by Audio_Init
+extern uint8_t g_AudioRecords[10 * 0x38];
+
+// 0x0079E700 — pointer to the main game object. MH2_InitGame sets it to the
+// static object at 0x0079E728, and sets that object's field +0xC
+// (0x0079E734) to the sub-object at 0x0079E70C. Its vtable is called during
+// init and shutdown.
 extern uint8_t* g_Game;
 // 0x0079E704 — set when global/pictures/legal_fr.tex is missing (non-French build)
 extern int g_NoFrenchLegalScreen;

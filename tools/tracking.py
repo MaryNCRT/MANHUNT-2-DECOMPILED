@@ -104,7 +104,8 @@ def measure(rows):
     done = m["readable_bytes"] + m["verified_bytes"]
     m["decomp_pct"] = pct(done, gbytes)
     m["verified_pct"] = pct(m["verified_bytes"], gbytes)
-    m["named_fns"] = sum(1 for r in game if r["name"])
+    # Tentative names ending in "(?)" do not count as named.
+    m["named_fns"] = sum(1 for r in game if r["name"] and not r["name"].endswith("(?)"))
     dx = [r for r in rows if r["category"] == "dxut"]
     m["dxut_fns"] = len(dx)
     m["dxut_replaced"] = sum(1 for r in dx if r["status"] == "replaced")
@@ -117,39 +118,81 @@ def measure(rows):
     return m
 
 
+PHASES = os.path.join(ROOT, "docs", "phases.tsv")
+BAR_WIDTH = 20
+PARTIAL = " ▏▎▍▌▋▊▉"
+
+
+def bar(p):
+    """Text progress bar with 1/8-character resolution. No rounding up: an
+    empty bar means less than 1/160 of the work is done."""
+    eighths = int(max(0.0, min(100.0, p)) / 100.0 * BAR_WIDTH * 8)
+    full, part = divmod(eighths, 8)
+    s = "█" * full + (PARTIAL[part] if part else "")
+    return "`" + s + "░" * (BAR_WIDTH - len(s)) + "`"
+
+
+def fmt_pct(p):
+    return f"{p:.2f} %" if p < 10 else f"{p:.1f} %"
+
+
 def table(m):
+    readable = m["readable_fns"] + m["verified_fns"]
+    named_pct = pct(m["named_fns"], m["game_fns"])
+    dxut_pct = pct(m["dxut_replaced"], m["dxut_fns"])
     return "\n".join([
-        "| Metric (measured by `tools/tracking.py`) | Value |",
-        "|---|---|",
-        f"| Game code decompiled to readable C/C++ (by bytes) | **{m['decomp_pct']:.2f} %** "
-        f"({m['readable_fns'] + m['verified_fns']} of {m['game_fns']:,} functions) |",
-        f"| Game code verified against the original (by bytes) | **{m['verified_pct']:.2f} %** "
-        f"({m['verified_fns']} functions) |",
-        f"| Game functions with a real name | {m['named_fns']} of {m['game_fns']:,} |",
-        f"| DXUT framework functions replaced by the port | {m['dxut_replaced']} of {m['dxut_fns']} identified |",
-        f"| Functions in the executable | {m['total_fns']:,} |",
+        "| Metric (measured by `tools/tracking.py`) | Progress | % | Count |",
+        "|---|---|---|---|",
+        f"| Game code decompiled to readable C/C++ (by bytes) | {bar(m['decomp_pct'])} | "
+        f"**{fmt_pct(m['decomp_pct'])}** | {readable} of {m['game_fns']:,} functions |",
+        f"| Game code verified against the original (by bytes) | {bar(m['verified_pct'])} | "
+        f"**{fmt_pct(m['verified_pct'])}** | {m['verified_fns']} functions |",
+        f"| Game functions with a confirmed name | {bar(named_pct)} | {fmt_pct(named_pct)} | "
+        f"{m['named_fns']} of {m['game_fns']:,} |",
+        f"| DXUT functions replaced by the port | {bar(dxut_pct)} | {fmt_pct(dxut_pct)} | "
+        f"{m['dxut_replaced']} of {m['dxut_fns']} identified |",
+        "",
+        f"Functions in the executable: {m['total_fns']:,}. CRT, DXUT, import thunks and "
+        "exception funclets are not part of the game-code total.",
     ])
 
 
-def splice(path, block):
+def phase_table(m):
+    if not os.path.exists(PHASES):
+        return ""
+    measured = {"decomp": m["decomp_pct"], "verified": m["verified_pct"]}
+    lines = ["| # | Phase | Progress | % | M/E | Basis |", "|---|---|---|---|---|---|"]
+    for i, r in enumerate(load(PHASES)):
+        p = measured[r["pct"]] if r["kind"] == "M" else float(r["pct"])
+        lines.append(f"| {i} | {r['phase']} | {bar(p)} | {fmt_pct(p)} | {r['kind']} | {r['how']} |")
+    lines += ["", "**M** = measured from `decomp/functions.tsv`. **E** = estimate, kept "
+              "deliberately conservative, for phases with no countable unit yet "
+              "(edit `docs/phases.tsv`)."]
+    return "\n".join(lines)
+
+
+def splice(path, marker, block):
     if not os.path.exists(path):
         return
     s = open(path, encoding="utf-8").read()
-    new = re.sub(r"(<!-- progress:start -->\n).*?(\n<!-- progress:end -->)",
-                 lambda mm: mm.group(1) + block + mm.group(2), s, flags=re.S)
+    new = re.sub(rf"(<!-- {marker}:start -->\n).*?(\n?<!-- {marker}:end -->)",
+                 lambda mm: mm.group(1) + block + "\n<!-- " + marker + ":end -->", s, flags=re.S)
     if new != s:
         open(path, "w", encoding="utf-8", newline="\n").write(new)
 
 
 def report():
     m = measure(load(TRACK))
-    t = table(m)
+    t, ph = table(m), phase_table(m)
     print(t)
+    print()
+    print(ph)
     print()
     for cat, (n, b) in sorted(m["by_cat"].items()):
         print(f"  {cat:7} {n:6} fns {b:9} B")
     for doc in ("README.md", "README_es.md", "PROGRESS.md"):
-        splice(os.path.join(ROOT, doc), t)
+        splice(os.path.join(ROOT, doc), "progress", t)
+        splice(os.path.join(ROOT, doc), "phases", ph)
 
 
 if __name__ == "__main__":

@@ -383,7 +383,7 @@ addr	size	section	category	status	name	file
 004083d0	168	.text	dxut	todo	DXUTSetHotkeyHandling	
 00408480	124	.text	dxut	todo	DXUTSetCursorSettings	
 00408500	274	.text	game	todo		
-00408620	53	.text	game	todo		
+00408620	53	.text	dxut	todo	DXUTGetHWND(?)	
 00408636	47	.text	game	todo		
 00408690	5	.text	game	todo		
 004086a0	26	.text	game	todo		
@@ -437,7 +437,7 @@ addr	size	section	category	status	name	file
 0040d9d0	73	.text	game	todo		
 0040dc10	45	.text	game	todo		
 0040dc53	13	.text	game	todo		
-0040dc68	10	.text	game	todo		
+0040dc68	10	.text	game	readable	SoundErrorText	decomp/audio/AudioInit.cpp
 0040dc80	1440	.text	dxut	todo	MH2_CreateDevice	
 0040e220	376	.text	game	todo		
 0040e3a0	555	.text	dxut	todo	DXUTMainLoop	
@@ -6867,7 +6867,7 @@ addr	size	section	category	status	name	file
 004b17c0	35	.text	game	todo		
 004b17f0	21	.text	game	todo		
 004b1810	6	.text	game	todo		
-004b1820	26	.text	game	todo		
+004b1820	26	.text	game	todo	Clock_Start(?)	
 004b1840	36	.text	game	todo		
 004b1870	321	.text	game	todo		
 004b19c0	5	.text	game	todo		
@@ -7579,7 +7579,7 @@ addr	size	section	category	status	name	file
 004cde20	71	.text	game	todo		
 004cde70	5	.text	game	todo		
 004cde90	5	.text	game	todo		
-004cdeb0	39	.text	game	todo		
+004cdeb0	39	.text	game	readable	Audio_TrackPeakMemory	decomp/audio/AudioInit.cpp
 004cded8	11	.text	game	todo		
 004cdef0	19	.text	game	todo		
 004cdf10	32	.text	game	todo		
@@ -7598,9 +7598,9 @@ addr	size	section	category	status	name	file
 004ce410	117	.text	game	todo		
 004ce490	5	.text	game	todo		
 004ce495	8	.text	game	todo		
-004ce4a0	13	.text	game	todo		
-004ce4b0	45	.text	game	todo		
-004ce4e0	545	.text	game	todo		
+004ce4a0	13	.text	game	readable	SoundErrorCaption	decomp/audio/AudioInit.cpp
+004ce4b0	45	.text	game	readable	FatalError	decomp/audio/AudioInit.cpp
+004ce4e0	545	.text	game	readable	Audio_Init	decomp/audio/AudioInit.cpp
 004ce710	70	.text	game	todo		
 004ce760	153	.text	game	todo		
 004ce800	161	.text	game	todo		
@@ -10765,7 +10765,7 @@ addr	size	section	category	status	name	file
 0056bef0	249	.text	game	todo		
 0056bff0	22	.text	game	todo		
 0056c00b	96	.text	game	todo		
-0056c070	42	.text	game	todo		
+0056c070	42	.text	game	todo	Settings_ClampDetailLevel(?)	
 0056c0a0	26	.text	game	todo		
 0056c0c0	208	.text	game	todo		
 0056c190	277	.text	game	todo		
@@ -13475,7 +13475,7 @@ addr	size	section	category	status	name	file
 00606da0	46	.text	game	todo		
 00606dd0	85	.text	game	todo		
 00606e30	5	.text	game	todo		
-00606e40	96	.text	game	todo		
+00606e40	96	.text	game	todo	Video_ProbeMultisampleModes(?)	
 00606ea0	23	.text	game	todo		
 00606ec0	22	.text	game	todo		
 00606ee0	98	.text	game	todo		
@@ -13734,7 +13734,7 @@ addr	size	section	category	status	name	file
 006151d0	127	.text	game	todo		
 00615360	78	.text	game	todo		
 00615420	197	.text	game	readable	CountProcessesNamed	decomp/core/WinMain.cpp
-006154f0	198	.text	game	todo	MH2_InitGame	
+006154f0	198	.text	game	readable	MH2_InitGame	decomp/core/GameInit.cpp
 006155c0	595	.text	game	readable	WinMain	decomp/core/WinMain.cpp
 0061583c	6	.text	import	todo	D3DXMatrixTranspose	
 00615842	6	.text	import	todo	D3DXMatrixInverse	
@@ -15297,7 +15297,7 @@ addr	size	section	category	status	name	file
 007d2790	54	.secu	secu	todo		
 007d27f0	222	.secu	secu	todo		
 007d2a00	70	.secu	secu	todo		
-007d2a70	52	.secu	secu	todo		
+007d2a70	52	.secu	secu	todo	Clock_ResetFrameCounters(?)	
 007d2ab0	102	.secu	secu	todo		
 007d2b60	53	.secu	secu	todo		
 007d2bd0	245	.secu	secu	todo		
