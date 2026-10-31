@@ -54,6 +54,7 @@ build64/
 TOOLS/ghidra_*/
 TOOLS/GhidraMCP/
 TOOLS/rea/
+TOOLS/binviz/
 
 # ---- Machine-specific ----
 .claude/settings.local.json

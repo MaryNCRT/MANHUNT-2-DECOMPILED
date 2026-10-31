@@ -132,6 +132,14 @@ Limits are catalogued in [docs/LIMITS.md](docs/LIMITS.md).
    `Mh2Modern.asi`, `Manhunt2.DebugMenu.asi`, `Manhunt2.UM2.asi`…) are **hints for which
    limits exist and where**. Their code is not copied.
 5. Repo language is English; `README_es.md` is the Spanish README.
+6. **Treemap via BinViz** ([docs/PROGRESS-TREEMAP.md](docs/PROGRESS-TREEMAP.md)):
+   `decomp/functions.tsv` stays the source of truth; `tools/generate_treemap.py`
+   turns it into BinViz notes and renders `docs/progress/decompilation.svg`.
+   `verified` → BinViz *nonmatching*, `readable` → *in-progress*; nothing is ever
+   *matched* (byte-identical), so BinViz's headline and the decompilati.onl
+   "Matching" badge read 0 % by design. BinViz is built locally with Rust into
+   `TOOLS/binviz` (no prebuilt releases exist). No GitHub Action: rendering needs the
+   original exe, which never enters the repo.
 
 ---
 
@@ -190,6 +198,9 @@ clock start → `Settings_ClampDetailLevel` → `Game_Init_004DF610` → **audio
 
 ## 6. Next work
 
+0. BinViz's own analysis finds **2,512 functions (90,865 bytes) that Ghidra's inventory
+   lacks**. Check whether they are real functions Ghidra missed; if so, add them to
+   the inventory so the game-code total is complete.
 1. Decompile `Game_Init_004DF450` and `Game_Init_004DF610` (what the game loads at boot)
 2. Identify the rest of DXUT and the 11 game callbacks (render/update entry points)
 3. Separate remaining static libraries (STL, zlib?, others)

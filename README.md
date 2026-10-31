@@ -11,13 +11,25 @@ code, to build a native **32-bit and 64-bit** port for Windows 10/11:
 - **original game mods keep working** ([how](docs/MODS.md))
 - no third-party patches needed to run on modern systems
 
-## Progress
+## Decompilation Progress
+
+[![Decompiled](https://decompilati.onl/badge/manhunt-2.svg)](https://decompilati.onl/projects/manhunt-2)
+[![Matching](https://decompilati.onl/badge/manhunt-2/matching.svg)](https://decompilati.onl/projects/manhunt-2)
 
 **Status:** decompilation has started. Nothing compiles yet. Nothing is playable.
 
+![Decompilation treemap](docs/progress/decompilation.svg)
+
+*One tile per function, area proportional to its code bytes, drawn by
+[BinViz](https://github.com/trevor-e/binviz) from `decomp/functions.tsv`.*
+**"Matched" will stay at 0 % by design:** in BinViz it means C that compiles to the
+very same bytes, which this project does not attempt. Our verified functions show
+as *Nonmatching C* (same behavior, proven by the oracle). See
+[PROGRESS-TREEMAP.md](docs/PROGRESS-TREEMAP.md).
+
 ![Decompilation progress map](docs/img/progress.svg)
 
-*Every function of the executable in address order, one cell per 256 bytes, colored by status.*
+*The same data in address order, one cell per 256 bytes.*
 
 <!-- progress:start -->
 | Metric (measured by `tools/tracking.py`) | Progress | % | Count |

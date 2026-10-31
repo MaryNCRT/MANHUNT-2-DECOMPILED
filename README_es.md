@@ -11,13 +11,25 @@ para construir un port nativo de **32 y 64 bits** para Windows 10/11:
 - **los mods del juego original siguen funcionando** ([cómo](docs/MODS.md), en inglés)
 - sin necesidad de parches de terceros para arrancar en sistemas modernos
 
-## Progreso
+## Progreso de la decompilación
+
+[![Decompiled](https://decompilati.onl/badge/manhunt-2.svg)](https://decompilati.onl/projects/manhunt-2)
+[![Matching](https://decompilati.onl/badge/manhunt-2/matching.svg)](https://decompilati.onl/projects/manhunt-2)
 
 **Estado:** la decompilación ha empezado. Nada compila todavía. Nada es jugable.
 
+![Treemap de la decompilación](docs/progress/decompilation.svg)
+
+*Una casilla por función, con área proporcional a sus bytes de código, dibujada por
+[BinViz](https://github.com/trevor-e/binviz) a partir de `decomp/functions.tsv`.*
+**"Matched" se quedará en 0 % a propósito:** en BinViz significa C que compila a
+exactamente los mismos bytes, y este proyecto no persigue eso. Nuestras funciones
+verificadas salen como *Nonmatching C* (mismo comportamiento, demostrado por el
+oráculo). Ver [PROGRESS-TREEMAP.md](docs/PROGRESS-TREEMAP.md) (en inglés).
+
 ![Mapa de progreso de la decompilación](docs/img/progress.svg)
 
-*Todas las funciones del ejecutable por orden de dirección, una celda cada 256 bytes, coloreadas según su estado.*
+*Los mismos datos por orden de dirección, una celda cada 256 bytes.*
 
 <!-- progress:start -->
 | Metric (measured by `tools/tracking.py`) | Progress | % | Count |
