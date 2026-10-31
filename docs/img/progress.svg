@@ -2,11 +2,11 @@
 <rect width="800" height="1018" fill="#16181d"/>
 <text x="16" y="26" fill="#e8eaed" font-size="16" font-weight="600">Manhunt 2 PC decompilation</text>
 <rect x="16" y="40" width="768" height="14" rx="3" fill="#3a3f4b"/>
-<rect x="16" y="40" width="0.61" height="14" rx="3" fill="#8fd19e"/>
+<rect x="16" y="40" width="0.62" height="14" rx="3" fill="#8fd19e"/>
 <text x="22" y="51" fill="#e8eaed" font-size="11">game code readable: 0.08 %</text>
 <rect x="16" y="62" width="768" height="14" rx="3" fill="#3a3f4b"/>
-<rect x="16" y="62" width="0.00" height="14" rx="3" fill="#2e9e5b"/>
-<text x="22" y="73" fill="#e8eaed" font-size="11">game code verified: 0.00 %</text>
+<rect x="16" y="62" width="0.08" height="14" rx="3" fill="#2e9e5b"/>
+<text x="22" y="73" fill="#e8eaed" font-size="11">game code verified: 0.01 %</text>
 <rect x="16" y="96" width="767" height="5" fill="#3a3f4b"/>
 <rect x="16" y="102" width="767" height="5" fill="#3a3f4b"/>
 <rect x="16" y="108" width="275" height="5" fill="#3a3f4b"/>
@@ -273,9 +273,12 @@
 <rect x="16" y="858" width="767" height="5" fill="#3a3f4b"/>
 <rect x="16" y="864" width="767" height="5" fill="#3a3f4b"/>
 <rect x="16" y="870" width="767" height="5" fill="#3a3f4b"/>
-<rect x="16" y="876" width="767" height="5" fill="#3a3f4b"/>
+<rect x="16" y="876" width="257" height="5" fill="#3a3f4b"/>
+<rect x="274" y="876" width="5" height="5" fill="#2e9e5b"/>
+<rect x="280" y="876" width="503" height="5" fill="#3a3f4b"/>
 <rect x="16" y="882" width="407" height="5" fill="#3a3f4b"/>
-<rect x="424" y="882" width="23" height="5" fill="#8fd19e"/>
+<rect x="424" y="882" width="5" height="5" fill="#2e9e5b"/>
+<rect x="430" y="882" width="17" height="5" fill="#8fd19e"/>
 <rect x="448" y="882" width="329" height="5" fill="#6b5b95"/>
 <rect x="778" y="882" width="5" height="5" fill="#3a3f4b"/>
 <rect x="16" y="888" width="5" height="5" fill="#3a3f4b"/>

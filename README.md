@@ -22,9 +22,9 @@ code, to build a native **32-bit and 64-bit** port for Windows 10/11:
 <!-- progress:start -->
 | Metric (measured by `tools/tracking.py`) | Progress | % | Count |
 |---|---|---|---|
-| Game code decompiled to readable C/C++ (by bytes) | `░░░░░░░░░░░░░░░░░░░░` | **0.08 %** | 8 of 14,929 functions |
-| Game code verified against the original (by bytes) | `░░░░░░░░░░░░░░░░░░░░` | **0.00 %** | 0 functions |
-| Game functions with a confirmed name | `░░░░░░░░░░░░░░░░░░░░` | 0.06 % | 9 of 14,929 |
+| Game code decompiled to readable C/C++ (by bytes) | `░░░░░░░░░░░░░░░░░░░░` | **0.08 %** | 9 of 14,929 functions |
+| Game code verified against the original (by bytes) | `░░░░░░░░░░░░░░░░░░░░` | **0.01 %** | 2 functions |
+| Game functions with a confirmed name | `░░░░░░░░░░░░░░░░░░░░` | 0.07 % | 10 of 14,929 |
 | DXUT functions replaced by the port | `░░░░░░░░░░░░░░░░░░░░` | 0.00 % | 0 of 20 identified |
 
 Functions in the executable: 15,407. CRT, DXUT, import thunks and exception funclets are not part of the game-code total.
@@ -46,9 +46,9 @@ Per-phase status, including the estimates we cannot measure, is in [PROGRESS.md]
 | 3 | Catalog of original limits (docs/LIMITS.md) | `▌░░░░░░░░░░░░░░░░░░░` | 3.00 % | E | 2 limits found so far |
 | 4 | Build skeleton x86 + x64 (CMake), boot with stubs | `░░░░░░░░░░░░░░░░░░░░` | 0.00 % | E | not started |
 | 5 | Game data setup from installed folder or ISO | `░░░░░░░░░░░░░░░░░░░░` | 0.00 % | E | not started |
-| 6 | Differential test harness (the oracle) | `░░░░░░░░░░░░░░░░░░░░` | 0.00 % | E | designed in METHODOLOGY.md, not built |
+| 6 | Differential test harness (the oracle) | `████████░░░░░░░░░░░░` | 40.0 % | E | loader, import traps, runner and live-input rule work; 2 functions verified; callee stubs, thiscall helpers and side-effect diff missing |
 | 7 | Decompilation: game code readable | `░░░░░░░░░░░░░░░░░░░░` | 0.08 % | M | measured by bytes of game code |
-| 8 | Decompilation: game code verified | `░░░░░░░░░░░░░░░░░░░░` | 0.00 % | M | measured by bytes of game code |
+| 8 | Decompilation: game code verified | `░░░░░░░░░░░░░░░░░░░░` | 0.01 % | M | measured by bytes of game code |
 | 9 | Original mod support (docs/MODS.md) | `▍░░░░░░░░░░░░░░░░░░░` | 2.00 % | E | plan written; 1 of 18 plugin features located; nothing implemented |
 | 10 | Improvements: widescreen, FPS, XInput, modern renderer | `░░░░░░░░░░░░░░░░░░░░` | 0.00 % | E | not started |
 

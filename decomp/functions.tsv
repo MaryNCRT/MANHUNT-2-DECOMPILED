@@ -13634,7 +13634,7 @@ addr	size	section	category	status	name	file
 0060d980	167	.text	game	todo		
 0060da30	15	.text	game	todo		
 0060da40	28	.text	game	todo		
-0060da60	25	.text	game	todo		
+0060da60	25	.text	game	verified	AlignUp64	decomp/core/Align.h
 0060da80	336	.text	game	todo		
 0060dbe0	1278	.text	game	todo		
 0060e0e0	2244	.text	game	todo		
@@ -13733,7 +13733,7 @@ addr	size	section	category	status	name	file
 006151b0	29	.text	game	todo		
 006151d0	127	.text	game	todo		
 00615360	78	.text	game	todo		
-00615420	197	.text	game	readable	CountProcessesNamed	decomp/core/WinMain.cpp
+00615420	197	.text	game	verified	CountProcessesNamed	decomp/core/ProcessCheck.cpp
 006154f0	198	.text	game	readable	MH2_InitGame	decomp/core/GameInit.cpp
 006155c0	595	.text	game	readable	WinMain	decomp/core/WinMain.cpp
 0061583c	6	.text	import	todo	D3DXMatrixTranspose	

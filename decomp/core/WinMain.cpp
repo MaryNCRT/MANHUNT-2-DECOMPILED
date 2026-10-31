@@ -2,38 +2,15 @@
 //
 // Decompiled from Manhunt2.exe (build 0x4992F67C).
 //   WinMain              0x006155C0  (595 B)  readable, not verified
-//   CountProcessesNamed  0x00615420  (197 B)  readable, return value verified in asm
+//   (CountProcessesNamed 0x00615420 lives in ProcessCheck.cpp)
 //
 // Differences from the original are marked "PORT:". Everything else mirrors
 // the original control flow.
 
 #include "original.h"
+#include "ProcessCheck.h"
 
-#include <tlhelp32.h>
 #include <cwchar>
-
-// Number of running processes whose image name contains `name`
-// (case-sensitive substring, like the original's wcsstr call).
-// Returns 0 if `name` is null or the snapshot fails.
-static unsigned CountProcessesNamed(const WCHAR* name)
-{
-    if (name == nullptr)
-        return 0;
-
-    HANDLE snapshot = CreateToolhelp32Snapshot(TH32CS_SNAPPROCESS, 0);
-    if (snapshot == INVALID_HANDLE_VALUE)
-        return 0;
-
-    unsigned count = 0;
-    PROCESSENTRY32W entry = {};
-    entry.dwSize = sizeof(entry);
-    for (BOOL ok = Process32FirstW(snapshot, &entry); ok; ok = Process32NextW(snapshot, &entry)) {
-        if (wcsstr(entry.szExeFile, name) != nullptr)
-            ++count;
-    }
-    CloseHandle(snapshot);
-    return count;
-}
 
 // "Manhunt 2 is already running." in the five shipped languages.
 // Index: 0 English, 1 German, 2 French, 3 Italian, 4 Spanish.

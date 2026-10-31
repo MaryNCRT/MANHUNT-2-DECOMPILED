@@ -26,9 +26,9 @@ Project state. Written so anyone can pick this up with no prior context.
 <!-- progress:start -->
 | Metric (measured by `tools/tracking.py`) | Progress | % | Count |
 |---|---|---|---|
-| Game code decompiled to readable C/C++ (by bytes) | `░░░░░░░░░░░░░░░░░░░░` | **0.08 %** | 8 of 14,929 functions |
-| Game code verified against the original (by bytes) | `░░░░░░░░░░░░░░░░░░░░` | **0.00 %** | 0 functions |
-| Game functions with a confirmed name | `░░░░░░░░░░░░░░░░░░░░` | 0.06 % | 9 of 14,929 |
+| Game code decompiled to readable C/C++ (by bytes) | `░░░░░░░░░░░░░░░░░░░░` | **0.08 %** | 9 of 14,929 functions |
+| Game code verified against the original (by bytes) | `░░░░░░░░░░░░░░░░░░░░` | **0.01 %** | 2 functions |
+| Game functions with a confirmed name | `░░░░░░░░░░░░░░░░░░░░` | 0.07 % | 10 of 14,929 |
 | DXUT functions replaced by the port | `░░░░░░░░░░░░░░░░░░░░` | 0.00 % | 0 of 20 identified |
 
 Functions in the executable: 15,407. CRT, DXUT, import thunks and exception funclets are not part of the game-code total.
@@ -45,9 +45,9 @@ Functions in the executable: 15,407. CRT, DXUT, import thunks and exception func
 | 3 | Catalog of original limits (docs/LIMITS.md) | `▌░░░░░░░░░░░░░░░░░░░` | 3.00 % | E | 2 limits found so far |
 | 4 | Build skeleton x86 + x64 (CMake), boot with stubs | `░░░░░░░░░░░░░░░░░░░░` | 0.00 % | E | not started |
 | 5 | Game data setup from installed folder or ISO | `░░░░░░░░░░░░░░░░░░░░` | 0.00 % | E | not started |
-| 6 | Differential test harness (the oracle) | `░░░░░░░░░░░░░░░░░░░░` | 0.00 % | E | designed in METHODOLOGY.md, not built |
+| 6 | Differential test harness (the oracle) | `████████░░░░░░░░░░░░` | 40.0 % | E | loader, import traps, runner and live-input rule work; 2 functions verified; callee stubs, thiscall helpers and side-effect diff missing |
 | 7 | Decompilation: game code readable | `░░░░░░░░░░░░░░░░░░░░` | 0.08 % | M | measured by bytes of game code |
-| 8 | Decompilation: game code verified | `░░░░░░░░░░░░░░░░░░░░` | 0.00 % | M | measured by bytes of game code |
+| 8 | Decompilation: game code verified | `░░░░░░░░░░░░░░░░░░░░` | 0.01 % | M | measured by bytes of game code |
 | 9 | Original mod support (docs/MODS.md) | `▍░░░░░░░░░░░░░░░░░░░` | 2.00 % | E | plan written; 1 of 18 plugin features located; nothing implemented |
 | 10 | Improvements: widescreen, FPS, XInput, modern renderer | `░░░░░░░░░░░░░░░░░░░░` | 0.00 % | E | not started |
 
@@ -162,6 +162,14 @@ Documentation links (to read when each subsystem comes up):
 | 2026-10-31 | `WinMain` 0x6155C0, `CountProcessesNamed` 0x615420 → `decomp/core/WinMain.cpp` | readable | Return value of 0x615420 confirmed in the disassembly (Ghidra lost it). Arity of 0x618EB0 unresolved. |
 | 2026-10-31 | `MH2_InitGame` 0x6154F0 → `decomp/core/GameInit.cpp` | readable | Call order and `ECX` of every call read from the disassembly. Most callees unnamed. |
 | 2026-10-31 | `Audio_Init` 0x4CE4E0, `Audio_TrackPeakMemory` 0x4CDEB0, `FatalError` 0x4CE4B0, sound error text/caption 0x40DC68 / 0x4CE4A0 → `decomp/audio/AudioInit.cpp` | readable | Mirrors FMOD Ex sample start-up; FMOD arguments from the disassembly (Ghidra's were wrong). Found limit L2 (15 MB FMOD pool). 0x4CDEB0 was assumed to be an error handler; it only tracks peak memory. |
+
+| 2026-10-31 | `AlignUp64` 0x60DA60, `CountProcessesNamed` 0x615420 | **verified** | First functions verified by the oracle (`tests/oracle/`): 1,131,072 and 220 cases, 0 divergences, three runs. |
+
+### The oracle
+`tests/oracle/` runs the original code in-process: a placeholder exe linked at
+0x400000 hands its address range to `oracle.dll`, which maps the hash-checked
+original there, binds system imports and traps all others. Details and results in
+[docs/METHODOLOGY.md](docs/METHODOLOGY.md).
 
 ### Game init sequence (`MH2_InitGame`)
 Affinity lock → 0x53ABD0 → block layout 0x60DA80 → multisample probe (2/4/8/16) →

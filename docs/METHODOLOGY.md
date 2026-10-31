@@ -30,21 +30,42 @@ UMK3 had to recompile ARM code into C to get a reference. Manhunt 2 is easier:
 the reference exe is a normal 32-bit Windows program, so **the original code can
 run directly on the same machine**.
 
-Planned harness (`tests/`, **not built yet**):
-1. A 32-bit test program maps `Manhunt2_nosecu.exe` at its preferred base `0x400000`
-   (no relocations needed), resolves its imports, and does **not** run its entry point.
-2. For a leaf function (one that calls nothing, or only CRT), the test calls the original
-   at its address and our rewrite with the same generated inputs, and compares outputs and
-   memory side effects.
-3. For functions that call others, those callees are either already verified or replaced
-   by recording stubs, so only one function is under test at a time.
-4. Acceptance: **zero divergences** across thousands of inputs, including edge cases.
+The harness is in `tests/oracle/` and runs with `.\tests\oracle\build.ps1` (32-bit MSVC).
 
-Where running the code is impractical (rendering, Windows calls, global state that only
-exists mid-game), the fallback is a static comparison: constants, call order, and branch
-conditions of our code against the disassembly, plus behavior checks once the port runs.
+1. **Mapping.** The original must sit at `0x00400000` (it has no relocation table), but
+   Windows puts the process heaps and NLS views in that range before any of our code runs.
+   So `oracle_host.exe` is a CRT-free placeholder linked *at* `0x00400000` with an image
+   big enough to cover the original's range. It loads `oracle.dll`, which reads and
+   hash-checks `Manhunt2_nosecu.exe`, unmaps the host image, immediately reserves the
+   range, copies the sections and binds the imports. The original's entry point never runs.
+2. **Imports.** System DLLs (kernel32, user32, …) are bound for real. Everything else
+   (d3dx9, FMOD, Bink, DirectInput) is bound to a trap that names the import and stops
+   the run, so a test can never silently call into something we do not provide.
+3. **One test** calls the original at its address and our rewrite with the same inputs and
+   compares the results. Writable sections are restored between tests.
+4. **Live inputs** (process list, clock): the original runs before and after ours; if its
+   two results differ, the system changed mid-case and the case is skipped and reported as
+   *unstable*, never counted as a pass.
+5. **Acceptance: zero divergences** across all cases, including edge cases.
 
-Until this harness exists, **the verified count stays at 0 %**, and that is the honest number.
+Not built yet: stubs for callees (so a function that calls others can be tested alone),
+`__thiscall` call helpers, and comparison of memory side effects. Until those exist,
+only leaf functions and functions whose callees are system DLLs can be verified.
+
+Where running the code is impractical (rendering, global state that only exists mid-game),
+the fallback is a static comparison: constants, call order and branch conditions of our
+code against the disassembly, plus behavior checks once the port runs.
+
+### Results so far
+
+| Function | Cases | Divergences |
+|---|---|---|
+| `AlignUp64` 0x0060DA60 | 1,131,072 (all of 0–0xFFFF, all of 0xFFFF0000–0xFFFFFFFF, 1 M random) | 0 |
+| `CountProcessesNamed` 0x00615420 | 220 per run, 11 names × 20 rounds (live process list) | 0 |
+
+The first run of `CountProcessesNamed` reported 1 divergence (375 vs 376 matches for
+`"e"`): a process started between the two calls. That was a flaw in the test, not in the
+function, and is why live inputs now use the before/after rule above.
 
 ## Step by step, for one function
 

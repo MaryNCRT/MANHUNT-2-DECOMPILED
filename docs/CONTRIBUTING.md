@@ -40,7 +40,12 @@ New here? Read [GETTING-STARTED.md](GETTING-STARTED.md) and
 # 4. Record it
 python tools\setstatus.py 615420 status=readable name=CountProcessesNamed file=decomp/core/WinMain.cpp
 
-# 5. Refresh the numbers in README/PROGRESS
+# 5. Verify it against the original (32-bit MSVC needed): add a test in
+#    tests/oracle/, run it, and mark it verified only with zero divergences
+.\tests\oracle\build.ps1 CountProcessesNamed
+python tools\setstatus.py 615420 status=verified
+
+# 6. Refresh the numbers in README/PROGRESS
 python tools\tracking.py report
 ```
 
