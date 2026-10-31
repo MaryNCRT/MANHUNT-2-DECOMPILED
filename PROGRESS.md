@@ -21,21 +21,34 @@ Project state. Written so anyone can pick this up with no prior context.
 
 ## 1. Status
 
-| Phase | Status |
-|---|---|
-| 0 — Binary analysis and mapping | 🔄 IN PROGRESS |
-| 1 — Function inventory + identify CRT/libraries (FID) | 🔄 IN PROGRESS (inventory ✅) |
-| 2 — Subsystem map (strings, imports, vtables, RTTI) | ⬜ |
-| 3 — Catalog of original limits (pools, arrays, textures, memory) → `docs/LIMITS.md` | ⬜ |
-| 4 — Build skeleton x86 + x64 (CMake), boot with stubs | ⬜ |
-| 5 — Game data setup from installed folder or ISO | ⬜ |
-| 6 — Decompile core: memory, files, level loading | ⬜ |
-| 7 — D3D9 renderer (unlimited textures/models, HD) | ⬜ |
-| 8 — FMOD audio, Bink video, input | ⬜ |
-| 9 — Gameplay, AI, level scripts | ⬜ |
-| 10 — Improvements: mod VFS, widescreen, FPS, XInput, modern renderer | ⬜ |
+### Measured (by `tools/tracking.py`, never edited by hand)
 
-**Overall: ~2%.** Nothing compiles yet.
+<!-- progress:start -->
+<!-- progress:end -->
+
+### Per phase
+
+**M** = measured from the tracking file. **E** = estimate, because the phase has no
+countable unit yet; estimates are deliberately conservative.
+
+| Phase | Status | % | How |
+|---|---|---|---|
+| 0 — Binary analysis and mapping | 🔄 | 25 % | E — headers, imports, DRM layout, entry/WinMain/DXUT found; subsystems not mapped |
+| 1 — Function inventory + library identification | 🔄 | 30 % | E — inventory 100 %; 296 CRT (FID) + 19 DXUT identified, rest of libraries not separated |
+| 2 — Subsystem map (strings, vtables, RTTI) | ⬜ | 0 % | — |
+| 3 — Catalog of original limits → `docs/LIMITS.md` | ⬜ | 0 % | — |
+| 4 — Build skeleton x86 + x64 (CMake), boot with stubs | ⬜ | 0 % | — |
+| 5 — Game data setup from installed folder or ISO | ⬜ | 0 % | — |
+| 6 — Differential test harness (the oracle) | ⬜ | 0 % | — |
+| 7 — Decompile core: memory, files, level loading | ⬜ | see M | M |
+| 8 — D3D9 renderer (unlimited textures/models, HD) | ⬜ | 0 % | M |
+| 9 — FMOD audio, Bink video, input | ⬜ | 0 % | M |
+| 10 — Gameplay, AI, level scripts | ⬜ | 0 % | M |
+| 11 — Original mod support ([MODS.md](docs/MODS.md)) | 🔄 | 2 % | E — plan written, 1 of 18 plugin features located, nothing implemented |
+| 12 — Improvements: widescreen, FPS, XInput, modern renderer | ⬜ | 0 % | — |
+
+**Overall: the decompilation itself is at the measured percentage above (well under
+1 %). Nothing compiles. Nothing is playable.**
 
 ---
 
@@ -132,17 +145,36 @@ Documentation links (to read when each subsystem comes up):
 
 ---
 
-## 5. Next work
+## 5. Decompilation log
 
-1. Identify VS2005 CRT, STL and static libraries (not decompiled)
-2. Group functions into subsystems from strings and virtual tables / RTTI
-3. Cross-check PCGamingWiki issues against the binary → table in §2
-4. Limits catalog → `docs/LIMITS.md`
-5. CMake skeleton x86/x64 → `runtime/`
+| Date | Functions | Status | Notes |
+|---|---|---|---|
+| 2026-10-31 | `WinMain` 0x6155C0, `CountProcessesNamed` 0x615420 → `decomp/core/WinMain.cpp` | readable | Return value of 0x615420 confirmed in the disassembly (Ghidra lost it). Arity of 0x618EB0 unresolved. |
+
+### Boot sequence (from WinMain)
+1. Single-instance check: counts processes named `Manhunt2`, shows a localized
+   "already running" box (EN/DE/FR/IT/ES) if more than one.
+2. Command line: `-safe` (ignore saved settings), `-stereo` (stereo 3D mode).
+3. Registers 11 game callbacks with **DXUT**.
+4. `global/pictures/legal_fr.tex` present → French build.
+5. Loads settings (or defaults), DXUT init / hotkeys / cursor / window "Manhunt 2".
+6. Device creation (`0x40DC80`, a Rockstar-extended DXUTCreateDevice).
+7. `MH2_InitGame` (`0x6154F0`): **affinity lock to 1 core**, then subsystem init.
+8. DXUT main loop, then shutdown sequence (7 calls), exit code from DXUT.
+
+## 6. Next work
+
+1. Decompile `MH2_InitGame` (0x6154F0) and name the subsystems it starts
+2. Identify the rest of DXUT and the 11 game callbacks
+3. Separate remaining static libraries (STL, zlib?, others)
+4. Design and build the differential test harness (`docs/METHODOLOGY.md`)
+5. Cross-check PCGamingWiki issues against the binary → table in §2
+6. Limits catalog → `docs/LIMITS.md`
+7. CMake skeleton x86/x64 → `runtime/`
 
 ---
 
-## 6. Reproducing the analysis
+## 7. Reproducing the analysis
 
 ```powershell
 $env:JAVA_HOME = "C:\Program Files\Microsoft\jdk-21.0.12.8-hotspot"

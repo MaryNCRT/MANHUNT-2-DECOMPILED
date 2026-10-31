@@ -40,10 +40,10 @@ ORIGINAL/
 
 # ---- Analysis derived from the binary: regenerated, never versioned ----
 # Reproduce with OUTPUT/tools (see PROGRESS.md, "Reproducing the analysis").
-OUTPUT/ghidra/
-OUTPUT/inventory/
-OUTPUT/decompiled/
-OUTPUT/*.log
+# Everything in OUTPUT/ is generated (Ghidra project, drafts, call trees, logs)
+# except our own scripts in OUTPUT/tools/.
+OUTPUT/*
+!OUTPUT/tools/
 recompiled/
 decomp/**/_raw/
 build/
