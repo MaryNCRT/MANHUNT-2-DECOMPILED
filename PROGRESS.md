@@ -26,12 +26,12 @@ Project state. Written so anyone can pick this up with no prior context.
 <!-- progress:start -->
 | Metric (measured by `tools/tracking.py`) | Progress | % | Count |
 |---|---|---|---|
-| Game code decompiled to readable C/C++ (by bytes) | `░░░░░░░░░░░░░░░░░░░░` | **0.08 %** | 9 of 14,929 functions |
+| Game code decompiled to readable C/C++ (by bytes) | `░░░░░░░░░░░░░░░░░░░░` | **0.08 %** | 9 of 15,677 functions |
 | Game code verified against the original (by bytes) | `░░░░░░░░░░░░░░░░░░░░` | **0.01 %** | 2 functions |
-| Game functions with a confirmed name | `░░░░░░░░░░░░░░░░░░░░` | 0.07 % | 10 of 14,929 |
+| Game functions with a confirmed name | `░░░░░░░░░░░░░░░░░░░░` | 0.06 % | 10 of 15,677 |
 | DXUT functions replaced by the port | `░░░░░░░░░░░░░░░░░░░░` | 0.00 % | 0 of 20 identified |
 
-Functions in the executable: 15,407. CRT, DXUT, import thunks and exception funclets are not part of the game-code total.
+Functions in the executable: 16,155. CRT, DXUT, import thunks and exception funclets are not part of the game-code total.
 <!-- progress:end -->
 
 ### Per phase
@@ -40,7 +40,7 @@ Functions in the executable: 15,407. CRT, DXUT, import thunks and exception func
 | # | Phase | Progress | % | M/E | Basis |
 |---|---|---|---|---|---|
 | 0 | Binary analysis and mapping | `█████░░░░░░░░░░░░░░░` | 25.0 % | E | headers, imports, DRM layout, entry, WinMain, DXUT and game init found; subsystems not mapped |
-| 1 | Function inventory and library identification | `██████░░░░░░░░░░░░░░` | 30.0 % | E | inventory complete; 296 CRT (FID) and 20 DXUT functions identified; other static libraries not separated |
+| 1 | Function inventory and library identification | `██████░░░░░░░░░░░░░░` | 30.0 % | E | inventory cross-checked with BinViz (+748 functions); 296 CRT (FID) and 20 DXUT identified; other static libraries not separated |
 | 2 | Subsystem map (strings, vtables, RTTI) | `▌░░░░░░░░░░░░░░░░░░░` | 3.00 % | E | boot, audio, settings and clock entry points located |
 | 3 | Catalog of original limits (docs/LIMITS.md) | `▌░░░░░░░░░░░░░░░░░░░` | 3.00 % | E | 2 limits found so far |
 | 4 | Build skeleton x86 + x64 (CMake), boot with stubs | `░░░░░░░░░░░░░░░░░░░░` | 0.00 % | E | not started |
@@ -173,6 +173,11 @@ Documentation links (to read when each subsystem comes up):
 
 | 2026-10-31 | `AlignUp64` 0x60DA60, `CountProcessesNamed` 0x615420 | **verified** | First functions verified by the oracle (`tests/oracle/`): 1,131,072 and 220 cases, 0 divergences, three runs. |
 
+### Inventory cross-check (2026-10-31)
+BinViz found 2,512 functions Ghidra lacked. 748 with strong evidence (pointer tables,
+direct calls, address taken) were added; 1,765 without it were left out and listed.
+Game functions: 14,929 → 15,677. Details: [docs/INVENTORY.md](docs/INVENTORY.md).
+
 ### The oracle
 `tests/oracle/` runs the original code in-process: a placeholder exe linked at
 0x400000 hands its address range to `oracle.dll`, which maps the hash-checked
@@ -198,9 +203,6 @@ clock start → `Settings_ClampDetailLevel` → `Game_Init_004DF610` → **audio
 
 ## 6. Next work
 
-0. BinViz's own analysis finds **2,512 functions (90,865 bytes) that Ghidra's inventory
-   lacks**. Check whether they are real functions Ghidra missed; if so, add them to
-   the inventory so the game-code total is complete.
 1. Decompile `Game_Init_004DF450` and `Game_Init_004DF610` (what the game loads at boot)
 2. Identify the rest of DXUT and the 11 game callbacks (render/update entry points)
 3. Separate remaining static libraries (STL, zlib?, others)

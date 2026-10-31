@@ -93,7 +93,8 @@ state. Write it for someone picking this up with no prior context.
 | Ghidra project | `OUTPUT\ghidra\MH2.gpr` | Imported and analyzed binary |
 | Oracle | `tests\oracle\build.ps1` (32-bit MSVC) | Runs original functions next to ours; zero divergences = verified |
 | BinViz CLI | `TOOLS\binviz\release\binviz.exe` (built with Rust from `REFERENCE\binviz`) | Treemap via `tools\generate_treemap.py` |
-| Progress | `python tools\generate_treemap.py --report` | Tables, bars, progress map and treemap in one command |
+| Progress | `python tools\generate_treemap.py --report` | Tables, bars and treemap in one command |
+| Inventory cross-check | `OUTPUT\tools\binviz_crosscheck.py` + `CreateFunctions.java` | Adds functions Ghidra missed, only with strong evidence (`docs\INVENTORY.md`) |
 
 MCP servers are registered in `.mcp.json` (machine-specific, not versioned).
 

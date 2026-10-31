@@ -30,12 +30,12 @@ oráculo). Ver [PROGRESS-TREEMAP.md](docs/PROGRESS-TREEMAP.md) (en inglés).
 <!-- progress:start -->
 | Metric (measured by `tools/tracking.py`) | Progress | % | Count |
 |---|---|---|---|
-| Game code decompiled to readable C/C++ (by bytes) | `░░░░░░░░░░░░░░░░░░░░` | **0.08 %** | 9 of 14,929 functions |
+| Game code decompiled to readable C/C++ (by bytes) | `░░░░░░░░░░░░░░░░░░░░` | **0.08 %** | 9 of 15,677 functions |
 | Game code verified against the original (by bytes) | `░░░░░░░░░░░░░░░░░░░░` | **0.01 %** | 2 functions |
-| Game functions with a confirmed name | `░░░░░░░░░░░░░░░░░░░░` | 0.07 % | 10 of 14,929 |
+| Game functions with a confirmed name | `░░░░░░░░░░░░░░░░░░░░` | 0.06 % | 10 of 15,677 |
 | DXUT functions replaced by the port | `░░░░░░░░░░░░░░░░░░░░` | 0.00 % | 0 of 20 identified |
 
-Functions in the executable: 15,407. CRT, DXUT, import thunks and exception funclets are not part of the game-code total.
+Functions in the executable: 16,155. CRT, DXUT, import thunks and exception funclets are not part of the game-code total.
 <!-- progress:end -->
 
 Estas cifras las calcula [`tools/tracking.py`](tools/tracking.py) a partir de
@@ -50,7 +50,7 @@ estimaciones que no se pueden medir, está en [PROGRESS.md](PROGRESS.md).
 | # | Phase | Progress | % | M/E | Basis |
 |---|---|---|---|---|---|
 | 0 | Binary analysis and mapping | `█████░░░░░░░░░░░░░░░` | 25.0 % | E | headers, imports, DRM layout, entry, WinMain, DXUT and game init found; subsystems not mapped |
-| 1 | Function inventory and library identification | `██████░░░░░░░░░░░░░░` | 30.0 % | E | inventory complete; 296 CRT (FID) and 20 DXUT functions identified; other static libraries not separated |
+| 1 | Function inventory and library identification | `██████░░░░░░░░░░░░░░` | 30.0 % | E | inventory cross-checked with BinViz (+748 functions); 296 CRT (FID) and 20 DXUT identified; other static libraries not separated |
 | 2 | Subsystem map (strings, vtables, RTTI) | `▌░░░░░░░░░░░░░░░░░░░` | 3.00 % | E | boot, audio, settings and clock entry points located |
 | 3 | Catalog of original limits (docs/LIMITS.md) | `▌░░░░░░░░░░░░░░░░░░░` | 3.00 % | E | 2 limits found so far |
 | 4 | Build skeleton x86 + x64 (CMake), boot with stubs | `░░░░░░░░░░░░░░░░░░░░` | 0.00 % | E | not started |
