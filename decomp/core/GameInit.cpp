@@ -8,6 +8,7 @@
 // evidence goes; the rest keep their address. Call order is the original's.
 
 #include "original.h"
+#include "GameApp.h"
 #include "../audio/AudioInit.h"
 
 bool MH2_InitGame()
@@ -38,12 +39,13 @@ bool MH2_InitGame()
     Unknown_0056F990();               // three calls: 0x56F530, 0x56F420, 0x56F3B0
     Settings_ClampDetailLevel(g_Settings);  // 0x0056C070, __thiscall on 0x007604C8 (?)
 
-    if (!Game_Init_004DF610(g_Game, 0))     // __thiscall; uses the string "0.9999"
+    GameApp* app = reinterpret_cast<GameApp*>(g_Game);
+    if (!app->Initialise(nullptr))          // 0x004DF610
         return false;
 
     Audio_Init();
 
-    if (!Game_Init_004DF450(g_Game, 0))     // __thiscall; loads 4 things, then a check
+    if (!app->Load(0))                      // 0x004DF450: language, options, saves, CApp
         return false;
 
     Game_Init_004F8C40(g_Game, 0);          // __thiscall; body is "return 1"

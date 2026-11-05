@@ -62,6 +62,17 @@ code against the disassembly, plus behavior checks once the port runs.
 |---|---|---|
 | `AlignUp64` 0x0060DA60 | 1,131,072 (all of 0–0xFFFF, all of 0xFFFF0000–0xFFFFFFFF, 1 M random) | 0 |
 | `CountProcessesNamed` 0x00615420 | 220 per run, 11 names × 20 rounds (live process list) | 0 |
+| `GameApp::SetDefaults` 0x004DF5C0 | 156,000 (2,000 objects × every byte, random default heights) | 0 |
+| `GameApp::HandleEvent` 0x004DF660 | 376,900 (events −8…0x40 × 50 + 100,000 random), **except events 0x15 and 0x16** | 0 |
+| `SetVersionString` 0x00424990 | 240,000 (20,000 strings of 0–20 chars × 12 buffer bytes) | 0 |
+| `AlwaysTrue` 0x004202E6 | 1,000 | 0 |
+
+`HandleEvent` stays *readable*, not *verified*, until events 0x15 (`Initialise`) and
+0x16 (`Shutdown`) can be tested too: their callees are not decompiled yet, and in the
+test build they are stubs that stop the run if reached.
+
+`__thiscall` functions of the original are called through a `__fastcall` pointer:
+`ECX` carries the object, `EDX` is a dummy, and the callee cleans the stack the same way.
 
 The first run of `CountProcessesNamed` reported 1 divergence (375 vs 376 matches for
 `"e"`): a process started between the two calls. That was a flaw in the test, not in the

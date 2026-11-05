@@ -26,9 +26,9 @@ Project state. Written so anyone can pick this up with no prior context.
 <!-- progress:start -->
 | Metric (measured by `tools/tracking.py`) | Progress | % | Count |
 |---|---|---|---|
-| Game code decompiled to readable C/C++ (by bytes) | `░░░░░░░░░░░░░░░░░░░░` | **0.08 %** | 9 of 15,677 functions |
-| Game code verified against the original (by bytes) | `░░░░░░░░░░░░░░░░░░░░` | **0.01 %** | 2 functions |
-| Game functions with a confirmed name | `░░░░░░░░░░░░░░░░░░░░` | 0.06 % | 10 of 15,677 |
+| Game code decompiled to readable C/C++ (by bytes) | `░░░░░░░░░░░░░░░░░░░░` | **0.10 %** | 16 of 15,677 functions |
+| Game code verified against the original (by bytes) | `░░░░░░░░░░░░░░░░░░░░` | **0.02 %** | 5 functions |
+| Game functions with a confirmed name | `░░░░░░░░░░░░░░░░░░░░` | 0.13 % | 21 of 15,677 |
 | DXUT functions replaced by the port | `░░░░░░░░░░░░░░░░░░░░` | 0.00 % | 0 of 20 identified |
 
 Functions in the executable: 16,155. CRT, DXUT, import thunks and exception funclets are not part of the game-code total.
@@ -172,6 +172,20 @@ Documentation links (to read when each subsystem comes up):
 | 2026-10-31 | `Audio_Init` 0x4CE4E0, `Audio_TrackPeakMemory` 0x4CDEB0, `FatalError` 0x4CE4B0, sound error text/caption 0x40DC68 / 0x4CE4A0 → `decomp/audio/AudioInit.cpp` | readable | Mirrors FMOD Ex sample start-up; FMOD arguments from the disassembly (Ghidra's were wrong). Found limit L2 (15 MB FMOD pool). 0x4CDEB0 was assumed to be an error handler; it only tracks peak memory. |
 
 | 2026-10-31 | `AlignUp64` 0x60DA60, `CountProcessesNamed` 0x615420 | **verified** | First functions verified by the oracle (`tests/oracle/`): 1,131,072 and 220 cases, 0 divergences, three runs. |
+
+| 2026-11-05 | `GameApp::SetDefaults` 0x4DF5C0, `SetVersionString` 0x424990, `AlwaysTrue` 0x4202E6 → `decomp/core/GameApp.cpp` | **verified** | 156,000 / 240,000 / 1,000 oracle cases, 0 divergences. |
+| 2026-11-05 | `GameApp::HandleEvent` 0x4DF660 → `decomp/core/GameApp.cpp` | readable | Jump table decoded by hand. 376,900 oracle cases, 0 divergences, but events 0x15/0x16 untested (callees missing). |
+| 2026-11-05 | `GameApp::Initialise` 0x4DF610, `GameApp::Load` 0x4DF450, 0x4DF5B0 → `decomp/core/GameAppInit.cpp` | readable | ECX of every call from the disassembly. Ghidra claimed Load's failure branch never returns; it returns 0. |
+
+### The main game object (`GameApp`, static at 0x79E728)
+An application object with an event handler that returns 0/1/2 (error, processed, not
+processed) and defaults `"MANHUNT"`, 640×480 and **30** at `+0x18` (frame limit (?)),
+the shape of an application skeleton like RenderWare's (?). `Initialise` (event 0x15)
+sets the version string to "0.9999"; `Load` loads the language, registers the saved
+options ("soundType", "subtitles", "volumeSFX", "widescreen", "antialiasing"…),
+prepares the save slots and starts `CApp` ("Initialising CApp"). `0x4202E6` always
+returns 1 and jumps back into its thunk's `ret`: relocated by SecuROM, probably an
+emptied check.
 
 ### Inventory cross-check (2026-10-31)
 BinViz found 2,512 functions Ghidra lacked. 748 with strong evidence (pointer tables,

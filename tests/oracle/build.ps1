@@ -21,10 +21,15 @@ $sources = @(
     "$root\tests\oracle\main.cpp",
     "$root\tests\oracle\pe_image.cpp",
     "$root\tests\oracle\test_core.cpp",
-    "$root\decomp\core\ProcessCheck.cpp"
+    "$root\tests\oracle\test_gameapp.cpp",
+    "$root\tests\oracle\stubs_gameapp.cpp",
+    "$root\decomp\core\ProcessCheck.cpp",
+    "$root\decomp\core\GameApp.cpp"
 ) -join '" "'
 
-$dll = "cl /nologo /std:c++17 /EHsc /O2 /W3 /utf-8 /MT /LD /Fo`"$out\\`" /Fe`"$out\oracle.dll`" `"$sources`" " +
+# _CRT_SECURE_NO_WARNINGS: decompiled code keeps the CRT calls the original
+# makes (strncpy...), so the "use _s versions" warnings do not apply.
+$dll = "cl /nologo /std:c++17 /EHsc /O2 /W3 /utf-8 /MT /LD /D_CRT_SECURE_NO_WARNINGS/Fo`"$out\\`" /Fe`"$out\oracle.dll`" `"$sources`" " +
        "/link /BASE:0x10000000 /DYNAMICBASE:NO"
 $host_ = "cl /nologo /O1 /GS- /Fo`"$out\\`" /Fe`"$out\oracle_host.exe`" `"$root\tests\oracle\host.cpp`" " +
          "/link /BASE:0x400000 /FIXED /DYNAMICBASE:NO /NODEFAULTLIB /ENTRY:HostEntry " +

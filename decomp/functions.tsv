@@ -1421,7 +1421,7 @@ addr	size	section	category	status	name	file
 004202a0	15	.text	game	todo		
 004202b0	46	.text	game	todo		
 004202e0	5	.text	game	todo		
-004202e6	11	.text	game	todo		
+004202e6	11	.text	game	verified	AlwaysTrue	decomp/core/GameApp.cpp
 004202f0	11	.text	game	todo		
 00420300	5	.text	game	todo		
 00420306	11	.text	game	todo		
@@ -1775,7 +1775,7 @@ addr	size	section	category	status	name	file
 004248e0	91	.text	game	todo		
 00424940	62	.text	game	todo		
 00424980	5	.text	game	todo		
-00424990	30	.text	game	todo		
+00424990	30	.text	game	verified	SetVersionString	decomp/core/GameApp.cpp
 004249c0	209	.text	game	todo		
 00424aa0	224	.text	game	todo		
 00424b80	63	.text	game	todo		
@@ -7024,7 +7024,7 @@ addr	size	section	category	status	name	file
 004b0110	97	.text	game	todo		
 004b0180	7	.text	game	todo		
 004b0187	161	.text	game	todo		
-004b0230	5	.text	game	todo		
+004b0230	5	.text	game	todo	thunk_SetVersionString	
 004b0250	27	.text	game	todo		
 004b0270	5	.text	game	todo		
 004b0280	58	.text	game	todo		
@@ -7054,7 +7054,7 @@ addr	size	section	category	status	name	file
 004b1270	22	.text	game	todo		
 004b1290	22	.text	game	todo		
 004b12b0	22	.text	game	todo		
-004b12d0	5	.text	game	todo		
+004b12d0	5	.text	game	todo	thunk_CApp_Init	
 004b12e0	103	.text	game	todo		
 004b1390	5	.text	game	todo		
 004b13e0	139	.text	game	todo		
@@ -8131,16 +8131,16 @@ addr	size	section	category	status	name	file
 004df3a0	94	.text	game	todo		
 004df400	39	.text	game	todo		
 004df430	18	.text	game	todo		
-004df450	67	.text	game	todo		
-004df4a0	30	.text	game	todo		
+004df450	67	.text	game	readable	GameApp::Load	decomp/core/GameAppInit.cpp
+004df4a0	30	.text	game	todo	GameApp::Shutdown(?)	
 004df4d0	151	.text	game	todo		
 004df570	33	.text	game	todo		
 004df5a0	11	.text	game	todo		
-004df5b0	10	.text	game	todo		
-004df5c0	76	.text	game	todo		
-004df610	76	.text	game	todo		
-004df660	127	.text	game	todo		
-004df730	5	.text	game	todo		
+004df5b0	10	.text	game	readable	GameApp_VCallSub1C	decomp/core/GameAppInit.cpp
+004df5c0	76	.text	game	verified	GameApp::SetDefaults	decomp/core/GameApp.cpp
+004df610	76	.text	game	readable	GameApp::Initialise	decomp/core/GameAppInit.cpp
+004df660	127	.text	game	readable	GameApp::HandleEvent	decomp/core/GameApp.cpp
+004df730	5	.text	game	todo	thunk_AlwaysTrue	
 004df740	28	.text	game	todo		
 004df760	28	.text	game	todo		
 004df780	7	.text	game	todo		
@@ -10776,7 +10776,7 @@ addr	size	section	category	status	name	file
 00561bd0	6	.text	game	todo		
 00561be0	32	.text	game	todo		
 00561c00	79	.text	game	todo		
-00561c50	1276	.text	game	todo		
+00561c50	1276	.text	game	todo	OptionsTable_RegisterAll(?)	
 00562150	219	.text	game	todo		
 00562230	20	.text	game	todo		
 00562250	53	.text	game	todo		
@@ -10802,7 +10802,7 @@ addr	size	section	category	status	name	file
 00562ab0	35	.text	game	todo		
 00562ae0	27	.text	game	todo		
 00562b00	749	.text	game	todo		
-00562df0	48	.text	game	todo		
+00562df0	48	.text	game	todo	OptionsTable_Get(?)	
 00562e20	224	.text	game	todo		
 00562f00	94	.text	game	todo		
 00562f60	1272	.text	game	todo		
@@ -11004,7 +11004,7 @@ addr	size	section	category	status	name	file
 0056b1a0	247	.text	game	todo		
 0056b2c0	42	.text	game	todo		
 0056b2f0	69	.text	game	todo		
-0056b340	146	.text	game	todo		
+0056b340	146	.text	game	todo	Language_Load(?)	
 0056b3f0	13	.text	game	todo		
 0056b3fd	204	.text	game	todo		
 0056b4f0	57	.text	game	todo		
@@ -11045,7 +11045,7 @@ addr	size	section	category	status	name	file
 0056c190	277	.text	game	todo		
 0056c2d0	219	.text	game	todo		
 0056c3b0	28	.text	game	todo		
-0056c3d0	155	.text	game	todo		
+0056c3d0	155	.text	game	todo	SaveGames_Init(?)	
 0056c470	21	.text	game	todo		
 0056c490	11	.text	game	todo		
 0056c4a0	93	.text	game	todo		
@@ -11524,8 +11524,8 @@ addr	size	section	category	status	name	file
 00580e60	32	.text	game	todo		
 00580e80	51	.text	game	todo		
 00580ec0	12	.text	game	todo		
-00580ed0	18	.text	game	todo		
-00580ef0	22	.text	game	todo		
+00580ed0	18	.text	game	todo	Unknown_Alloc_00580ED0(?)	
+00580ef0	22	.text	game	todo	Unknown_Free_00580EF0(?)	
 00580f10	67	.text	game	todo		
 00580f60	213	.text	game	todo		
 00581040	64	.text	game	todo		
@@ -16043,7 +16043,7 @@ addr	size	section	category	status	name	file
 007d2640	73	.secu	secu	todo		
 007d26c0	90	.secu	secu	todo		
 007d2790	54	.secu	secu	todo		
-007d27f0	222	.secu	secu	todo		
+007d27f0	222	.secu	secu	todo	CApp_Init	
 007d2a00	70	.secu	secu	todo		
 007d2a70	52	.secu	secu	todo	Clock_ResetFrameCounters(?)	
 007d2ab0	102	.secu	secu	todo		

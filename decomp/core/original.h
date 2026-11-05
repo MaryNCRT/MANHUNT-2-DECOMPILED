@@ -90,9 +90,26 @@ void Unknown_0056F990();
 struct Settings;
 extern Settings* g_Settings;              // 0x007604C8, static settings object
 void Settings_ClampDetailLevel(Settings* self);  // 0x0056C070 (?)
-bool Game_Init_004DF610(uint8_t* game, int);
-bool Game_Init_004DF450(uint8_t* game, int);
-bool Game_Init_004F8C40(uint8_t* game, int);
+// GameApp::Initialise (0x004DF610) and GameApp::Load (0x004DF450) are decompiled
+// in GameApp.h / GameAppInit.cpp.
+bool Game_Init_004F8C40(uint8_t* game, int);   // __thiscall; body is "return 1"
+
+// Callees of GameApp::Initialise / GameApp::Load.
+struct GameSubObject;
+int   SubObject_VCall1C(GameSubObject* sub);     // sub->vtable[0x1C / 4]()
+void* Unknown_00580ED0(unsigned sizeOrId);       // 0x00580E30 then 0x00580C30 on its result
+void  Unknown_00580EF0(void* p);                 // 0x00580E30 then 0x00580D80; null-safe
+struct LanguageTable;
+extern LanguageTable* g_Language_0075FC9C;       // static object at 0x0075FC9C
+void  Language_Load(LanguageTable* self);        // 0x0056B340 (?): picks data by g_Language
+struct OptionsTable;
+OptionsTable* OptionsTable_Get();                // 0x00562DF0: function-local static at 0x0075F110
+void  OptionsTable_RegisterAll(OptionsTable*);   // 0x00561C50: "soundType", "subtitles", "volumeSFX"...
+struct SaveGames;
+extern SaveGames* g_SaveGames_007605F0;          // static object at 0x007605F0
+void  SaveGames_Init(SaveGames* self);           // 0x0056C3D0 (?): copies 0xAD08 bytes, "EMPTY" slot
+bool  CApp_Init();                               // 0x007D27F0 via 0x004B12D0: logs "Initialising CApp"
+void  Unknown_005E02A0();
 extern uint8_t* g_Object_00696ED8;
 void Unknown_004C5390(uint8_t* self);
 extern uint8_t g_GameObject[];            // 0x0079E728
