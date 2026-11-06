@@ -17,8 +17,9 @@ bool CApp_Init()
     SetLoadingMessage("Initialising CApp");
     Paths_SetupFromGlobals_007D2570();      // via thunk 0x004B0270 (?)
 
-    // Parses global/initscripts/LEVELS.txt (the path slot at 0x007597E4) with
-    // the "LEVEL" / "ENABLE_LEVEL_ORDER" handler.
+    // Parses the level list (path slot 0x007597E4) with the "LEVEL" /
+    // "ENABLE_LEVEL_ORDER" handler. On PC Paths_Init sets that slot to
+    // global/initscripts/resource23.glg, a zlib-packed text script (Paths.cpp).
     // ORIGINAL LIMIT L3: the reader takes at most 80,000 bytes of the file.
     TextScript_Parse(g_PathLevelsTxt, LevelList_OnToken);   // 0x00541F90, handler 0x00546D90
 

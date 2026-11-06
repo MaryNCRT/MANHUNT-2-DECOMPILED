@@ -78,7 +78,7 @@ void MH2_Callback_00615410();
 bool MH2_InitGame();
 
 // Callees of MH2_InitGame, in call order.
-void Unknown_0053ABD0();
+void Paths_InitForPC();                   // 0x0053ABD0, decompiled in Paths.cpp
 void Unknown_0060DA80(bool layout);
 void Video_ProbeMultisampleModes();       // 0x00606E40: keeps which of 2/4/8/16 pass 0x0040A510 (?)
 int  Unknown_004202E6(int);               // returns 1
@@ -107,7 +107,7 @@ inline void  Unknown_00580EF0(void* p) { Mem_Free(p); }
 
 // Callees of CApp_Init.
 struct GameString;                               // the string type of the path slots (ctor 0x005FDA60, dtor 0x005FDB70)
-extern GameString* g_PathLevelsTxt;              // slot 0x007597E4: global/initscripts/LEVELS.txt on PC
+extern GameString* g_PathLevelsTxt;              // slot 0x007597E4: global/initscripts/resource23.glg on PC
 typedef void (*TextScriptHandler)();
 void  TextScript_Parse(GameString* path, TextScriptHandler handler);  // 0x00541F90, __cdecl
 void  LevelList_OnToken();                       // 0x00546D90: "LEVEL", "ENABLE_LEVEL_ORDER"

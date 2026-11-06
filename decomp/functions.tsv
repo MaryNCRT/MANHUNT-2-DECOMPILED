@@ -9805,7 +9805,7 @@ addr	size	section	category	status	name	file
 0053ab60	27	.text	game	todo		
 0053ab80	28	.text	game	todo		
 0053aba0	39	.text	game	todo		
-0053abd0	9	.text	game	todo		
+0053abd0	9	.text	game	readable	Paths_InitForPC	decomp/core/Paths.cpp
 0053abe0	103	.text	game	todo		
 0053ac50	12	.text	game	todo		
 0053ac60	4	.text	game	todo		
@@ -9902,9 +9902,9 @@ addr	size	section	category	status	name	file
 0053ced0	21	.text	game	todo		
 0053cef0	24	.text	game	todo		
 0053cf10	62	.text	game	todo		
-0053cf50	157	.text	game	todo		
+0053cf50	157	.text	game	readable	Paths_Init	decomp/core/Paths.cpp
 0053cff0	292	.text	game	todo		
-0053d140	436	.text	game	todo		
+0053d140	436	.text	game	todo	Unknown_ctor_0053D140	
 0053d300	76	.text	game	todo		
 0053d350	22	.text	game	todo		
 0053d370	490	.text	game	todo		

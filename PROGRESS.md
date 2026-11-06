@@ -26,9 +26,9 @@ Project state. Written so anyone can pick this up with no prior context.
 <!-- progress:start -->
 | Metric (measured by `tools/tracking.py`) | Progress | % | Count |
 |---|---|---|---|
-| Game code decompiled to readable C/C++ (by bytes) | `░░░░░░░░░░░░░░░░░░░░` | **0.12 %** | 20 of 16,242 functions |
+| Game code decompiled to readable C/C++ (by bytes) | `░░░░░░░░░░░░░░░░░░░░` | **0.13 %** | 22 of 16,242 functions |
 | Game code verified against the original (by bytes) | `░░░░░░░░░░░░░░░░░░░░` | **0.03 %** | 8 functions |
-| Game functions with a confirmed name | `░░░░░░░░░░░░░░░░░░░░` | 0.17 % | 28 of 16,242 |
+| Game functions with a confirmed name | `░░░░░░░░░░░░░░░░░░░░` | 0.19 % | 31 of 16,242 |
 | DXUT functions replaced by the port | `░░░░░░░░░░░░░░░░░░░░` | 0.00 % | 0 of 20 identified |
 
 Functions in the executable: 16,720. CRT, DXUT, import thunks and exception funclets are not part of the game-code total.
@@ -41,14 +41,14 @@ Functions in the executable: 16,720. CRT, DXUT, import thunks and exception func
 |---|---|---|---|---|---|
 | 0 | Binary analysis and mapping | `█████░░░░░░░░░░░░░░░` | 25.0 % | E | headers, imports, DRM layout, entry, WinMain, DXUT and game init found; subsystems not mapped |
 | 1 | Function inventory and library identification | `██████░░░░░░░░░░░░░░` | 30.0 % | E | inventory cross-checked with BinViz (+1,313 functions in two rounds); 296 CRT (FID) and 20 DXUT identified; other static libraries not separated |
-| 2 | Subsystem map (strings, vtables, RTTI) | `█▍░░░░░░░░░░░░░░░░░░` | 7.00 % | E | boot, game object, audio, options, saves, CApp, text scripts and the file path table located |
+| 2 | Subsystem map (strings, vtables, RTTI) | `█▌░░░░░░░░░░░░░░░░░░` | 8.00 % | E | boot, game object, audio, options, saves, CApp, text scripts, file path table (decoded) and .glg format located |
 | 3 | Catalog of original limits (docs/LIMITS.md) | `█░░░░░░░░░░░░░░░░░░░` | 5.00 % | E | 3 limits, 1 bug and 5 fixed buffers found so far |
 | 4 | Build skeleton x86 + x64 (CMake), boot with stubs | `░░░░░░░░░░░░░░░░░░░░` | 0.00 % | E | not started |
 | 5 | Game data setup from installed folder or ISO | `░░░░░░░░░░░░░░░░░░░░` | 0.00 % | E | not started |
 | 6 | Differential test harness (the oracle) | `██████████░░░░░░░░░░` | 50.0 % | E | loader, import traps, runner, live-input rule, thiscall calls and callee stubs work; 8 functions verified; generic side-effect diff missing |
-| 7 | Decompilation: game code readable | `░░░░░░░░░░░░░░░░░░░░` | 0.12 % | M | measured by bytes of game code |
+| 7 | Decompilation: game code readable | `░░░░░░░░░░░░░░░░░░░░` | 0.13 % | M | measured by bytes of game code |
 | 8 | Decompilation: game code verified | `░░░░░░░░░░░░░░░░░░░░` | 0.03 % | M | measured by bytes of game code |
-| 9 | Original mod support (docs/MODS.md) | `▍░░░░░░░░░░░░░░░░░░░` | 2.00 % | E | plan written; 1 of 18 plugin features located; nothing implemented |
+| 9 | Original mod support (docs/MODS.md) | `▊░░░░░░░░░░░░░░░░░░░` | 4.00 % | E | plan written; 1 of 18 plugin features located; file hook point (path table) found; nothing implemented |
 | 10 | Improvements: widescreen, FPS, XInput, modern renderer | `░░░░░░░░░░░░░░░░░░░░` | 0.00 % | E | not started |
 
 **M** = measured from `decomp/functions.tsv`. **E** = estimate, kept deliberately conservative, for phases with no countable unit yet (edit `docs/phases.tsv`).
@@ -181,17 +181,30 @@ Documentation links (to read when each subsystem comes up):
 | 2026-11-05 | `CApp_Init` 0x7D27F0 → `decomp/core/CAppInit.cpp` | readable | Split by SecuROM into jmp-joined pieces; read with `disasm.py follow`. Fails only if 0x5898C0 fails. Ghidra's draft had two calls wrong. |
 
 ### CApp_Init and the file path table
-`CApp_Init` parses `global/initscripts/LEVELS.txt` with `TextScript_Parse` (0x541F90):
-UTF-16 files with a BOM are folded to ASCII, `#` comments outside quotes are blanked,
-and the text goes to a token handler. It reads **at most 80,000 bytes** (limit L3) and
-then writes one byte past the buffer when a file reaches that size (bug B1).
+`CApp_Init` parses the level list with `TextScript_Parse` (0x541F90): UTF-16 files with
+a BOM are folded to ASCII, `#` comments outside quotes are blanked, and the text goes to
+a token handler. It reads **at most 80,000 bytes** (limit L3) and then writes one byte
+past the buffer when a file reaches that size (bug B1).
 
-The game's file names come from a **path table at 0x6A2C00–0x6A3180**: 12-byte records
-`{slot, path A, path B}`, one set in console style (`GLOBAL/INITSCR/LEVELS.TXT`) and one
-for PC (`global/initscripts/LEVELS.txt`); path A is often a packed `resourceNN.glg`, path
-B the loose text file. Each slot is a string object built empty by a static initializer
-and filled at run time (the code that picks A or B is not found yet). This table is
-the map of what the game loads: the mod file system will hook at this level.
+The game's file names come from a **path table at 0x6A2A48–0x6A318C**: 155 records of
+12 bytes `{slot, path A, path B}`, ended by a null slot, for 96 distinct string slots.
+The first part holds console-style base paths; a later part overrides 59 slots with PC
+paths. `Paths_Init` (0x53CF50, the very first step of `MH2_InitGame`) assigns every
+record's path to its slot in order, so the **last record for a slot wins**. The game
+calls it with `usePathA = 1`: on PC the level list is
+**`global/initscripts/resource23.glg`**, not `LEVELS.txt`. The only special case: a
+path A of `"controller_page"` becomes `global/pictures/MH2_controller.tex`.
+
+**Correction (2026-11-05):** the previous commit said the PC game reads
+`global/initscripts/LEVELS.txt`. That is path B of the record; PC uses path A. The
+installed game confirms it: `global/initscripts/` has `resource23.glg` and no `LEVELS.txt`.
+
+**`.glg` files** are packed text scripts: magic `Z2HM`, a 32-bit unpacked size, then a
+zlib stream. See [docs/FORMATS.md](docs/FORMATS.md).
+
+This table is the map of what the game loads: the mod file system hooks here. Path B
+names the loose text equivalents (`LEVELS.txt`, `AITYPEDATA.ini`…), so the port can
+accept either the original `.glg` or a plain text file in a mod folder.
 
 Fixed buffers seen here: a 32-record pool, a 1 MB buffer and a 48 KB buffer
 ([docs/LIMITS.md](docs/LIMITS.md)).
@@ -236,9 +249,9 @@ clock start → `Settings_ClampDetailLevel` → `Game_Init_004DF610` → **audio
 
 ## 6. Next work
 
-1. Find the code that fills the path slots from the path table (picks path A or B):
-   it decides which files the game reads, so the mod file system starts there
-2. Decompile `TextScript_Parse` (0x541F90) and the LEVELS.txt handler (0x546D90)
+1. Decompile the `.glg` reader (file open 0x53BD00 and the zlib unpack) so a mod can
+   replace a `.glg` with plain text
+2. Decompile `TextScript_Parse` (0x541F90) and the level list handler (0x546D90)
 2. Identify the rest of DXUT and the 11 game callbacks (render/update entry points)
 3. Separate remaining static libraries (STL, zlib?, others)
 4. Design and build the differential test harness (`docs/METHODOLOGY.md`)

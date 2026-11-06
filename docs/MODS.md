@@ -24,6 +24,12 @@ about the one kind that cannot work as-is.
   port's replacement.
 - Mods that only exist as "overwrite the game folder" instructions also work:
   the port reads the installed folder as the base layer.
+- **Where this hooks in:** every file the game loads by name goes through a path
+  table of 96 string slots, filled at start-up by `Paths_Init` (0x0053CF50,
+  `decomp/core/Paths.cpp`). The mod file system resolves each slot through the
+  mod folders first. For a slot whose PC file is a packed `.glg` script, a mod may
+  ship either the `.glg` or plain text under the slot's loose name (path B, such as
+  `LEVELS.txt`), see [FORMATS.md](FORMATS.md).
 
 ## 3. ASI plugins: why they cannot load as-is
 

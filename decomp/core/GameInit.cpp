@@ -20,7 +20,7 @@ bool MH2_InitGame()
     // FMOD's and the driver's threads. The port does not do it. This is the
     // fix the mh2-affinity plugin applies by patching these bytes.
 
-    Unknown_0053ABD0();               // calls 0x0053CF50(1)
+    Paths_InitForPC();                // 0x0053ABD0: Paths_Init(true), see Paths.cpp
     Unknown_0060DA80(true);           // lays out a list of blocks (std::vector, checked iterators)
     Video_ProbeMultisampleModes();    // 0x00606E40 (?)
     Unknown_004202E6(0);              // via thunk 0x004DF730; body is "return 1"
