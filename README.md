@@ -48,8 +48,8 @@ Per-phase status, including the estimates we cannot measure, is in [PROGRESS.md]
 <!-- phases:start -->
 | # | Phase | Progress | % | M/E | Basis |
 |---|---|---|---|---|---|
-| 0 | Binary analysis and mapping | `█████░░░░░░░░░░░░░░░` | 25.0 % | E | headers, imports, DRM layout, entry, WinMain, DXUT and game init found; subsystems not mapped |
-| 1 | Function inventory and library identification | `██████░░░░░░░░░░░░░░` | 30.0 % | E | inventory cross-checked with BinViz (+1,313 functions in two rounds); 296 CRT (FID) and 20 DXUT identified; other static libraries not separated |
+| 0 | Binary analysis and mapping | `██████░░░░░░░░░░░░░░` | 30.0 % | E | headers, imports, DRM layout, full boot path (WinMain, DXUT, game init, CApp), file system and path table mapped; most subsystems not mapped |
+| 1 | Function inventory and library identification | `███████░░░░░░░░░░░░░` | 35.0 % | E | inventory cross-checked with BinViz (+1,313 functions in two rounds); 296 CRT (FID), 20 DXUT and 8 zlib identified; other static libraries not separated |
 | 2 | Subsystem map (strings, vtables, RTTI) | `█▊░░░░░░░░░░░░░░░░░░` | 9.00 % | E | boot, game object, audio, options, saves, CApp, text scripts, file path table, file classes and .glg reader located |
 | 3 | Catalog of original limits (docs/LIMITS.md) | `█▏░░░░░░░░░░░░░░░░░░` | 6.00 % | E | 4 limits, 1 bug and 5 fixed buffers found so far |
 | 4 | Build skeleton x86 + x64 (CMake), boot with stubs | `░░░░░░░░░░░░░░░░░░░░` | 0.00 % | E | not started |

@@ -1,6 +1,6 @@
 phase	kind	pct	how
-Binary analysis and mapping	E	25	headers, imports, DRM layout, entry, WinMain, DXUT and game init found; subsystems not mapped
-Function inventory and library identification	E	30	inventory cross-checked with BinViz (+1,313 functions in two rounds); 296 CRT (FID) and 20 DXUT identified; other static libraries not separated
+Binary analysis and mapping	E	30	headers, imports, DRM layout, full boot path (WinMain, DXUT, game init, CApp), file system and path table mapped; most subsystems not mapped
+Function inventory and library identification	E	35	inventory cross-checked with BinViz (+1,313 functions in two rounds); 296 CRT (FID), 20 DXUT and 8 zlib identified; other static libraries not separated
 Subsystem map (strings, vtables, RTTI)	E	9	boot, game object, audio, options, saves, CApp, text scripts, file path table, file classes and .glg reader located
 Catalog of original limits (docs/LIMITS.md)	E	6	4 limits, 1 bug and 5 fixed buffers found so far
 Build skeleton x86 + x64 (CMake), boot with stubs	E	0	not started
