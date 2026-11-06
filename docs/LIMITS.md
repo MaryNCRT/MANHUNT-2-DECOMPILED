@@ -13,6 +13,7 @@ read.** Original data and original mods must load exactly as before.
 |---|---|---|---|---|---|
 | L1 | Address space | PE header | `LARGE_ADDRESS_AWARE` off | Process limited to 2 GB; HD texture packs run out of memory | x64 build; LAA on in the x86 build |
 | L2 | FMOD memory pool | `Audio_Init` 0x004CE4E0 | 15 MB (`0xF00000`), one fixed block | Every FMOD allocation (event data, streams, DSP) shares it; bigger or extra audio banks exhaust it | Pool sized from the loaded banks, or FMOD's own allocator |
+| L4 | One packed file at a time | `File_Open` 0x0053BD00 | A single global reader (0x006A0390) with one `z_stream` | Opening a second `.glg` while one is being read resets the first one's stream | One reader object per open file |
 | L3 | Text script size | `TextScript_Parse` 0x00541F90 | 80,000 bytes (`0x13880`): allocated, and at most that many read | Init scripts such as the level list (`global/initscripts/resource23.glg`, unpacked) are cut at 80,000 bytes; a mod adding levels or entries past that loses them silently | Buffer sized from the file |
 
 ## Bugs in the original

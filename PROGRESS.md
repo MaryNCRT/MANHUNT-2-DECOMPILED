@@ -26,9 +26,9 @@ Project state. Written so anyone can pick this up with no prior context.
 <!-- progress:start -->
 | Metric (measured by `tools/tracking.py`) | Progress | % | Count |
 |---|---|---|---|
-| Game code decompiled to readable C/C++ (by bytes) | `░░░░░░░░░░░░░░░░░░░░` | **0.13 %** | 22 of 16,242 functions |
-| Game code verified against the original (by bytes) | `░░░░░░░░░░░░░░░░░░░░` | **0.03 %** | 8 functions |
-| Game functions with a confirmed name | `░░░░░░░░░░░░░░░░░░░░` | 0.19 % | 31 of 16,242 |
+| Game code decompiled to readable C/C++ (by bytes) | `░░░░░░░░░░░░░░░░░░░░` | **0.16 %** | 28 of 16,234 functions |
+| Game code verified against the original (by bytes) | `░░░░░░░░░░░░░░░░░░░░` | **0.04 %** | 11 functions |
+| Game functions with a confirmed name | `░░░░░░░░░░░░░░░░░░░░` | 0.23 % | 38 of 16,234 |
 | DXUT functions replaced by the port | `░░░░░░░░░░░░░░░░░░░░` | 0.00 % | 0 of 20 identified |
 
 Functions in the executable: 16,720. CRT, DXUT, import thunks and exception funclets are not part of the game-code total.
@@ -41,14 +41,14 @@ Functions in the executable: 16,720. CRT, DXUT, import thunks and exception func
 |---|---|---|---|---|---|
 | 0 | Binary analysis and mapping | `█████░░░░░░░░░░░░░░░` | 25.0 % | E | headers, imports, DRM layout, entry, WinMain, DXUT and game init found; subsystems not mapped |
 | 1 | Function inventory and library identification | `██████░░░░░░░░░░░░░░` | 30.0 % | E | inventory cross-checked with BinViz (+1,313 functions in two rounds); 296 CRT (FID) and 20 DXUT identified; other static libraries not separated |
-| 2 | Subsystem map (strings, vtables, RTTI) | `█▌░░░░░░░░░░░░░░░░░░` | 8.00 % | E | boot, game object, audio, options, saves, CApp, text scripts, file path table (decoded) and .glg format located |
-| 3 | Catalog of original limits (docs/LIMITS.md) | `█░░░░░░░░░░░░░░░░░░░` | 5.00 % | E | 3 limits, 1 bug and 5 fixed buffers found so far |
+| 2 | Subsystem map (strings, vtables, RTTI) | `█▊░░░░░░░░░░░░░░░░░░` | 9.00 % | E | boot, game object, audio, options, saves, CApp, text scripts, file path table, file classes and .glg reader located |
+| 3 | Catalog of original limits (docs/LIMITS.md) | `█▏░░░░░░░░░░░░░░░░░░` | 6.00 % | E | 4 limits, 1 bug and 5 fixed buffers found so far |
 | 4 | Build skeleton x86 + x64 (CMake), boot with stubs | `░░░░░░░░░░░░░░░░░░░░` | 0.00 % | E | not started |
 | 5 | Game data setup from installed folder or ISO | `░░░░░░░░░░░░░░░░░░░░` | 0.00 % | E | not started |
-| 6 | Differential test harness (the oracle) | `██████████░░░░░░░░░░` | 50.0 % | E | loader, import traps, runner, live-input rule, thiscall calls and callee stubs work; 8 functions verified; generic side-effect diff missing |
-| 7 | Decompilation: game code readable | `░░░░░░░░░░░░░░░░░░░░` | 0.13 % | M | measured by bytes of game code |
-| 8 | Decompilation: game code verified | `░░░░░░░░░░░░░░░░░░░░` | 0.03 % | M | measured by bytes of game code |
-| 9 | Original mod support (docs/MODS.md) | `▊░░░░░░░░░░░░░░░░░░░` | 4.00 % | E | plan written; 1 of 18 plugin features located; file hook point (path table) found; nothing implemented |
+| 6 | Differential test harness (the oracle) | `███████████░░░░░░░░░` | 55.0 % | E | loader, import traps, runner, live-input rule, thiscall calls, callee stubs and fake vtables work; 11 functions verified; generic side-effect diff missing |
+| 7 | Decompilation: game code readable | `░░░░░░░░░░░░░░░░░░░░` | 0.16 % | M | measured by bytes of game code |
+| 8 | Decompilation: game code verified | `░░░░░░░░░░░░░░░░░░░░` | 0.04 % | M | measured by bytes of game code |
+| 9 | Original mod support (docs/MODS.md) | `█▏░░░░░░░░░░░░░░░░░░` | 6.00 % | E | plan written; 1 of 18 plugin features located; file hook point and plain-text fallback found; nothing implemented |
 | 10 | Improvements: widescreen, FPS, XInput, modern renderer | `░░░░░░░░░░░░░░░░░░░░` | 0.00 % | E | not started |
 
 **M** = measured from `decomp/functions.tsv`. **E** = estimate, kept deliberately conservative, for phases with no countable unit yet (edit `docs/phases.tsv`).
@@ -180,6 +180,9 @@ Documentation links (to read when each subsystem comes up):
 | 2026-11-05 | `SetLoadingMessage` 0x4B0570, `Vec4Table_F620::Construct` 0x4B08C0, `ResetGlobals_0076BD80` 0x56EFB0 → `decomp/core/CApp.cpp` | **verified** | 100,000 / 1,260,180 / 113,000 oracle cases, 0 divergences. The last field of the reset block is a byte, not the dword Ghidra showed. |
 | 2026-11-05 | `CApp_Init` 0x7D27F0 → `decomp/core/CAppInit.cpp` | readable | Split by SecuROM into jmp-joined pieces; read with `disasm.py follow`. Fails only if 0x5898C0 fails. Ghidra's draft had two calls wrong. |
 
+| 2026-11-05 | `File::ReadLine` 0x53ABE0, `PackedFile::IsEOF` 0x53ACF0, `PackedFile::GetSize` 0x53AD10 → `decomp/io/File.cpp` | **verified** | 13,200,000 / 400,000 oracle cases, 0 divergences. |
+| 2026-11-05 | `File_Open` 0x53BD00, `PackedFile::Read` 0x53AD20, `PackedFile::Close` 0x53AE70 → `decomp/io/File.cpp` | readable | The "last raw file" global 0x6A0394 is the `raw` field of the reader at 0x6A0390. Plain files pass through unpacked. Limit L4: one packed file at a time. zlib 1.1.4 identified and marked as library. |
+
 ### CApp_Init and the file path table
 `CApp_Init` parses the level list with `TextScript_Parse` (0x541F90): UTF-16 files with
 a BOM are folded to ASCII, `#` comments outside quotes are blanked, and the text goes to
@@ -249,9 +252,11 @@ clock start → `Settings_ClampDetailLevel` → `Game_Init_004DF610` → **audio
 
 ## 6. Next work
 
-1. Decompile the `.glg` reader (file open 0x53BD00 and the zlib unpack) so a mod can
-   replace a `.glg` with plain text
+1. Decompile `RawFile_Open` (0x53BCC0) and the raw file class: where file paths reach
+   Windows, i.e. where the mod folders get checked
 2. Decompile `TextScript_Parse` (0x541F90) and the level list handler (0x546D90)
+3. Test in game that a plain-text file in place of a `.glg` loads in the original
+   (the code says it should)
 2. Identify the rest of DXUT and the 11 game callbacks (render/update entry points)
 3. Separate remaining static libraries (STL, zlib?, others)
 4. Design and build the differential test harness (`docs/METHODOLOGY.md`)

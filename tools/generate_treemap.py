@@ -21,7 +21,7 @@ State mapping (BinViz semantics read from its source, crates/binviz/src/model.rs
     replaced                 library               reimplemented by the port, not decompiled
     dropped                  skipped               removed on purpose
     todo                     todo
-    category crt/import/eh/dxut                    library (outside game totals, like ours)
+    category crt/import/eh/dxut/zlib               library (outside game totals, like ours)
 
 Nothing is ever "matched": in BinViz that means the C compiles to the very same
 bytes, which this project does not attempt. BinViz's headline percentage counts
@@ -56,9 +56,9 @@ BINVIZ_CANDIDATES = [
     shutil.which("binviz") or "",
 ]
 
-CATEGORIES = {"game", "secu", "dxut", "crt", "import", "eh"}
+CATEGORIES = {"game", "secu", "dxut", "crt", "import", "eh", "zlib"}
 STATUSES = {"todo", "readable", "verified", "replaced", "dropped"}
-LIBRARY_CATEGORIES = {"crt", "import", "eh", "dxut"}
+LIBRARY_CATEGORIES = {"crt", "import", "eh", "dxut", "zlib"}
 STATE = {
     "verified": "nonmatching",
     "readable": "in-progress",

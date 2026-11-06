@@ -24,6 +24,9 @@ $sources = @(
     "$root\tests\oracle\test_gameapp.cpp",
     "$root\tests\oracle\stubs_gameapp.cpp",
     "$root\tests\oracle\test_capp.cpp",
+    "$root\tests\oracle\test_file.cpp",
+    "$root\tests\oracle\stubs_file.cpp",
+    "$root\decomp\io\File.cpp",
     "$root\decomp\core\CApp.cpp",
     "$root\decomp\core\ProcessCheck.cpp",
     "$root\decomp\core\GameApp.cpp"

@@ -5068,7 +5068,7 @@ addr	size	section	category	status	name	file
 00466fe0	7	.text	game	todo		
 00466fe8	7	.text	game	todo		
 00466ff0	159	.text	game	todo		
-004670b0	3	.text	game	todo		
+004670b0	3	.text	game	todo	NullSeek_ret4(?)	
 004670c0	34	.text	game	todo		
 004670f0	167	.text	game	todo		
 004671a0	68	.text	game	todo		
@@ -9803,21 +9803,21 @@ addr	size	section	category	status	name	file
 0053ab00	24	.text	game	todo		
 0053ab20	55	.text	game	todo		
 0053ab60	27	.text	game	todo		
-0053ab80	28	.text	game	todo		
+0053ab80	28	.text	game	todo	PackedFile::~PackedFile	
 0053aba0	39	.text	game	todo		
 0053abd0	9	.text	game	readable	Paths_InitForPC	decomp/core/Paths.cpp
-0053abe0	103	.text	game	todo		
+0053abe0	103	.text	game	verified	File::ReadLine	decomp/io/File.cpp
 0053ac50	12	.text	game	todo		
 0053ac60	4	.text	game	todo		
 0053ac70	52	.text	game	todo		
 0053acb0	10	.text	game	todo		
 0053acc0	45	.text	game	todo		
-0053acf0	18	.text	game	todo		
-0053ad10	7	.text	game	todo		
-0053ad20	330	.text	game	todo		
-0053ae70	37	.text	game	todo		
-0053aea0	23	.text	game	todo		
-0053aec0	18	.text	game	todo		
+0053acf0	18	.text	game	verified	PackedFile::IsEOF	decomp/io/File.cpp
+0053ad10	7	.text	game	verified	PackedFile::GetSize	decomp/io/File.cpp
+0053ad20	330	.text	game	readable	PackedFile::Read	decomp/io/File.cpp
+0053ae70	37	.text	game	readable	PackedFile::Close	decomp/io/File.cpp
+0053aea0	23	.text	game	todo	Zlib_Alloc(?)	
+0053aec0	18	.text	game	todo	Zlib_Free(?)	
 0053aee0	42	.text	game	todo		
 0053af10	7	.text	game	todo		
 0053af20	7	.text	game	todo		
@@ -9865,8 +9865,8 @@ addr	size	section	category	status	name	file
 0053bc50	22	.text	game	todo		
 0053bc70	13	.text	game	todo		
 0053bc80	50	.text	game	todo		
-0053bcc0	54	.text	game	todo		
-0053bd00	190	.text	game	todo		
+0053bcc0	54	.text	game	todo	RawFile_Open(?)	
+0053bd00	190	.text	game	readable	File_Open	decomp/io/File.cpp
 0053bdc0	27	.text	game	todo		
 0053bde0	15	.text	game	todo		
 0053bdf0	129	.text	game	todo		
@@ -14031,22 +14031,22 @@ addr	size	section	category	status	name	file
 0060ff10	88	.text	game	todo		
 0060ff69	36	.text	game	todo		
 0060ff90	167	.text	game	todo		
-00610040	2675	.text	game	todo		
+00610040	2675	.text	zlib	todo		
 00610b10	63	.text	game	todo		
 00610b50	59	.text	game	todo		
-00610b90	1647	.text	game	todo		
+00610b90	1647	.text	zlib	todo		
 00611230	22	.text	game	todo		
-00611250	925	.text	game	todo		
+00611250	925	.text	zlib	todo		
 00611600	66	.text	game	todo		
-00611650	67	.text	game	todo		
+00611650	67	.text	zlib	todo	inflateEnd	
 0061168e	4	.text	game	todo		
 006116a0	248	.text	game	todo		
-006117a0	26	.text	game	todo		
-006117c0	933	.text	game	todo		
+006117a0	26	.text	zlib	todo	inflateInit_	
+006117c0	933	.text	zlib	todo	inflate	
 00611ba0	5	.text	game	todo		
 00611ba6	1152	.text	game	todo		
-00612040	148	.text	game	todo		
-006120e0	378	.text	game	todo		
+00612040	148	.text	zlib	todo		
+006120e0	378	.text	zlib	todo		
 00612260	46	.text	game	todo		
 00612290	52	.text	game	todo		
 006122c4	186	.text	game	todo		

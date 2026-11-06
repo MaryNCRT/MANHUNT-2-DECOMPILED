@@ -35,6 +35,16 @@ method (0x550A30) and a thunk called directly (0x468A40) were all real functions
 tail-called function, but the sample 0x53DED5 is a single `ret` other code jumps to: a
 shared function tail, not a function. That rule (76 candidates) was dropped.
 
+## zlib (2026-11-05)
+
+zlib 1.1.4 is linked statically (version string "1.1.4" passed to `inflateInit_` by
+`File_Open`). Eight functions are categorized `zlib` and count as library, outside the
+game totals: the six that use zlib's own error strings, `inflateInit_` (0x006117A0) and
+`inflateEnd` (0x00611650, called by the packed reader's `Close`). Their neighbours in
+0x0060FF00–0x00612800 are probably zlib too (the copyright strings of both inflate and
+deflate are present), but without evidence they still count as game code: the game
+total is slightly too large rather than too small.
+
 ## Second round: 560 more (2026-11-05)
 
 The first round's "direct call" and "address taken" scans used capstone's linear

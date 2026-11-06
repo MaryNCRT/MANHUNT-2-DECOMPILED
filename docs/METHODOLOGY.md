@@ -69,6 +69,12 @@ code against the disassembly, plus behavior checks once the port runs.
 | `SetLoadingMessage` 0x004B0570 | 100,000 | 0 |
 | `Vec4Table_F620::Construct` 0x004B08C0 | 1,260,180 (20 random-filled objects × every byte, plus the return value) | 0 |
 | `ResetGlobals_0076BD80` 0x0056EFB0 | 113,000 (fields, plus every neighbouring byte left untouched) | 0 |
+| `File::ReadLine` 0x0053ABE0 | 13,200,000 (200,000 random streams with `\r`, `\n`, `\0`; max −2…21; return, 64-byte buffer and bytes consumed) | 0 |
+| `PackedFile::IsEOF` / `GetSize` 0x0053ACF0 / 0x0053AD10 | 400,000 (random, at-end and one-before-end positions) | 0 |
+
+`File::ReadLine` calls virtual methods. The original is given a fake object whose
+vtable slots point at test functions serving the same byte stream as our side, so both
+read identical input and their consumption is compared.
 
 ### Reading functions SecuROM split
 
