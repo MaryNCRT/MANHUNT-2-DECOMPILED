@@ -97,8 +97,34 @@ bool Game_Init_004F8C40(uint8_t* game, int);   // __thiscall; body is "return 1"
 // Callees of GameApp::Initialise / GameApp::Load.
 struct GameSubObject;
 int   SubObject_VCall1C(GameSubObject* sub);     // sub->vtable[0x1C / 4]()
-void* Unknown_00580ED0(unsigned sizeOrId);       // 0x00580E30 then 0x00580C30 on its result
-void  Unknown_00580EF0(void* p);                 // 0x00580E30 then 0x00580D80; null-safe
+// 0x00580ED0 / 0x00580EF0 — the game's allocator: the text reader allocates
+// 0x13880 bytes with it and reads exactly that many into the block, then frees
+// it with 0x00580EF0. Each goes through 0x00580E30 first (heap lookup (?)).
+void* Mem_Alloc(unsigned size);                  // 0x00580ED0
+void  Mem_Free(void* p);                         // 0x00580EF0; null-safe
+inline void* Unknown_00580ED0(unsigned size) { return Mem_Alloc(size); }
+inline void  Unknown_00580EF0(void* p) { Mem_Free(p); }
+
+// Callees of CApp_Init.
+struct GameString;                               // the string type of the path slots (ctor 0x005FDA60, dtor 0x005FDB70)
+extern GameString* g_PathLevelsTxt;              // slot 0x007597E4: global/initscripts/LEVELS.txt on PC
+typedef void (*TextScriptHandler)();
+void  TextScript_Parse(GameString* path, TextScriptHandler handler);  // 0x00541F90, __cdecl
+void  LevelList_OnToken();                       // 0x00546D90: "LEVEL", "ENABLE_LEVEL_ORDER"
+void  Paths_SetupFromGlobals_007D2570();         // sprintf of two path slots, then 0x005BC3D0 / 0x005BC270
+void  Unknown_00608680();
+extern void* g_Unknown_0075B6F0;
+int   Unknown_005898C0(void*);
+void  Unknown_005DECF0();
+void  Unknown_005F3F30();
+void  Unknown_007D2640();
+void  Pool32_Init_005F1E90();
+void* Unknown_005BF6C0();
+void  Unknown_005BF660(void* self);              // __thiscall
+void* Unknown_005B8D00();
+void  Unknown_005B9BD0(void* self);              // __thiscall
+struct Vec4Table_F620;
+extern Vec4Table_F620* g_Vec4Table;              // 0x00758690
 struct LanguageTable;
 extern LanguageTable* g_Language_0075FC9C;       // static object at 0x0075FC9C
 void  Language_Load(LanguageTable* self);        // 0x0056B340 (?): picks data by g_Language

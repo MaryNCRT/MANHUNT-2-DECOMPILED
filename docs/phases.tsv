@@ -1,11 +1,11 @@
 phase	kind	pct	how
 Binary analysis and mapping	E	25	headers, imports, DRM layout, entry, WinMain, DXUT and game init found; subsystems not mapped
-Function inventory and library identification	E	30	inventory cross-checked with BinViz (+748 functions); 296 CRT (FID) and 20 DXUT identified; other static libraries not separated
-Subsystem map (strings, vtables, RTTI)	E	5	boot, game object and its events, audio, options table, saves and CApp entry points located
-Catalog of original limits (docs/LIMITS.md)	E	3	2 limits found so far
+Function inventory and library identification	E	30	inventory cross-checked with BinViz (+1,313 functions in two rounds); 296 CRT (FID) and 20 DXUT identified; other static libraries not separated
+Subsystem map (strings, vtables, RTTI)	E	7	boot, game object, audio, options, saves, CApp, text scripts and the file path table located
+Catalog of original limits (docs/LIMITS.md)	E	5	3 limits, 1 bug and 5 fixed buffers found so far
 Build skeleton x86 + x64 (CMake), boot with stubs	E	0	not started
 Game data setup from installed folder or ISO	E	0	not started
-Differential test harness (the oracle)	E	50	loader, import traps, runner, live-input rule, thiscall calls and callee stubs work; 6 functions verified; generic side-effect diff missing
+Differential test harness (the oracle)	E	50	loader, import traps, runner, live-input rule, thiscall calls and callee stubs work; 8 functions verified; generic side-effect diff missing
 Decompilation: game code readable	M	decomp	measured by bytes of game code
 Decompilation: game code verified	M	verified	measured by bytes of game code
 Original mod support (docs/MODS.md)	E	2	plan written; 1 of 18 plugin features located; nothing implemented

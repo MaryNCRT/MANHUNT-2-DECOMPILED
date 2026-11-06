@@ -19,6 +19,7 @@ saved as OUTPUT/binviz/progress.json first (see docs/INVENTORY.md).
     python OUTPUT/tools/binviz_crosscheck.py
 """
 
+import bisect
 import collections
 import csv
 import json
@@ -73,11 +74,27 @@ def main():
 
     calls, table, taken = collections.Counter(), collections.Counter(), collections.Counter()
     hexre = re.compile(r"0x[0-9a-f]+")
+    # Without skipdata, capstone stops at the first byte it cannot decode:
+    # on .text that was 0.3 % of the section. Skipping data bytes keeps the
+    # linear sweep going to the end (it resynchronizes after embedded data).
+    md.skipdata = True
+    # A sweep that lost sync after embedded data can produce fake instructions;
+    # a call or a taken address only counts if its instruction lies inside a
+    # function Ghidra already knows.
+    with open(INVENTORY, encoding="utf-8", newline="") as f:
+        spans = sorted((int(r["addr"], 16), int(r["bytes"])) for r in csv.DictReader(f, delimiter="\t"))
+    span_starts = [a for a, _ in spans]
+
+    def in_known_function(va):
+        i = bisect.bisect_right(span_starts, va) - 1
+        return i >= 0 and va < spans[i][0] + spans[i][1]
     for s in pe.sections:
         lo, size = s.VirtualAddress, s.Misc_VirtualSize
         name = s.Name.rstrip(b"\0")
         if s.Characteristics & 0x20000000:  # code
             for ins in md.disasm(bytes(img[lo:lo + size]), BASE + lo):
+                if not in_known_function(ins.address):
+                    continue
                 if ins.mnemonic == "call" and ins.op_str.startswith("0x"):
                     t = int(ins.op_str, 16)
                     if t in extra:

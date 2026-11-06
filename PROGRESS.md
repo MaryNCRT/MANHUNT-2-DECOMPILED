@@ -26,12 +26,12 @@ Project state. Written so anyone can pick this up with no prior context.
 <!-- progress:start -->
 | Metric (measured by `tools/tracking.py`) | Progress | % | Count |
 |---|---|---|---|
-| Game code decompiled to readable C/C++ (by bytes) | `░░░░░░░░░░░░░░░░░░░░` | **0.10 %** | 16 of 15,677 functions |
-| Game code verified against the original (by bytes) | `░░░░░░░░░░░░░░░░░░░░` | **0.02 %** | 5 functions |
-| Game functions with a confirmed name | `░░░░░░░░░░░░░░░░░░░░` | 0.13 % | 21 of 15,677 |
+| Game code decompiled to readable C/C++ (by bytes) | `░░░░░░░░░░░░░░░░░░░░` | **0.12 %** | 20 of 16,242 functions |
+| Game code verified against the original (by bytes) | `░░░░░░░░░░░░░░░░░░░░` | **0.03 %** | 8 functions |
+| Game functions with a confirmed name | `░░░░░░░░░░░░░░░░░░░░` | 0.17 % | 28 of 16,242 |
 | DXUT functions replaced by the port | `░░░░░░░░░░░░░░░░░░░░` | 0.00 % | 0 of 20 identified |
 
-Functions in the executable: 16,155. CRT, DXUT, import thunks and exception funclets are not part of the game-code total.
+Functions in the executable: 16,720. CRT, DXUT, import thunks and exception funclets are not part of the game-code total.
 <!-- progress:end -->
 
 ### Per phase
@@ -40,14 +40,14 @@ Functions in the executable: 16,155. CRT, DXUT, import thunks and exception func
 | # | Phase | Progress | % | M/E | Basis |
 |---|---|---|---|---|---|
 | 0 | Binary analysis and mapping | `█████░░░░░░░░░░░░░░░` | 25.0 % | E | headers, imports, DRM layout, entry, WinMain, DXUT and game init found; subsystems not mapped |
-| 1 | Function inventory and library identification | `██████░░░░░░░░░░░░░░` | 30.0 % | E | inventory cross-checked with BinViz (+748 functions); 296 CRT (FID) and 20 DXUT identified; other static libraries not separated |
-| 2 | Subsystem map (strings, vtables, RTTI) | `▌░░░░░░░░░░░░░░░░░░░` | 3.00 % | E | boot, audio, settings and clock entry points located |
-| 3 | Catalog of original limits (docs/LIMITS.md) | `▌░░░░░░░░░░░░░░░░░░░` | 3.00 % | E | 2 limits found so far |
+| 1 | Function inventory and library identification | `██████░░░░░░░░░░░░░░` | 30.0 % | E | inventory cross-checked with BinViz (+1,313 functions in two rounds); 296 CRT (FID) and 20 DXUT identified; other static libraries not separated |
+| 2 | Subsystem map (strings, vtables, RTTI) | `█▍░░░░░░░░░░░░░░░░░░` | 7.00 % | E | boot, game object, audio, options, saves, CApp, text scripts and the file path table located |
+| 3 | Catalog of original limits (docs/LIMITS.md) | `█░░░░░░░░░░░░░░░░░░░` | 5.00 % | E | 3 limits, 1 bug and 5 fixed buffers found so far |
 | 4 | Build skeleton x86 + x64 (CMake), boot with stubs | `░░░░░░░░░░░░░░░░░░░░` | 0.00 % | E | not started |
 | 5 | Game data setup from installed folder or ISO | `░░░░░░░░░░░░░░░░░░░░` | 0.00 % | E | not started |
-| 6 | Differential test harness (the oracle) | `████████░░░░░░░░░░░░` | 40.0 % | E | loader, import traps, runner and live-input rule work; 2 functions verified; callee stubs, thiscall helpers and side-effect diff missing |
-| 7 | Decompilation: game code readable | `░░░░░░░░░░░░░░░░░░░░` | 0.08 % | M | measured by bytes of game code |
-| 8 | Decompilation: game code verified | `░░░░░░░░░░░░░░░░░░░░` | 0.01 % | M | measured by bytes of game code |
+| 6 | Differential test harness (the oracle) | `██████████░░░░░░░░░░` | 50.0 % | E | loader, import traps, runner, live-input rule, thiscall calls and callee stubs work; 8 functions verified; generic side-effect diff missing |
+| 7 | Decompilation: game code readable | `░░░░░░░░░░░░░░░░░░░░` | 0.12 % | M | measured by bytes of game code |
+| 8 | Decompilation: game code verified | `░░░░░░░░░░░░░░░░░░░░` | 0.03 % | M | measured by bytes of game code |
 | 9 | Original mod support (docs/MODS.md) | `▍░░░░░░░░░░░░░░░░░░░` | 2.00 % | E | plan written; 1 of 18 plugin features located; nothing implemented |
 | 10 | Improvements: widescreen, FPS, XInput, modern renderer | `░░░░░░░░░░░░░░░░░░░░` | 0.00 % | E | not started |
 
@@ -177,6 +177,25 @@ Documentation links (to read when each subsystem comes up):
 | 2026-11-05 | `GameApp::HandleEvent` 0x4DF660 → `decomp/core/GameApp.cpp` | readable | Jump table decoded by hand. 376,900 oracle cases, 0 divergences, but events 0x15/0x16 untested (callees missing). |
 | 2026-11-05 | `GameApp::Initialise` 0x4DF610, `GameApp::Load` 0x4DF450, 0x4DF5B0 → `decomp/core/GameAppInit.cpp` | readable | ECX of every call from the disassembly. Ghidra claimed Load's failure branch never returns; it returns 0. |
 
+| 2026-11-05 | `SetLoadingMessage` 0x4B0570, `Vec4Table_F620::Construct` 0x4B08C0, `ResetGlobals_0076BD80` 0x56EFB0 → `decomp/core/CApp.cpp` | **verified** | 100,000 / 1,260,180 / 113,000 oracle cases, 0 divergences. The last field of the reset block is a byte, not the dword Ghidra showed. |
+| 2026-11-05 | `CApp_Init` 0x7D27F0 → `decomp/core/CAppInit.cpp` | readable | Split by SecuROM into jmp-joined pieces; read with `disasm.py follow`. Fails only if 0x5898C0 fails. Ghidra's draft had two calls wrong. |
+
+### CApp_Init and the file path table
+`CApp_Init` parses `global/initscripts/LEVELS.txt` with `TextScript_Parse` (0x541F90):
+UTF-16 files with a BOM are folded to ASCII, `#` comments outside quotes are blanked,
+and the text goes to a token handler. It reads **at most 80,000 bytes** (limit L3) and
+then writes one byte past the buffer when a file reaches that size (bug B1).
+
+The game's file names come from a **path table at 0x6A2C00–0x6A3180**: 12-byte records
+`{slot, path A, path B}`, one set in console style (`GLOBAL/INITSCR/LEVELS.TXT`) and one
+for PC (`global/initscripts/LEVELS.txt`); path A is often a packed `resourceNN.glg`, path
+B the loose text file. Each slot is a string object built empty by a static initializer
+and filled at run time (the code that picks A or B is not found yet). This table is
+the map of what the game loads: the mod file system will hook at this level.
+
+Fixed buffers seen here: a 32-record pool, a 1 MB buffer and a 48 KB buffer
+([docs/LIMITS.md](docs/LIMITS.md)).
+
 ### The main game object (`GameApp`, static at 0x79E728)
 An application object with an event handler that returns 0/1/2 (error, processed, not
 processed) and defaults `"MANHUNT"`, 640×480 and **30** at `+0x18` (frame limit (?)),
@@ -217,7 +236,9 @@ clock start → `Settings_ClampDetailLevel` → `Game_Init_004DF610` → **audio
 
 ## 6. Next work
 
-1. Decompile `Game_Init_004DF450` and `Game_Init_004DF610` (what the game loads at boot)
+1. Find the code that fills the path slots from the path table (picks path A or B):
+   it decides which files the game reads, so the mod file system starts there
+2. Decompile `TextScript_Parse` (0x541F90) and the LEVELS.txt handler (0x546D90)
 2. Identify the rest of DXUT and the 11 game callbacks (render/update entry points)
 3. Separate remaining static libraries (STL, zlib?, others)
 4. Design and build the differential test harness (`docs/METHODOLOGY.md`)

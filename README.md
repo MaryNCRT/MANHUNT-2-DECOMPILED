@@ -30,12 +30,12 @@ as *Nonmatching C* (same behavior, proven by the oracle). See
 <!-- progress:start -->
 | Metric (measured by `tools/tracking.py`) | Progress | % | Count |
 |---|---|---|---|
-| Game code decompiled to readable C/C++ (by bytes) | `░░░░░░░░░░░░░░░░░░░░` | **0.10 %** | 16 of 15,677 functions |
-| Game code verified against the original (by bytes) | `░░░░░░░░░░░░░░░░░░░░` | **0.02 %** | 5 functions |
-| Game functions with a confirmed name | `░░░░░░░░░░░░░░░░░░░░` | 0.13 % | 21 of 15,677 |
+| Game code decompiled to readable C/C++ (by bytes) | `░░░░░░░░░░░░░░░░░░░░` | **0.12 %** | 20 of 16,242 functions |
+| Game code verified against the original (by bytes) | `░░░░░░░░░░░░░░░░░░░░` | **0.03 %** | 8 functions |
+| Game functions with a confirmed name | `░░░░░░░░░░░░░░░░░░░░` | 0.17 % | 28 of 16,242 |
 | DXUT functions replaced by the port | `░░░░░░░░░░░░░░░░░░░░` | 0.00 % | 0 of 20 identified |
 
-Functions in the executable: 16,155. CRT, DXUT, import thunks and exception funclets are not part of the game-code total.
+Functions in the executable: 16,720. CRT, DXUT, import thunks and exception funclets are not part of the game-code total.
 <!-- progress:end -->
 
 These numbers are computed from [`decomp/functions.tsv`](decomp/functions.tsv) by
@@ -49,14 +49,14 @@ Per-phase status, including the estimates we cannot measure, is in [PROGRESS.md]
 | # | Phase | Progress | % | M/E | Basis |
 |---|---|---|---|---|---|
 | 0 | Binary analysis and mapping | `█████░░░░░░░░░░░░░░░` | 25.0 % | E | headers, imports, DRM layout, entry, WinMain, DXUT and game init found; subsystems not mapped |
-| 1 | Function inventory and library identification | `██████░░░░░░░░░░░░░░` | 30.0 % | E | inventory cross-checked with BinViz (+748 functions); 296 CRT (FID) and 20 DXUT identified; other static libraries not separated |
-| 2 | Subsystem map (strings, vtables, RTTI) | `█░░░░░░░░░░░░░░░░░░░` | 5.00 % | E | boot, game object and its events, audio, options table, saves and CApp entry points located |
-| 3 | Catalog of original limits (docs/LIMITS.md) | `▌░░░░░░░░░░░░░░░░░░░` | 3.00 % | E | 2 limits found so far |
+| 1 | Function inventory and library identification | `██████░░░░░░░░░░░░░░` | 30.0 % | E | inventory cross-checked with BinViz (+1,313 functions in two rounds); 296 CRT (FID) and 20 DXUT identified; other static libraries not separated |
+| 2 | Subsystem map (strings, vtables, RTTI) | `█▍░░░░░░░░░░░░░░░░░░` | 7.00 % | E | boot, game object, audio, options, saves, CApp, text scripts and the file path table located |
+| 3 | Catalog of original limits (docs/LIMITS.md) | `█░░░░░░░░░░░░░░░░░░░` | 5.00 % | E | 3 limits, 1 bug and 5 fixed buffers found so far |
 | 4 | Build skeleton x86 + x64 (CMake), boot with stubs | `░░░░░░░░░░░░░░░░░░░░` | 0.00 % | E | not started |
 | 5 | Game data setup from installed folder or ISO | `░░░░░░░░░░░░░░░░░░░░` | 0.00 % | E | not started |
-| 6 | Differential test harness (the oracle) | `██████████░░░░░░░░░░` | 50.0 % | E | loader, import traps, runner, live-input rule, thiscall calls and callee stubs work; 6 functions verified; generic side-effect diff missing |
-| 7 | Decompilation: game code readable | `░░░░░░░░░░░░░░░░░░░░` | 0.10 % | M | measured by bytes of game code |
-| 8 | Decompilation: game code verified | `░░░░░░░░░░░░░░░░░░░░` | 0.02 % | M | measured by bytes of game code |
+| 6 | Differential test harness (the oracle) | `██████████░░░░░░░░░░` | 50.0 % | E | loader, import traps, runner, live-input rule, thiscall calls and callee stubs work; 8 functions verified; generic side-effect diff missing |
+| 7 | Decompilation: game code readable | `░░░░░░░░░░░░░░░░░░░░` | 0.12 % | M | measured by bytes of game code |
+| 8 | Decompilation: game code verified | `░░░░░░░░░░░░░░░░░░░░` | 0.03 % | M | measured by bytes of game code |
 | 9 | Original mod support (docs/MODS.md) | `▍░░░░░░░░░░░░░░░░░░░` | 2.00 % | E | plan written; 1 of 18 plugin features located; nothing implemented |
 | 10 | Improvements: widescreen, FPS, XInput, modern renderer | `░░░░░░░░░░░░░░░░░░░░` | 0.00 % | E | not started |
 

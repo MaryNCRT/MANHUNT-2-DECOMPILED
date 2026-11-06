@@ -4,6 +4,9 @@ addr	size	section	category	status	name	file
 00401047	85	.text	game	todo		
 004010a0	63	.text	game	todo		
 004010e0	47	.text	game	todo		
+00401110	4	.text	game	todo		
+00401120	3	.text	game	todo		
+00401130	4	.text	game	todo		
 00401140	186	.text	game	todo		
 00401200	7	.text	game	todo		
 00401210	243	.text	game	todo		
@@ -297,6 +300,7 @@ addr	size	section	category	status	name	file
 00403e10	5	.text	game	todo		
 00403e6d	11	.text	game	todo		
 00403e78	12	.text	game	todo		
+00403e90	70	.text	game	todo		
 00403f00	5	.text	game	todo		
 00403f05	38	.text	game	todo		
 00403f30	65	.text	dxut	todo	DXUTSetShowMsgBoxOnError	
@@ -366,6 +370,7 @@ addr	size	section	category	status	name	file
 00406030	1099	.text	game	todo		
 00406480	1099	.text	game	todo		
 004068d0	1823	.text	game	todo		
+00406ff0	176	.text	game	todo		
 004070a0	5	.text	game	todo		
 004070a6	751	.text	game	todo		
 004073a0	437	.text	game	todo		
@@ -447,6 +452,7 @@ addr	size	section	category	status	name	file
 0040e690	72	.text	game	todo		
 0040e720	63	.text	game	todo		
 0040e790	55	.text	game	todo		
+0040e7f0	69	.text	game	todo		
 0040e840	31	.text	game	todo		
 0040e860	445	.text	game	todo		
 0040ea20	4	.text	game	todo		
@@ -560,6 +566,8 @@ addr	size	section	category	status	name	file
 004122a0	12	.text	game	todo		
 004122c0	366	.text	game	todo		
 0041242f	676	.text	game	todo		
+004126e0	25	.text	game	todo		
+00412710	25	.text	game	todo		
 00412740	5	.text	game	todo		
 004127a4	11	.text	game	todo		
 004127c0	194	.text	game	todo		
@@ -931,6 +939,7 @@ addr	size	section	category	status	name	file
 0041a740	163	.text	game	todo		
 0041a7f0	65	.text	game	todo		
 0041a840	47	.text	game	todo		
+0041a870	58	.text	game	todo		
 0041a8b0	62	.text	game	todo		
 0041a900	440	.text	game	todo		
 0041aac0	279	.text	game	todo		
@@ -2694,13 +2703,14 @@ addr	size	section	category	status	name	file
 00433bf6	13	.text	game	todo		
 00433c0f	13	.text	game	todo		
 00433c30	61	.text	game	todo		
+00433c70	16	.text	game	todo		
 00433c80	165	.text	game	todo		
 00433d30	219	.text	game	todo		
 00433e10	20	.text	game	todo		
 00433e30	5	.text	game	todo		
 00433ed1	11	.text	game	todo		
 00433ee0	5	.text	game	todo		
-00433ee6	6534	.text	game	todo		
+00433ee6	12	.text	game	todo		
 00433f10	225	.text	game	todo		
 00433fe9	260	.text	game	todo		
 00434100	12	.text	game	todo		
@@ -5959,6 +5969,7 @@ addr	size	section	category	status	name	file
 004890d0	73	.text	game	todo		
 00489120	23	.text	game	todo		
 00489140	23	.text	game	todo		
+00489160	10	.text	game	todo		
 00489170	33	.text	game	todo		
 004891a0	37	.text	game	todo		
 004891d0	8	.text	game	todo		
@@ -7036,14 +7047,14 @@ addr	size	section	category	status	name	file
 004b04b0	84	.text	game	todo		
 004b0510	51	.text	game	todo		
 004b0550	31	.text	game	todo		
-004b0570	10	.text	game	todo		
+004b0570	10	.text	game	verified	SetLoadingMessage	decomp/core/CApp.cpp
 004b0580	5	.text	game	todo		
 004b05b0	5	.text	game	todo		
 004b05f0	11	.text	game	todo		
 004b0600	5	.text	game	todo		
 004b0610	5	.text	game	todo		
 004b0616	671	.text	game	todo		
-004b08c0	82	.text	game	todo		
+004b08c0	82	.text	game	verified	Vec4Table_F620::Construct	decomp/core/CApp.cpp
 004b0920	197	.text	game	todo		
 004b09f0	1650	.text	game	todo		
 004b1070	15	.text	game	todo		
@@ -7057,6 +7068,7 @@ addr	size	section	category	status	name	file
 004b12d0	5	.text	game	todo	thunk_CApp_Init	
 004b12e0	103	.text	game	todo		
 004b1390	5	.text	game	todo		
+004b13d0	16	.text	game	todo		
 004b13e0	139	.text	game	todo		
 004b1470	660	.text	game	todo		
 004b14dd	53	.text	game	todo		
@@ -7421,6 +7433,7 @@ addr	size	section	category	status	name	file
 004c4cb0	45	.text	game	todo		
 004c4ce0	45	.text	game	todo		
 004c4d10	52	.text	game	todo		
+004c4d50	5	.text	game	todo		
 004c4d60	15	.text	game	todo		
 004c4d70	5	.text	game	todo		
 004c4db0	33	.text	game	todo		
@@ -7810,6 +7823,7 @@ addr	size	section	category	status	name	file
 004cea00	5	.text	game	todo		
 004cea20	22	.text	game	todo		
 004cecc0	540	.text	game	todo		
+004ceee0	27	.text	game	todo		
 004cef00	109	.text	game	todo		
 004cefb0	18	.text	game	todo		
 004cefd0	307	.text	game	todo		
@@ -7859,6 +7873,7 @@ addr	size	section	category	status	name	file
 004d0080	108	.text	game	todo		
 004d00f0	5	.text	game	todo		
 004d0110	121	.text	game	todo		
+004d0190	51	.text	game	todo		
 004d01d0	166	.text	game	todo		
 004d0280	5	.text	game	todo		
 004d0290	121	.text	game	todo		
@@ -7943,13 +7958,18 @@ addr	size	section	category	status	name	file
 004d47bd	92	.text	game	todo		
 004d4820	106	.text	game	todo		
 004d4890	65	.text	game	todo		
+004d48e0	58	.text	game	todo		
+004d4920	75	.text	game	todo		
 004d4a30	42	.text	game	todo		
+004d4a60	155	.text	game	todo		
 004d4b00	40	.text	game	todo		
 004d4b30	341	.text	game	todo		
 004d4c90	487	.text	game	todo		
 004d4e80	381	.text	game	todo		
 004d4ed9	62	.text	game	todo		
 004d5040	208	.text	game	todo		
+004d5110	161	.text	game	todo		
+004d51c0	287	.text	game	todo		
 004d52e0	9	.text	game	todo		
 004d52e9	380	.text	game	todo		
 004d5470	434	.text	game	todo		
@@ -7980,6 +8000,7 @@ addr	size	section	category	status	name	file
 004d6680	119	.text	game	todo		
 004d6700	38	.text	game	todo		
 004d6730	32	.text	game	todo		
+004d6750	33	.text	game	todo		
 004d6780	96	.text	game	todo		
 004d67e0	309	.text	game	todo		
 004d6920	104	.text	game	todo		
@@ -8091,6 +8112,7 @@ addr	size	section	category	status	name	file
 004dd8c0	115	.text	game	todo		
 004dd940	109	.text	game	todo		
 004dd9b0	22	.text	game	todo		
+004dd9d0	225	.text	game	todo		
 004ddac0	300	.text	game	todo		
 004ddbf0	40	.text	game	todo		
 004ddc20	153	.text	game	todo		
@@ -8117,6 +8139,7 @@ addr	size	section	category	status	name	file
 004ded20	17	.text	game	todo		
 004ded40	341	.text	game	todo		
 004deea0	88	.text	game	todo		
+004def00	84	.text	game	todo		
 004def60	239	.text	game	todo		
 004df050	108	.text	game	todo		
 004df0c0	17	.text	game	todo		
@@ -8206,6 +8229,7 @@ addr	size	section	category	status	name	file
 004e1950	20	.text	game	todo		
 004e1970	29	.text	game	todo		
 004e1990	35	.text	game	todo		
+004e19c0	21	.text	game	todo		
 004e19e0	40	.text	game	todo		
 004e1a10	9	.text	game	todo		
 004e1a1a	27	.text	game	todo		
@@ -8329,6 +8353,7 @@ addr	size	section	category	status	name	file
 004e8b80	27	.text	game	todo		
 004e8ba0	87	.text	game	todo		
 004e8c00	70	.text	game	todo		
+004e8c50	19	.text	game	todo		
 004e8c70	45	.text	game	todo		
 004e8ca0	34	.text	game	todo		
 004e8cc3	67	.text	game	todo		
@@ -8345,6 +8370,7 @@ addr	size	section	category	status	name	file
 004e9130	5	.text	game	todo		
 004e9135	91	.text	game	todo		
 004e9190	92	.text	game	todo		
+004e91f0	22	.text	game	todo		
 004e9210	148	.text	game	todo		
 004e92b0	140	.text	game	todo		
 004e9340	102	.text	game	todo		
@@ -8565,6 +8591,7 @@ addr	size	section	category	status	name	file
 004f7e00	12	.text	game	todo		
 004f7e0d	51	.text	game	todo		
 004f7e40	24	.text	game	todo		
+004f7e60	92	.text	game	todo		
 004f7ec0	54	.text	game	todo		
 004f7f00	286	.text	game	todo		
 004f8020	42	.text	game	todo		
@@ -8822,6 +8849,7 @@ addr	size	section	category	status	name	file
 00508680	770	.text	game	todo		
 00508984	1129	.text	game	todo		
 00508dee	612	.text	game	todo		
+00509060	280	.text	game	todo		
 00509180	920	.text	game	todo		
 00509520	30	.text	game	todo		
 00509540	27	.text	game	todo		
@@ -8886,11 +8914,17 @@ addr	size	section	category	status	name	file
 0050da90	180	.text	game	todo		
 0050db50	30	.text	game	todo		
 0050db70	86	.text	game	todo		
+0050dbd0	58	.text	game	todo		
+0050dc10	133	.text	game	todo		
 0050dca0	96	.text	game	todo		
+0050dd00	148	.text	game	todo		
 0050dda0	27	.text	game	todo		
+0050ddc0	27	.text	game	todo		
+0050dde0	142	.text	game	todo		
 0050de70	486	.text	game	todo		
 0050e060	141	.text	game	todo		
 0050e0f0	75	.text	game	todo		
+0050e140	30	.text	game	todo		
 0050e160	88	.text	game	todo		
 0050e1c0	59	.text	game	todo		
 0050e200	148	.text	game	todo		
@@ -8921,6 +8955,7 @@ addr	size	section	category	status	name	file
 00510da0	69	.text	game	todo		
 00510df0	14	.text	game	todo		
 00510dff	596	.text	game	todo		
+00511060	1609	.text	game	todo		
 005116b0	555	.text	game	todo		
 005118e0	12	.text	game	todo		
 005118ec	320	.text	game	todo		
@@ -8975,6 +9010,7 @@ addr	size	section	category	status	name	file
 00514157	95	.text	game	todo		
 005141c0	65	.text	game	todo		
 00514210	7	.text	game	todo		
+00514220	17	.text	game	todo		
 00514240	103	.text	game	todo		
 005142b0	172	.text	game	todo		
 00514360	120	.text	game	todo		
@@ -8987,6 +9023,7 @@ addr	size	section	category	status	name	file
 005146a0	37	.text	game	todo		
 005146d0	29	.text	game	todo		
 005146f0	862	.text	game	todo		
+00514a50	482	.text	game	todo		
 00514c40	266	.text	game	todo		
 00514d50	397	.text	game	todo		
 00514ee0	398	.text	game	todo		
@@ -9779,6 +9816,8 @@ addr	size	section	category	status	name	file
 0053ad10	7	.text	game	todo		
 0053ad20	330	.text	game	todo		
 0053ae70	37	.text	game	todo		
+0053aea0	23	.text	game	todo		
+0053aec0	18	.text	game	todo		
 0053aee0	42	.text	game	todo		
 0053af10	7	.text	game	todo		
 0053af20	7	.text	game	todo		
@@ -9947,6 +9986,12 @@ addr	size	section	category	status	name	file
 0053f020	30	.text	game	todo		
 0053f040	340	.text	game	todo		
 0053f1a0	125	.text	game	todo		
+0053f220	6619	.text	game	todo		
+0053f230	1199	.text	game	todo		
+0053f270	812	.text	game	todo		
+0053f2b0	5	.text	game	todo		
+0053f2c0	5	.text	game	todo		
+0053f2d0	5	.text	game	todo		
 0053f2e0	47	.text	game	todo		
 0053f310	71	.text	game	todo		
 0053f360	73	.text	game	todo		
@@ -9980,16 +10025,19 @@ addr	size	section	category	status	name	file
 00541850	1380	.text	game	todo		
 00541dc0	55	.text	game	todo		
 00541df7	92	.text	game	todo		
+00541e60	22	.text	game	todo		
 00541e80	60	.text	game	todo		
 00541ec0	32	.text	game	todo		
 00541ee0	161	.text	game	todo		
-00541f90	394	.text	game	todo		
+00541f90	394	.text	game	todo	TextScript_Parse	
+00542140	4354	.text	game	todo		
 00543240	222	.text	game	todo		
 00543320	21	.text	game	todo		
 00543340	203	.text	game	todo		
 00543410	48	.text	game	todo		
 00543440	147	.text	game	todo		
 005434e0	226	.text	game	todo		
+005435d0	59	.text	game	todo		
 00543610	38	.text	game	todo		
 00543640	119	.text	game	todo		
 005436b7	33	.text	eh	todo	Catch@005436b7	
@@ -10040,7 +10088,7 @@ addr	size	section	category	status	name	file
 00546b82	45	.text	eh	todo	Catch@00546b82	
 00546c20	180	.text	game	todo		
 00546ce0	165	.text	game	todo		
-00546d90	659	.text	game	todo		
+00546d90	659	.text	game	todo	LevelList_OnToken	
 00547030	30	.text	game	todo		
 00547050	23	.text	game	todo		
 00547070	8	.text	game	todo		
@@ -10569,6 +10617,8 @@ addr	size	section	category	status	name	file
 00559590	135	.text	game	todo		
 00559620	32	.text	game	todo		
 00559640	553	.text	game	todo		
+00559870	657	.text	game	todo		
+00559b00	16	.text	game	todo		
 00559ce0	102	.text	game	todo		
 00559d50	17	.text	game	todo		
 00559d70	35	.text	game	todo		
@@ -11110,6 +11160,7 @@ addr	size	section	category	status	name	file
 0056e1f0	17	.text	game	todo		
 0056e210	32	.text	game	todo		
 0056e320	5	.text	game	todo		
+0056e330	16	.text	game	todo		
 0056e370	128	.text	game	todo		
 0056e3f0	28	.text	game	todo		
 0056e410	45	.text	game	todo		
@@ -11137,7 +11188,7 @@ addr	size	section	category	status	name	file
 0056ed76	184	.text	game	todo		
 0056ee30	243	.text	game	todo		
 0056ef30	124	.text	game	todo		
-0056efb0	193	.text	game	todo		
+0056efb0	193	.text	game	verified	ResetGlobals_0076BD80	decomp/core/CApp.cpp
 0056f080	18	.text	game	todo		
 0056f0a0	216	.text	game	todo		
 0056f180	33	.text	game	todo		
@@ -11229,6 +11280,9 @@ addr	size	section	category	status	name	file
 00574a30	708	.text	game	todo		
 00574d00	1086	.text	game	todo		
 00575150	32	.text	game	todo		
+00575170	13	.text	game	todo		
+00575180	13	.text	game	todo		
+00575190	26	.text	game	todo		
 005751b0	8	.text	game	todo		
 005751c0	7	.text	game	todo		
 005751d0	19	.text	game	todo		
@@ -11349,6 +11403,7 @@ addr	size	section	category	status	name	file
 0057a220	92	.text	game	todo		
 0057a280	29	.text	game	todo		
 0057a2a0	11	.text	game	todo		
+0057a2b0	18	.text	game	todo		
 0057a2d0	4	.text	game	todo		
 0057a2e0	112	.text	game	todo		
 0057a350	8	.text	game	todo		
@@ -11404,6 +11459,7 @@ addr	size	section	category	status	name	file
 0057ca00	37	.text	game	todo		
 0057ca30	5	.text	game	todo		
 0057ca40	100	.text	game	todo		
+0057cab0	156	.text	game	todo		
 0057cb50	19	.text	game	todo		
 0057cb70	10	.text	game	todo		
 0057cb80	226	.text	game	todo		
@@ -11524,8 +11580,8 @@ addr	size	section	category	status	name	file
 00580e60	32	.text	game	todo		
 00580e80	51	.text	game	todo		
 00580ec0	12	.text	game	todo		
-00580ed0	18	.text	game	todo	Unknown_Alloc_00580ED0(?)	
-00580ef0	22	.text	game	todo	Unknown_Free_00580EF0(?)	
+00580ed0	18	.text	game	todo	Mem_Alloc	
+00580ef0	22	.text	game	todo	Mem_Free	
 00580f10	67	.text	game	todo		
 00580f60	213	.text	game	todo		
 00581040	64	.text	game	todo		
@@ -11637,7 +11693,10 @@ addr	size	section	category	status	name	file
 00584f70	76	.text	game	todo		
 00584fc0	28	.text	game	todo		
 00584fe0	28	.text	game	todo		
+00585000	20	.text	game	todo		
+00585020	20	.text	game	todo		
 00585040	5	.text	game	todo		
+00585050	10	.text	game	todo		
 00585060	79	.text	game	todo		
 005850b0	35	.text	game	todo		
 005850e0	147	.text	game	todo		
@@ -11652,6 +11711,7 @@ addr	size	section	category	status	name	file
 005853f0	5	.text	game	todo		
 00585400	75	.text	game	todo		
 00585450	66	.text	game	todo		
+005854a0	20	.text	game	todo		
 005854c0	180	.text	game	todo		
 00585590	175	.text	game	todo		
 00585640	45	.text	game	todo		
@@ -11690,6 +11750,7 @@ addr	size	section	category	status	name	file
 00586020	11	.text	game	todo		
 00586030	27	.text	game	todo		
 00586050	147	.text	game	todo		
+005860f0	20	.text	game	todo		
 00586110	83	.text	game	todo		
 00586170	25	.text	game	todo		
 00586190	55	.text	game	todo		
@@ -12032,6 +12093,7 @@ addr	size	section	category	status	name	file
 00595040	999	.text	game	todo		
 00595430	125	.text	game	todo		
 005954b0	78	.text	game	todo		
+00595500	18	.text	game	todo		
 00595530	256	.text	game	todo		
 00595630	10	.text	game	todo		
 00595640	126	.text	game	todo		
@@ -12294,6 +12356,7 @@ addr	size	section	category	status	name	file
 005ad62d	3329	.text	game	todo		
 005ae330	528	.text	game	todo		
 005ae507	1685	.text	game	todo		
+005aebe0	21	.text	game	todo		
 005aec00	56	.text	game	todo		
 005aec40	121	.text	game	todo		
 005aecc0	21	.text	game	todo		
@@ -12302,6 +12365,7 @@ addr	size	section	category	status	name	file
 005aed10	20	.text	game	todo		
 005aed30	40	.text	game	todo		
 005aed60	44	.text	game	todo		
+005aed90	94	.text	game	todo		
 005aedf0	10	.text	game	todo		
 005aee00	5	.text	game	todo		
 005aee07	78	.text	game	todo		
@@ -12548,15 +12612,21 @@ addr	size	section	category	status	name	file
 005bb290	99	.text	game	todo		
 005bb300	30	.text	game	todo		
 005bb320	509	.text	game	todo		
+005bb520	25	.text	game	todo		
 005bb540	36	.text	game	todo		
+005bb570	136	.text	game	todo		
 005bb600	12	.text	game	todo		
 005bb60c	23	.text	game	todo		
 005bb630	70	.text	game	todo		
 005bb680	35	.text	game	todo		
+005bb6b0	38	.text	game	todo		
+005bb6e0	21	.text	game	todo		
 005bb700	30	.text	game	todo		
+005bb720	13	.text	game	todo		
 005bb730	23	.text	game	todo		
 005bb750	23	.text	game	todo		
 005bb770	47	.text	game	todo		
+005bb7a0	19	.text	game	todo		
 005bb7c0	18	.text	game	todo		
 005bb7e0	29	.text	game	todo		
 005bb800	45	.text	game	todo		
@@ -12567,6 +12637,7 @@ addr	size	section	category	status	name	file
 005bb8e0	72	.text	game	todo		
 005bb930	32	.text	game	todo		
 005bb950	8	.text	game	todo		
+005bb960	104	.text	game	todo		
 005bb9d0	45	.text	game	todo		
 005bba00	48	.text	game	todo		
 005bba30	38	.text	game	todo		
@@ -12629,6 +12700,7 @@ addr	size	section	category	status	name	file
 005bc800	9	.text	game	todo		
 005bc809	9	.text	game	todo		
 005bc820	301	.text	game	todo		
+005bc970	46	.text	game	todo		
 005bc9a0	12	.text	game	todo		
 005bc9e0	45	.text	game	todo		
 005bca10	574	.text	game	todo		
@@ -12683,6 +12755,7 @@ addr	size	section	category	status	name	file
 005c0880	28	.text	game	todo		
 005c089d	33	.text	game	todo		
 005c08c0	5	.text	game	todo		
+005c08d0	25	.text	game	todo		
 005c08f0	15	.text	game	todo		
 005c0900	157	.text	game	todo		
 005c09a0	127	.text	game	todo		
@@ -12690,6 +12763,7 @@ addr	size	section	category	status	name	file
 005c0a60	27	.text	game	todo		
 005c0a80	27	.text	game	todo		
 005c0aa0	45	.text	game	todo		
+005c0ad0	77	.text	game	todo		
 005c0b20	65	.text	game	todo		
 005c0b70	43	.text	game	todo		
 005c0ba0	4	.text	game	todo		
@@ -12750,6 +12824,7 @@ addr	size	section	category	status	name	file
 005c31f0	5	.text	game	todo		
 005c3200	67	.text	game	todo		
 005c3250	45	.text	game	todo		
+005c3280	51	.text	game	todo		
 005c32c0	51	.text	game	todo		
 005c3300	101	.text	game	todo		
 005c3370	5	.text	game	todo		
@@ -12840,6 +12915,7 @@ addr	size	section	category	status	name	file
 005c9550	80	.text	game	todo		
 005c95b0	108	.text	game	todo		
 005c9620	169	.text	game	todo		
+005c96d0	14	.text	game	todo		
 005c96e0	489	.text	game	todo		
 005c98d0	160	.text	game	todo		
 005c9970	245	.text	game	todo		
@@ -12875,6 +12951,7 @@ addr	size	section	category	status	name	file
 005ca8b0	61	.text	game	todo		
 005ca8f0	19	.text	game	todo		
 005ca910	112	.text	game	todo		
+005ca980	29	.text	game	todo		
 005ca9a0	141	.text	game	todo		
 005caa40	263	.text	game	todo		
 005cab50	796	.text	game	todo		
@@ -12890,15 +12967,20 @@ addr	size	section	category	status	name	file
 005cbf10	16	.text	game	todo		
 005cbf20	44	.text	game	todo		
 005cbf4f	82	.text	game	todo		
+005cbfb0	84	.text	game	todo		
 005cc010	106	.text	game	todo		
 005cc080	345	.text	game	todo		
 005cc1e0	25	.text	game	todo		
+005cc200	12	.text	game	todo		
+005cc210	16	.text	game	todo		
 005cc220	31	.text	game	todo		
+005cc240	12	.text	game	todo		
 005cc250	104	.text	game	todo		
 005cc2c0	21	.text	game	todo		
 005cc2e0	13	.text	game	todo		
 005cc2f0	23	.text	game	todo		
 005cc310	12	.text	game	todo		
+005cc320	17	.text	game	todo		
 005cc340	37	.text	game	todo		
 005cc370	40	.text	game	todo		
 005cc398	344	.text	game	todo		
@@ -12972,6 +13054,8 @@ addr	size	section	category	status	name	file
 005d11f0	32	.text	game	todo		
 005d1210	14	.text	game	todo		
 005d1220	154	.text	game	todo		
+005d12c0	12	.text	game	todo		
+005d12d0	17	.text	game	todo		
 005d12f0	11	.text	game	todo		
 005d1300	21	.text	game	todo		
 005d1320	21	.text	game	todo		
@@ -13106,6 +13190,7 @@ addr	size	section	category	status	name	file
 005da1b0	42	.text	game	todo		
 005da1e0	77	.text	game	todo		
 005da230	31	.text	game	todo		
+005da250	40	.text	game	todo		
 005da280	5	.text	game	todo		
 005da286	157	.text	game	todo		
 005da340	10	.text	game	todo		
@@ -13217,6 +13302,7 @@ addr	size	section	category	status	name	file
 005e0940	27	.text	game	todo		
 005e0960	25	.text	game	todo		
 005e0980	17	.text	game	todo		
+005e09a0	90	.text	game	todo		
 005e0a00	90	.text	game	todo		
 005e0a60	23	.text	game	todo		
 005e0a80	79	.text	game	todo		
@@ -13257,6 +13343,7 @@ addr	size	section	category	status	name	file
 005e1500	28	.text	game	todo		
 005e1520	306	.text	game	todo		
 005e1660	87	.text	game	todo		
+005e16c0	173	.text	game	todo		
 005e1770	5	.text	game	todo		
 005e1775	141	.text	game	todo		
 005e1810	1147	.text	game	todo		
@@ -13278,6 +13365,7 @@ addr	size	section	category	status	name	file
 005e4320	93	.text	game	todo		
 005e4380	54	.text	game	todo		
 005e43c0	25	.text	game	todo		
+005e43e0	32	.text	game	todo		
 005e4400	1785	.text	game	todo		
 005e4b00	21	.text	game	todo		
 005e4b20	21	.text	game	todo		
@@ -13287,6 +13375,7 @@ addr	size	section	category	status	name	file
 005e4ba0	96	.text	game	todo		
 005e4c00	106	.text	game	todo		
 005e4c80	953	.text	game	todo		
+005e5050	4387	.text	game	todo		
 005e6180	10	.text	game	todo		
 005e6190	1357	.text	game	todo		
 005e6720	54	.text	game	todo		
@@ -13323,6 +13412,9 @@ addr	size	section	category	status	name	file
 005ea2a0	316	.text	game	todo		
 005ea3e0	5	.text	game	todo		
 005ea3f0	36	.text	game	todo		
+005ea420	54	.text	game	todo		
+005ea460	8	.text	game	todo		
+005ea470	8	.text	game	todo		
 005ea480	18	.text	game	todo		
 005ea4a0	30	.text	game	todo		
 005ea4c0	65	.text	game	todo		
@@ -13337,9 +13429,12 @@ addr	size	section	category	status	name	file
 005eaca0	281	.text	game	todo		
 005eadc0	221	.text	game	todo		
 005eaea0	178	.text	game	todo		
+005eaf60	25	.text	game	todo		
 005eaf80	116	.text	game	todo		
 005eb000	85	.text	game	todo		
 005eb060	241	.text	game	todo		
+005eb160	29	.text	game	todo		
+005eb180	29	.text	game	todo		
 005eb1a0	16	.text	game	todo		
 005eb1b1	652	.text	game	todo		
 005eb440	32	.text	game	todo		
@@ -13384,6 +13479,7 @@ addr	size	section	category	status	name	file
 005ee9d0	25	.text	game	todo		
 005ee9f0	777	.text	game	todo		
 005eed00	167	.text	game	todo		
+005eee50	40	.text	game	todo		
 005eee80	1116	.text	game	todo		
 005ef2e0	1195	.text	game	todo		
 005ef78d	707	.text	game	todo		
@@ -13402,7 +13498,7 @@ addr	size	section	category	status	name	file
 005f1d30	13	.text	game	todo		
 005f1d40	279	.text	game	todo		
 005f1e60	45	.text	game	todo		
-005f1e90	191	.text	game	todo		
+005f1e90	191	.text	game	todo	Pool32_Init(?)	
 005f1f50	1389	.text	game	todo		
 005f24d0	25	.text	game	todo		
 005f24f0	19	.text	game	todo		
@@ -13918,9 +14014,11 @@ addr	size	section	category	status	name	file
 0060e0e0	2244	.text	game	todo		
 0060e65e	197	.text	game	todo		
 0060ea70	332	.text	game	todo		
+0060ebc0	28	.text	game	todo		
 0060ebe0	36	.text	game	todo		
 0060ec04	24	.text	game	todo		
 0060ec20	332	.text	game	todo		
+0060ed70	28	.text	game	todo		
 0060ed90	58	.text	game	todo		
 0060edd0	137	.text	game	todo		
 0060ee60	1124	.text	game	todo		
@@ -13971,6 +14069,7 @@ addr	size	section	category	status	name	file
 00613860	159	.text	game	todo		
 00613900	494	.text	game	todo		
 00613af0	19	.text	game	todo		
+00613b10	12	.text	game	todo		
 00613b20	7	.text	game	todo		
 00613b30	101	.text	game	todo		
 00613ba0	8	.text	game	todo		
@@ -14010,7 +14109,16 @@ addr	size	section	category	status	name	file
 00615150	93	.text	game	todo		
 006151b0	29	.text	game	todo		
 006151d0	127	.text	game	todo		
+00615250	5	.text	game	todo		
+00615260	5	.text	game	todo		
+00615270	61	.text	game	todo		
+006152b0	49	.text	game	todo		
+006152f0	49	.text	game	todo		
+00615330	35	.text	game	todo		
 00615360	78	.text	game	todo		
+006153b0	53	.text	game	todo		
+006153f0	31	.text	game	todo		
+00615410	5	.text	game	todo		
 00615420	197	.text	game	verified	CountProcessesNamed	decomp/core/ProcessCheck.cpp
 006154f0	198	.text	game	readable	MH2_InitGame	decomp/core/GameInit.cpp
 006155c0	595	.text	game	readable	WinMain	decomp/core/WinMain.cpp
@@ -14138,6 +14246,7 @@ addr	size	section	category	status	name	file
 006189de	7	.text	import	todo	FID_conflict:_CallMemberFunction1	
 006189e5	82	.text	crt	todo	_UnwindNestedFrames	
 00618a37	54	.text	import	todo	FID_conflict:___CxxFrameHandler3	
+00618a6d	48	.text	game	todo		
 00618a9d	213	.text	crt	todo	_CallSETranslator	
 00618b72	152	.text	import	todo	TranslatorGuardHandler	
 00618c0f	115	.text	crt	todo	_GetRangeOfTrysToCheck	
@@ -14254,8 +14363,12 @@ addr	size	section	category	status	name	file
 0061c2a1	10	.text	import	todo	entry	
 0061c2ab	113	.text	crt	todo	__forcdecpt_l	
 0061c31c	128	.text	crt	todo	__cropzeros_l	
+0061c39c	22	.text	game	todo		
 0061c3b2	64	.text	crt	todo	__fassign_l	
+0061c3f2	23	.text	game	todo		
 0061c409	29	.text	crt	todo	__shift	
+0061c426	14	.text	game	todo		
+0061c434	14	.text	game	todo		
 0061c442	362	.text	crt	todo	__cftoe2_l	
 0061c5af	206	.text	crt	todo	__cftoe_l	
 0061c67d	30	.text	crt	todo	__cftoe	
@@ -14293,12 +14406,14 @@ addr	size	section	category	status	name	file
 0061d936	103	.text	game	todo		
 0061d99d	9	.text	crt	todo	__encoded_null	
 0061d9a6	110	.text	game	todo		
+0061da14	9	.text	game	todo		
 0061da1d	50	.text	game	todo		
 0061da4f	61	.text	crt	todo	__mtterm	
 0061da8c	182	.text	game	todo		
 0061db42	9	.text	game	todo		
 0061db4b	119	.text	game	todo		
 0061dbc2	24	.text	crt	todo	__getptd	
+0061dbda	265	.text	game	todo		
 0061dce6	9	.text	game	todo		
 0061dcf2	9	.text	game	todo		
 0061dcfb	388	.text	crt	todo	__mtinit	
@@ -14481,6 +14596,7 @@ addr	size	section	category	status	name	file
 00625ce0	24	.text	game	todo		
 00625cfe	614	.text	game	todo		
 00625f70	36	.text	crt	todo	__RTC_Initialize	
+00625f94	36	.text	game	todo		
 00625fc0	41	.text	crt	todo	__ValidateImageBase	
 00625ff0	66	.text	crt	todo	__FindPESection	
 00626040	10	.text	game	todo		
@@ -14508,6 +14624,7 @@ addr	size	section	category	status	name	file
 00627200	84	.text	game	todo		
 00627254	22	.text	game	todo		
 0062726a	37	.text	game	todo		
+0062728f	3149	.text	game	todo		
 00627edc	26	.text	game	todo		
 00627ef6	122	.text	game	todo		
 00627f70	195	.text	crt	todo	__close	
@@ -14528,6 +14645,7 @@ addr	size	section	category	status	name	file
 00628fc9	9	.text	game	todo		
 00628fd4	25	.text	game	todo		
 00628fed	119	.text	game	todo		
+00629064	70	.text	game	todo		
 006290aa	28	.text	game	todo		
 006290c6	23	.text	crt	todo	_EH4_CallFilterFunc	
 006290dd	25	.text	crt	todo	_EH4_TransferToHandler	
@@ -14610,6 +14728,7 @@ addr	size	section	category	status	name	file
 0062dbb0	54	.text	crt	todo	__EH_prolog3_catch	
 0062dbe6	13	.text	crt	todo	_ValidateRead	
 0062dbf4	32	.text	crt	todo	__global_unwind2	
+0062dc14	69	.text	game	todo		
 0062dc59	132	.text	crt	todo	__local_unwind2	
 0062dd00	9	.text	crt	todo	__NLG_Notify1	
 0062dd09	31	.text	crt	todo	__NLG_Notify	
@@ -14686,16 +14805,62 @@ addr	size	section	category	status	name	file
 00631d23	8	.text	game	todo		
 00631d2c	89	.text	game	todo		
 00631d90	27	.text	game	todo		
+00631db0	27	.text	game	todo		
+00631dd0	27	.text	game	todo		
+00631df0	27	.text	game	todo		
 00631e10	27	.text	game	todo		
 00631e30	27	.text	game	todo		
 00631e50	27	.text	game	todo		
 00631e70	27	.text	game	todo		
+00631e90	27	.text	game	todo		
+00631eb0	27	.text	game	todo		
+00631ed0	27	.text	game	todo		
 00631ef0	27	.text	game	todo		
+00631f10	27	.text	game	todo		
 00631f30	27	.text	game	todo		
 00631f50	27	.text	game	todo		
+00631f70	27	.text	game	todo		
+00631f90	27	.text	game	todo		
 00631fb0	27	.text	game	todo		
 00631fd0	27	.text	game	todo		
+00631ff0	27	.text	game	todo		
+00632010	27	.text	game	todo		
+00632030	27	.text	game	todo		
+00632050	27	.text	game	todo		
+00632070	27	.text	game	todo		
+00632090	27	.text	game	todo		
+006320b0	27	.text	game	todo		
+006320d0	27	.text	game	todo		
+006320f0	37	.text	game	todo		
+00632120	37	.text	game	todo		
+00632150	27	.text	game	todo		
+00632170	27	.text	game	todo		
+00632190	27	.text	game	todo		
+006321b0	27	.text	game	todo		
+006321d0	27	.text	game	todo		
+006321f0	27	.text	game	todo		
+00632210	27	.text	game	todo		
+00632230	27	.text	game	todo		
+00632250	27	.text	game	todo		
+00632270	27	.text	game	todo		
+00632290	27	.text	game	todo		
+006322b0	27	.text	game	todo		
+006322d0	27	.text	game	todo		
+006322f0	27	.text	game	todo		
+00632310	27	.text	game	todo		
+00632330	27	.text	game	todo		
+00632350	27	.text	game	todo		
+00632370	27	.text	game	todo		
+00632390	27	.text	game	todo		
+006323b0	27	.text	game	todo		
+006323d0	27	.text	game	todo		
+006323f0	27	.text	game	todo		
+00632410	27	.text	game	todo		
+00632430	27	.text	game	todo		
+00632450	27	.text	game	todo		
+0063246b	27	.text	game	todo		
 00632486	8	.text	eh	todo	Unwind@00632486	
+0063248e	27	.text	game	todo		
 006324b0	15	.text	game	todo		
 006324bf	7	.text	game	todo		
 006324d0	12	.text	game	todo		
@@ -15111,9 +15276,409 @@ addr	size	section	category	status	name	file
 00635690	22	.text	game	todo		
 006356b0	22	.text	game	todo		
 006356d0	32	.text	game	todo		
+006356f0	5	.text	game	todo		
+00635700	5	.text	game	todo		
+00635710	5	.text	game	todo		
+00635720	1	.text	game	todo		
+00635730	1	.text	game	todo		
+00635740	1	.text	game	todo		
+00635750	1	.text	game	todo		
+00635760	1	.text	game	todo		
+00635770	1	.text	game	todo		
+00635780	1	.text	game	todo		
+00635790	1	.text	game	todo		
+006357a0	1	.text	game	todo		
+006357b0	1	.text	game	todo		
+006357c0	1	.text	game	todo		
+006357d0	10	.text	game	todo		
+006357e0	10	.text	game	todo		
 006357f0	49	.text	game	todo		
+00635830	10	.text	game	todo		
+00635850	10	.text	game	todo		
+00635860	1	.text	game	todo		
+00635870	1	.text	game	todo		
+00635880	1	.text	game	todo		
+00635890	1	.text	game	todo		
+006358a0	21	.text	game	todo		
+006358b0	1	.text	game	todo		
+006358c0	1	.text	game	todo		
+006358d0	10	.text	game	todo		
+006358e0	10	.text	game	todo		
+006358f0	10	.text	game	todo		
+00635900	1	.text	game	todo		
+00635910	54	.text	game	todo		
+00635950	10	.text	game	todo		
+00635960	10	.text	game	todo		
+00635970	10	.text	game	todo		
+00635980	10	.text	game	todo		
+00635990	10	.text	game	todo		
+006359a0	10	.text	game	todo		
+006359b0	10	.text	game	todo		
+006359c0	10	.text	game	todo		
+006359d0	1	.text	game	todo		
+006359e0	10	.text	game	todo		
+006359f0	10	.text	game	todo		
+00635a00	10	.text	game	todo		
+00635a10	10	.text	game	todo		
+00635a20	1	.text	game	todo		
+00635a30	10	.text	game	todo		
+00635a40	10	.text	game	todo		
+00635a50	10	.text	game	todo		
+00635a60	26	.text	game	todo		
+00635a70	1	.text	game	todo		
+00635a80	32	.text	game	todo		
+00635a90	10	.text	game	todo		
+00635aa0	10	.text	game	todo		
 00635ab0	1	.text	game	todo		
+00635ac0	1	.text	game	todo		
+00635ad0	10	.text	game	todo		
+00635ae0	10	.text	game	todo		
+00635af0	10	.text	game	todo		
+00635b00	10	.text	game	todo		
+00635b10	1	.text	game	todo		
+00635b20	10	.text	game	todo		
+00635b30	10	.text	game	todo		
+00635b40	1	.text	game	todo		
+00635b50	1	.text	game	todo		
+00635b60	1	.text	game	todo		
+00635b70	10	.text	game	todo		
+00635b80	1	.text	game	todo		
+00635b90	1	.text	game	todo		
+00635ba0	1	.text	game	todo		
+00635bb0	1	.text	game	todo		
+00635bc0	1	.text	game	todo		
+00635bd0	1	.text	game	todo		
+00635be0	1	.text	game	todo		
+00635bf0	1	.text	game	todo		
+00635c00	1	.text	game	todo		
+00635c10	1	.text	game	todo		
+00635c20	1	.text	game	todo		
+00635c30	1	.text	game	todo		
+00635c40	1	.text	game	todo		
+00635c50	1	.text	game	todo		
+00635c60	1	.text	game	todo		
+00635c70	1	.text	game	todo		
+00635c80	1	.text	game	todo		
+00635c90	1	.text	game	todo		
+00635ca0	1	.text	game	todo		
+00635cb0	1	.text	game	todo		
+00635cc0	1	.text	game	todo		
+00635cd0	1	.text	game	todo		
 00635ce0	49	.text	game	todo		
+00635d20	10	.text	game	todo		
+00635d30	10	.text	game	todo		
+00635d40	10	.text	game	todo		
+00635d50	10	.text	game	todo		
+00635d60	10	.text	game	todo		
+00635d70	10	.text	game	todo		
+00635d80	10	.text	game	todo		
+00635d90	10	.text	game	todo		
+00635da0	10	.text	game	todo		
+00635db0	10	.text	game	todo		
+00635dc0	10	.text	game	todo		
+00635dd0	10	.text	game	todo		
+00635de0	10	.text	game	todo		
+00635df0	10	.text	game	todo		
+00635e00	10	.text	game	todo		
+00635e10	10	.text	game	todo		
+00635e20	10	.text	game	todo		
+00635e30	1	.text	game	todo		
+00635e40	1	.text	game	todo		
+00635e50	1	.text	game	todo		
+00635e60	1	.text	game	todo		
+00635e70	1	.text	game	todo		
+00635e80	1	.text	game	todo		
+00635e90	1	.text	game	todo		
+00635ea0	1	.text	game	todo		
+00635eb0	1	.text	game	todo		
+00635ec0	1	.text	game	todo		
+00635ed0	1	.text	game	todo		
+00635ee0	10	.text	game	todo		
+00635ef0	10	.text	game	todo		
+00635f00	34	.text	game	todo		
+00635f30	1	.text	game	todo		
+00635f40	1	.text	game	todo		
+00635f50	10	.text	game	todo		
+00635f80	10	.text	game	todo		
+00635f90	11	.text	game	todo		
+00635fa0	10	.text	game	todo		
+00635fb0	10	.text	game	todo		
+00635fc0	10	.text	game	todo		
+00635fd0	10	.text	game	todo		
+00635fe0	10	.text	game	todo		
+00635ff0	10	.text	game	todo		
+00636000	10	.text	game	todo		
+00636010	10	.text	game	todo		
+00636020	10	.text	game	todo		
+00636030	10	.text	game	todo		
+00636040	10	.text	game	todo		
+00636050	10	.text	game	todo		
+00636060	10	.text	game	todo		
+00636070	10	.text	game	todo		
+00636080	10	.text	game	todo		
+00636090	10	.text	game	todo		
+006360a0	10	.text	game	todo		
+006360b0	10	.text	game	todo		
+006360c0	10	.text	game	todo		
+006360d0	10	.text	game	todo		
+006360e0	10	.text	game	todo		
+006360f0	10	.text	game	todo		
+00636100	10	.text	game	todo		
+00636110	10	.text	game	todo		
+00636120	10	.text	game	todo		
+00636130	10	.text	game	todo		
+00636140	10	.text	game	todo		
+00636150	10	.text	game	todo		
+00636160	10	.text	game	todo		
+00636170	10	.text	game	todo		
+00636180	10	.text	game	todo		
+00636190	10	.text	game	todo		
+006361a0	10	.text	game	todo		
+006361b0	10	.text	game	todo		
+006361c0	10	.text	game	todo		
+006361d0	10	.text	game	todo		
+006361e0	10	.text	game	todo		
+006361f0	10	.text	game	todo		
+00636200	10	.text	game	todo		
+00636210	10	.text	game	todo		
+00636220	10	.text	game	todo		
+00636230	10	.text	game	todo		
+00636240	10	.text	game	todo		
+00636250	10	.text	game	todo		
+00636260	10	.text	game	todo		
+00636270	10	.text	game	todo		
+00636280	10	.text	game	todo		
+00636290	10	.text	game	todo		
+006362a0	10	.text	game	todo		
+006362b0	10	.text	game	todo		
+006362c0	10	.text	game	todo		
+006362d0	10	.text	game	todo		
+006362e0	10	.text	game	todo		
+006362f0	10	.text	game	todo		
+00636300	10	.text	game	todo		
+00636310	10	.text	game	todo		
+00636320	10	.text	game	todo		
+00636330	10	.text	game	todo		
+00636340	10	.text	game	todo		
+00636350	10	.text	game	todo		
+00636360	10	.text	game	todo		
+00636370	10	.text	game	todo		
+00636380	10	.text	game	todo		
+00636390	10	.text	game	todo		
+006363a0	10	.text	game	todo		
+006363b0	10	.text	game	todo		
+006363c0	10	.text	game	todo		
+006363d0	10	.text	game	todo		
+006363e0	10	.text	game	todo		
+006363f0	10	.text	game	todo		
+00636400	10	.text	game	todo		
+00636410	10	.text	game	todo		
+00636420	10	.text	game	todo		
+00636430	10	.text	game	todo		
+00636440	10	.text	game	todo		
+00636450	10	.text	game	todo		
+00636460	10	.text	game	todo		
+00636470	10	.text	game	todo		
+00636480	10	.text	game	todo		
+00636490	10	.text	game	todo		
+006364a0	10	.text	game	todo		
+006364b0	10	.text	game	todo		
+006364c0	10	.text	game	todo		
+006364d0	10	.text	game	todo		
+006364e0	10	.text	game	todo		
+006364f0	10	.text	game	todo		
+00636500	10	.text	game	todo		
+00636510	10	.text	game	todo		
+00636520	10	.text	game	todo		
+00636530	10	.text	game	todo		
+00636540	10	.text	game	todo		
+00636550	10	.text	game	todo		
+00636560	10	.text	game	todo		
+00636580	10	.text	game	todo		
+00636590	10	.text	game	todo		
+006365a0	10	.text	game	todo		
+006365b0	10	.text	game	todo		
+006365c0	1	.text	game	todo		
+006365d0	1	.text	game	todo		
+006365e0	1	.text	game	todo		
+006365f0	75	.text	game	todo		
+00636640	1	.text	game	todo		
+00636650	1	.text	game	todo		
+00636660	1	.text	game	todo		
+00636670	1	.text	game	todo		
+00636680	46	.text	game	todo		
+006366c0	47	.text	game	todo		
+006366d0	46	.text	game	todo		
+00636710	46	.text	game	todo		
+00636750	46	.text	game	todo		
+00636790	46	.text	game	todo		
+006367d0	44	.text	game	todo		
+006367e0	10	.text	game	todo		
+006367f0	10	.text	game	todo		
+00636800	10	.text	game	todo		
+00636810	1	.text	game	todo		
+00636820	1	.text	game	todo		
+00636830	1	.text	game	todo		
+00636840	10	.text	game	todo		
+00636850	1	.text	game	todo		
+00636860	1	.text	game	todo		
+00636870	10	.text	game	todo		
+00636880	10	.text	game	todo		
+00636890	10	.text	game	todo		
+006368a0	10	.text	game	todo		
+006368b0	10	.text	game	todo		
+006368c0	10	.text	game	todo		
+006368d0	1	.text	game	todo		
+006368e0	1	.text	game	todo		
+006368f0	10	.text	game	todo		
+00636900	1	.text	game	todo		
+00636910	10	.text	game	todo		
+00636920	1	.text	game	todo		
+00636930	1	.text	game	todo		
+00636940	50	.text	game	todo		
+00636980	50	.text	game	todo		
+006369c0	10	.text	game	todo		
+006369d0	11	.text	game	todo		
+006369e0	11	.text	game	todo		
+006369f0	11	.text	game	todo		
+00636a00	21	.text	game	todo		
+00636a20	1	.text	game	todo		
+00636a30	1	.text	game	todo		
+00636a40	1	.text	game	todo		
+00636a50	1	.text	game	todo		
+00636a60	1	.text	game	todo		
+00636a70	10	.text	game	todo		
+00636a80	10	.text	game	todo		
+00636a90	1	.text	game	todo		
+00636aa0	1	.text	game	todo		
+00636ab0	1	.text	game	todo		
+00636ac0	1	.text	game	todo		
+00636ad0	1	.text	game	todo		
+00636ae0	1	.text	game	todo		
+00636af0	10	.text	game	todo		
+00636b00	10	.text	game	todo		
+00636b10	10	.text	game	todo		
+00636b20	1	.text	game	todo		
+00636b30	10	.text	game	todo		
+00636b40	10	.text	game	todo		
+00636b50	10	.text	game	todo		
+00636b60	10	.text	game	todo		
+00636b70	10	.text	game	todo		
+00636b80	10	.text	game	todo		
+00636b90	1	.text	game	todo		
+00636ba0	1	.text	game	todo		
+00636bb0	1	.text	game	todo		
+00636bc0	1	.text	game	todo		
+00636bd0	19	.text	game	todo		
+00636be0	10	.text	game	todo		
+00636bf0	10	.text	game	todo		
+00636c00	1	.text	game	todo		
+00636c10	1	.text	game	todo		
+00636c20	1	.text	game	todo		
+00636c30	1	.text	game	todo		
+00636c40	10	.text	game	todo		
+00636c50	1	.text	game	todo		
+00636c60	1	.text	game	todo		
+00636c70	1	.text	game	todo		
+00636c80	1	.text	game	todo		
+00636c90	1	.text	game	todo		
+00636ca0	1	.text	game	todo		
+00636cb0	10	.text	game	todo		
+00636cc0	10	.text	game	todo		
+00636cd0	10	.text	game	todo		
+00636ce0	10	.text	game	todo		
+00636cf0	1	.text	game	todo		
+00636d00	1	.text	game	todo		
+00636d10	10	.text	game	todo		
+00636d20	10	.text	game	todo		
+00636d30	1	.text	game	todo		
+00636d40	1	.text	game	todo		
+00636d50	1	.text	game	todo		
+00636d60	1	.text	game	todo		
+00636d70	1	.text	game	todo		
+00636d80	10	.text	game	todo		
+00636d90	10	.text	game	todo		
+00636da0	10	.text	game	todo		
+00636db0	1	.text	game	todo		
+00636dc0	1	.text	game	todo		
+00636dd0	1	.text	game	todo		
+00636de0	1	.text	game	todo		
+00636df0	10	.text	game	todo		
+00636e00	10	.text	game	todo		
+00636e10	10	.text	game	todo		
+00636e20	1	.text	game	todo		
+00636e30	10	.text	game	todo		
+00636e40	10	.text	game	todo		
+00636e50	1	.text	game	todo		
+00636e60	46	.text	game	todo		
+00636ea0	46	.text	game	todo		
+00636ee0	46	.text	game	todo		
+00636f20	46	.text	game	todo		
+00636f60	1	.text	game	todo		
+00636f70	1	.text	game	todo		
+00636f80	1	.text	game	todo		
+00636f90	37	.text	game	todo		
+00636fc0	1	.text	game	todo		
+00636fd0	46	.text	game	todo		
+00637010	46	.text	game	todo		
+00637050	1	.text	game	todo		
+00637060	1	.text	game	todo		
+00637070	1	.text	game	todo		
+00637080	1	.text	game	todo		
+00637090	1	.text	game	todo		
+006370a0	10	.text	game	todo		
+006370b0	10	.text	game	todo		
+006370c0	10	.text	game	todo		
+006370d0	10	.text	game	todo		
+006370e0	1	.text	game	todo		
+006370f0	1	.text	game	todo		
+00637100	1	.text	game	todo		
+00637110	1	.text	game	todo		
+00637120	1	.text	game	todo		
+00637130	1	.text	game	todo		
+00637140	1	.text	game	todo		
+00637150	1	.text	game	todo		
+00637160	1	.text	game	todo		
+00637170	1	.text	game	todo		
+00637180	1	.text	game	todo		
+00637190	1	.text	game	todo		
+006371a0	1	.text	game	todo		
+006371b0	1	.text	game	todo		
+006371c0	10	.text	game	todo		
+006371d0	1	.text	game	todo		
+006371e0	1	.text	game	todo		
+006371f0	10	.text	game	todo		
+00637200	10	.text	game	todo		
+00637210	10	.text	game	todo		
+00637220	10	.text	game	todo		
+00637230	10	.text	game	todo		
+00637240	1	.text	game	todo		
+00637250	1	.text	game	todo		
+00637260	10	.text	game	todo		
+00637270	10	.text	game	todo		
+00637280	10	.text	game	todo		
+00637290	1	.text	game	todo		
+006372a0	1	.text	game	todo		
+006372b0	10	.text	game	todo		
+006372c0	1	.text	game	todo		
+006372d0	34	.text	game	todo		
+00637300	34	.text	game	todo		
+00637330	1	.text	game	todo		
+00637340	1	.text	game	todo		
+00637350	10	.text	game	todo		
+00637360	10	.text	game	todo		
+00637370	10	.text	game	todo		
+00637380	10	.text	game	todo		
+00637390	34	.text	game	todo		
+006373c0	34	.text	game	todo		
+006373f0	1	.text	game	todo		
+00637400	1	.text	game	todo		
+00637410	1	.text	game	todo		
+00637420	20	.text	game	todo		
+00637430	46	.text	game	todo		
+00637470	10	.text	game	todo		
+00637480	10	.text	game	todo		
+00637490	10	.text	game	todo		
 007a5400	67	.secu	secu	todo		
 007a5520	16	.secu	secu	todo		
 007a5530	58	.secu	secu	todo		
@@ -16039,11 +16604,11 @@ addr	size	section	category	status	name	file
 007d22a0	293	.secu	secu	todo		
 007d2450	104	.secu	secu	todo		
 007d2530	32	.secu	secu	todo		
-007d2570	126	.secu	secu	todo		
+007d2570	126	.secu	secu	todo	Paths_SetupFromGlobals(?)	
 007d2640	73	.secu	secu	todo		
 007d26c0	90	.secu	secu	todo		
 007d2790	54	.secu	secu	todo		
-007d27f0	222	.secu	secu	todo	CApp_Init	
+007d27f0	222	.secu	secu	readable	CApp_Init	decomp/core/CAppInit.cpp
 007d2a00	70	.secu	secu	todo		
 007d2a70	52	.secu	secu	todo	Clock_ResetFrameCounters(?)	
 007d2ab0	102	.secu	secu	todo		

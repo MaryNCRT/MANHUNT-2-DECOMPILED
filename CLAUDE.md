@@ -105,7 +105,7 @@ MCP servers are registered in `.mcp.json` (machine-specific, not versioned).
 See `PROGRESS.md §2`. Summary:
 - PE32 i386, MSVC 8.0 (VS2005), ImageBase `0x400000`, TimeDateStamp `0x4992F67C` (2009-02-11)
 - Original PDB `W:\Manhunt2_PC\Assets\DvdRoot\Manhunt2.pdb`: **not available**, binary has no symbols
-- **15,407 functions**, 7,624 strings (Ghidra auto-analysis)
+- **16,720 functions** (15,407 from Ghidra auto-analysis + 1,313 confirmed by the BinViz cross-check), 7,624 strings
 - Renderer **Direct3D 9** (d3dx9_35 + .fx effects), audio **FMOD Ex + FMOD Event**, video **Bink**,
   input **DirectInput 8**
 - Forced single core: `SetProcessAffinityMask(GetCurrentProcess(), 1)` at `0x6154F0`

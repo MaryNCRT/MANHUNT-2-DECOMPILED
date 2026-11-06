@@ -35,7 +35,33 @@ method (0x550A30) and a thunk called directly (0x468A40) were all real functions
 tail-called function, but the sample 0x53DED5 is a single `ret` other code jumps to: a
 shared function tail, not a function. That rule (76 candidates) was dropped.
 
-## What was left out: 1,765 BinViz-only functions (~70 KB)
+## Second round: 560 more (2026-11-05)
+
+The first round's "direct call" and "address taken" scans used capstone's linear
+disassembler, which **stops at the first byte it cannot decode**: on `.text` it covered
+0.3 % of the section. With `skipdata` it covers all of it. To keep a sweep that lost
+sync after embedded data from inventing references, a call or a taken address now only
+counts if its instruction lies inside a function Ghidra already knows.
+
+Result: **560 functions whose address is pushed or loaded inside a known function**
+(callbacks, and the destructors that static initializers register with `_atexit`).
+560 of the 563 candidates passed the in-function rule; 3 were dropped. Ghidra created
+5 more while following them, and one existing function shrank from 6,534 to 12 bytes:
+Ghidra had merged unreferenced code that now has functions of its own.
+
+## What was left out: 1,205 BinViz-only functions
+
+After the second round:
+
+| Shape | Count |
+|---|---|
+| Code that does not end in `ret` or `jmp` (fragments) | 444 |
+| Lone `jmp`, no reference | 399 |
+| Ends in `jmp`, no reference | 157 |
+| Ends in `ret`, no reference | 141 |
+| Up to three instructions ending in `ret`, no reference | 64 |
+
+## What was left out in the first round: 1,765 BinViz-only functions (~70 KB)
 
 | Shape | Count |
 |---|---|
@@ -63,5 +89,5 @@ python tools\tracking.py init
 
 ## Effect on the numbers
 
-Game-code functions went from 14,929 to 15,677. The treemap's game total (BinViz's view)
-stays larger by the 1,765 left-out functions; the README percentages use our list.
+Game-code functions went from 14,929 to 15,677 (first round) and then to 16,242 (second round). The treemap's game total (BinViz's view)
+stays larger by the left-out functions; the README percentages use our list.

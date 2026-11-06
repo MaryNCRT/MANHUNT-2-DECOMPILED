@@ -13,6 +13,13 @@ read.** Original data and original mods must load exactly as before.
 |---|---|---|---|---|---|
 | L1 | Address space | PE header | `LARGE_ADDRESS_AWARE` off | Process limited to 2 GB; HD texture packs run out of memory | x64 build; LAA on in the x86 build |
 | L2 | FMOD memory pool | `Audio_Init` 0x004CE4E0 | 15 MB (`0xF00000`), one fixed block | Every FMOD allocation (event data, streams, DSP) shares it; bigger or extra audio banks exhaust it | Pool sized from the loaded banks, or FMOD's own allocator |
+| L3 | Text script size | `TextScript_Parse` 0x00541F90 | 80,000 bytes (`0x13880`): allocated, and at most that many read | Init scripts such as `global/initscripts/LEVELS.txt` are cut at 80,000 bytes; a mod adding levels or entries past that loses them silently | Buffer sized from the file |
+
+## Bugs in the original
+
+| # | Bug | Where | Port |
+|---|---|---|---|
+| B1 | **One byte written past the text buffer** when a script is 80,000 bytes or longer: after reading, it stores a space at `buffer[bytesRead]` (`mov byte [ebx+esi], 0x20` at 0x00542074, `ebx` = bytes read, set at 0x00541FD5), and `bytesRead` can equal the 80,000-byte allocation. Whether the allocator's rounding hides it in practice is not known. | `TextScript_Parse` | Buffer one byte larger than the file, and L3 removed |
 
 ## Found, meaning not yet known
 
@@ -20,6 +27,9 @@ read.** Original data and original mods must load exactly as before.
 |---|---|---|---|
 | U1 | Fixed array of audio records, 0x38 bytes each | reset in `Audio_Init`, fields at 0x0070480C | 10 records |
 | U2 | Multisample modes list | `0x00606E40`, array at 0x0079BEE8 | 4 entries (2, 4, 8, 16) |
+| U3 | Fixed pool of records, 0x54 bytes each, linked as a free list | `0x005F1E90`, at 0x007953FC | 32 records |
+| U4 | Buffer allocated once and zeroed | `0x005B9BD0`, pointer at 0x0077E854 | 1 MB (`0x100000`) |
+| U5 | Buffer allocated at start-up | `0x00608680`, pointer at 0x0079D0F4 | 48 KB (`0xC000`) |
 
 ## To investigate
 

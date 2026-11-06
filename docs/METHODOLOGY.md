@@ -66,6 +66,16 @@ code against the disassembly, plus behavior checks once the port runs.
 | `GameApp::HandleEvent` 0x004DF660 | 376,900 (events −8…0x40 × 50 + 100,000 random), **except events 0x15 and 0x16** | 0 |
 | `SetVersionString` 0x00424990 | 240,000 (20,000 strings of 0–20 chars × 12 buffer bytes) | 0 |
 | `AlwaysTrue` 0x004202E6 | 1,000 | 0 |
+| `SetLoadingMessage` 0x004B0570 | 100,000 | 0 |
+| `Vec4Table_F620::Construct` 0x004B08C0 | 1,260,180 (20 random-filled objects × every byte, plus the return value) | 0 |
+| `ResetGlobals_0076BD80` 0x0056EFB0 | 113,000 (fields, plus every neighbouring byte left untouched) | 0 |
+
+### Reading functions SecuROM split
+
+Some functions were cut into pieces joined by `jmp`s, so a listing by size stops halfway
+and Ghidra's draft can skip calls. `python OUTPUT/tools/disasm.py <exe> <addr> follow`
+reads in execution order across the pieces; `CApp_Init` was decompiled that way, and it
+showed two calls Ghidra's draft had wrong.
 
 `HandleEvent` stays *readable*, not *verified*, until events 0x15 (`Initialise`) and
 0x16 (`Shutdown`) can be tested too: their callees are not decompiled yet, and in the
